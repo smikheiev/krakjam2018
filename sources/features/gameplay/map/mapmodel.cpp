@@ -22,16 +22,16 @@ TileModel *MapModel::getTileByIndex(const int tileIndex)
 void MapModel::initTiles()
 {
     QVector<QVector<int>> tileTypes;
-    tileTypes.append(QVector<int>{1,2,3,1,2,3,1,2,3,1});
-    tileTypes.append(QVector<int>{2,3,1,2,3,1,2,3,1,2});
-    tileTypes.append(QVector<int>{3,1,2,3,1,2,3,1,2,3});
-    tileTypes.append(QVector<int>{1,2,3,1,2,3,1,2,3,1});
-    tileTypes.append(QVector<int>{2,3,1,2,3,1,2,3,1,2});
-    tileTypes.append(QVector<int>{3,1,2,3,1,2,3,1,2,3});
-    tileTypes.append(QVector<int>{1,2,3,1,2,3,1,2,3,1});
-    tileTypes.append(QVector<int>{2,3,1,2,3,1,2,3,1,2});
-    tileTypes.append(QVector<int>{3,1,2,3,1,2,3,1,2,3});
-    tileTypes.append(QVector<int>{1,2,3,1,2,3,1,2,3,1});
+    tileTypes.append(QVector<int>{2,2,2,2,2,2,2,2,2,3});
+    tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
+    tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
+    tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
+    tileTypes.append(QVector<int>{2,2,2,2,1,1,2,2,2,2});
+    tileTypes.append(QVector<int>{2,4,4,4,1,1,2,4,4,2});
+    tileTypes.append(QVector<int>{2,4,4,4,2,2,2,4,4,2});
+    tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
+    tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
+    tileTypes.append(QVector<int>{2,2,2,2,2,2,2,2,2,2});
 
     for (int i = 0; i < width(); ++i)
     {

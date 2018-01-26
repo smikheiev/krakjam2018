@@ -10,9 +10,10 @@ class TileTypeEnumWrapper : public QObject
 public:
     enum Enum {
         None = 0,
-        House,
-        MainStreet,
-        SecondaryStreet,
+        Headquarter = 1,
+        Street = 2,
+        Target = 3,
+        Wall = 4,
     };
     Q_ENUM(Enum)
 };

@@ -34,13 +34,16 @@ Item {
     function getTileImageSource(tileType) {
         var imageSource = ""
         switch (tileType) {
-        case TileType.House.valueOf():
+        case TileType.Headquarter.valueOf():
             imageSource = "red"
             break
-        case TileType.MainStreet.valueOf():
+        case TileType.Street.valueOf():
             imageSource = "green"
             break
-        case TileType.SecondaryStreet.valueOf():
+        case TileType.Target.valueOf():
+            imageSource = "orange"
+            break
+        case TileType.Wall.valueOf():
             imageSource = "blue"
             break
         default:
