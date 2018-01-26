@@ -1,0 +1,27 @@
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+
+#include "spinacz.h"
+
+int main(int argc, char *argv[])
+{
+#if defined(Q_OS_WIN)
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
+
+    QGuiApplication app(argc, argv);
+    QQmlApplicationEngine engine;
+    QQmlContext* context = engine.rootContext();
+
+    Spinacz* spinacz = new Spinacz(engine.rootContext());
+    context->setContextProperty("features", spinacz->featuresRoot());
+
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+    if (engine.rootObjects().isEmpty())
+    {
+        return -1;
+    }
+
+    return app.exec();
+}

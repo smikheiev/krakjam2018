@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/scenes/ScenesRoot.qml</file>
+        <file>qml/scenes/LoadingScene.qml</file>
+        <file>qml/Fonts.qml</file>
+        <file>qml/scenes/MenuScene.qml</file>
+        <file>qml/scenes/BaseScene.qml</file>
+        <file>qml/scenes/gameplay/GameplayScene.qml</file>
+        <file>qml/scenes/gameplay/gameEndPopup/BaseGameEndPopup.qml</file>
+        <file>qml/scenes/gameplay/gameEndPopup/WonPopup.qml</file>
+        <file>qml/scenes/gameplay/gameEndPopup/LosePopup.qml</file>
+        <file>qml/common/ButtonWithText.qml</file>
+    </qresource>
+</RCC>
