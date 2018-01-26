@@ -11,5 +11,8 @@
         <file>qml/scenes/gameplay/gameEndPopup/WonPopup.qml</file>
         <file>qml/scenes/gameplay/gameEndPopup/LosePopup.qml</file>
         <file>qml/common/ButtonWithText.qml</file>
+        <file>qml/scenes/gameplay/map/Map.qml</file>
+        <file>qml/scenes/gameplay/map/Tile.qml</file>
+        <file>qml/scenes/gameplay/map/MapConstants.js</file>
     </qresource>
 </RCC>

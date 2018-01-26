@@ -7,12 +7,14 @@
 #include "../../macros.h"
 #include "gameplaystate.h"
 #include "../appState/appstate.h"
+#include "map/mapmodel.h"
 
 class GameplayFeature : public QObject
 {
     Q_OBJECT
 
     AUTO_Q_PROPERTY(GameplayState, currentGameplayState)
+    AUTO_Q_PROPERTY(MapModel*, mapModel)
 
 public:
     explicit GameplayFeature(QObject *parent = nullptr);
