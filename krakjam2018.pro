@@ -10,7 +10,9 @@ SOURCES += \
     sources/features/appState/appstatefeature.cpp \
     sources/qmltypesregistrator.cpp \
     sources/features/exitApp/exitappfeature.cpp \
-    sources/features/gameplay/gameplayfeature.cpp
+    sources/features/gameplay/gameplayfeature.cpp \
+    sources/features/gameplay/map/mapmodel.cpp \
+    sources/features/gameplay/map/tilemodel.cpp
 
 RESOURCES += \
     resources/qml.qrc \
@@ -25,4 +27,7 @@ HEADERS += \
     sources/qmltypesregistrator.h \
     sources/features/exitApp/exitappfeature.h \
     sources/features/gameplay/gameplayfeature.h \
-    sources/features/gameplay/gameplaystate.h
+    sources/features/gameplay/gameplaystate.h \
+    sources/features/gameplay/map/mapmodel.h \
+    sources/features/gameplay/map/tiletype.h \
+    sources/features/gameplay/map/tilemodel.h
