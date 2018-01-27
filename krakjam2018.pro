@@ -16,7 +16,9 @@ SOURCES += \
     sources/features/gameplay/map/mapmodel.cpp \
     sources/features/gameplay/map/tilemodel.cpp \
     sources/features/gameplay/range/rangemodel.cpp \
-    sources/features/gameplay/range/rangeslistmodel.cpp
+    sources/features/gameplay/range/rangeslistmodel.cpp \
+    sources/features/gameplay/esbekmodel.cpp \
+    sources/features/gameplay/esbeklogic.cpp
 
 RESOURCES += \
     resources/qml.qrc \
@@ -38,4 +40,6 @@ HEADERS += \
     sources/features/gameplay/map/tiletype.h \
     sources/features/gameplay/map/tilemodel.h \
     sources/features/gameplay/range/rangemodel.h \
-    sources/features/gameplay/range/rangeslistmodel.h
+    sources/features/gameplay/range/rangeslistmodel.h \
+    sources/features/gameplay/esbekmodel.h \
+    sources/features/gameplay/esbeklogic.h

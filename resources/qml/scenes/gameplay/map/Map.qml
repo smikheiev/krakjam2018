@@ -1,6 +1,7 @@
 import QtQuick 2.10
 
 import "./MapConstants.js" as MapConstants
+import "../"
 
 import "../range"
 
@@ -60,5 +61,14 @@ Item {
                 model: display // display - standart Qt Role "Qt::DisplayRole"
             }
         }
+    }
+
+    Esbek {
+        id: esbek
+
+        mapXStart: mapGrid.x
+        mapYStart: mapGrid.y
+
+        color: "#ff00ff"
     }
 }
