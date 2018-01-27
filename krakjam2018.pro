@@ -49,4 +49,5 @@ HEADERS += \
     sources/features/gameplay/constants.h \
     sources/features/gameplay/transmissionlogic.h \
     sources/features/gameplay/map/hqmodel.h \
-    sources/features/gameplay/map/objectivemodel.h
+    sources/features/gameplay/map/objectivemodel.h \
+    sources/utils.h

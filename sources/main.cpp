@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QTime>
 
 #include "spinacz.h"
 
@@ -9,6 +10,9 @@ int main(int argc, char *argv[])
 #if defined(Q_OS_WIN)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
+
+    uint seed = QTime::currentTime().msec();
+    qsrand(seed);
 
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;

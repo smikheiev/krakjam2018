@@ -6,6 +6,7 @@ RangeModel::RangeModel(QObject *parent)
     , m_radius(-1)
     , m_posX(-1)
     , m_posY(-1)
+    , m_rangeColor("cyan")
 {
 }
 

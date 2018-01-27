@@ -35,6 +35,16 @@ TileModel *MapModel::getTileByposition(const int column, const int row)
     return tileModel;
 }
 
+#include <QDebug>
+bool MapModel::tryToMove(int posX, int posY, int boySize)
+{
+    if (getTileType(posX, posY) != TileType::Street) return false;
+    if (getTileType(posX + boySize - 1, posY) != TileType::Street) return false;
+    if (getTileType(posX, posY + boySize - 1) != TileType::Street) return false;
+    if (getTileType(posX + boySize - 1, posY + boySize - 1) != TileType::Street) return false;
+    return true;
+}
+
 void MapModel::initTiles()
 {
     QVector<QVector<int>> tileTypes;

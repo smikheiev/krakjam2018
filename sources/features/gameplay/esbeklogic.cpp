@@ -1,4 +1,5 @@
 #include "esbeklogic.h"
+#include "../../utils.h"
 #include <QDebug>
 
 EsbekLogic::EsbekLogic(MapModel* mapModel, QObject *parent)
@@ -6,112 +7,154 @@ EsbekLogic::EsbekLogic(MapModel* mapModel, QObject *parent)
     , m_esbekModel(new EsbekModel(this))
     , m_mapModel(mapModel)
 {
-   timer.setInterval(300);
-   timer.setSingleShot(false);
-
-   connect(&timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
    esbekModel()->set_moveX(1);
-   timer.start();
 }
 
-void EsbekLogic::onTimeout()
+void EsbekLogic::setAntenaBoyList(QList<AntenaBoyModel *>* antenaBoyList)
 {
-    if (m_esbekModel->moveX() == 1) {
-        checkDirection(WEST);
-    } else if (m_esbekModel->moveX() == -1) {
-        checkDirection(EAST);
-    } else if (m_esbekModel->moveY() == 1) {
-        checkDirection(NORTH);
-    } else if (m_esbekModel->moveY() == -1) {
-        checkDirection(SOUTH);
+    mAntenaBoyList = antenaBoyList;
+}
+
+void EsbekLogic::searchAntenaBoyToJail()
+{
+    // TODO
+//    for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
+//    for (int i=0; mAntenaBoyList->size()-1; i++) {
+//        qreal distanceValue = Utils::distance(esbekModel()->posX(), esbekModel()->posY(), mAntenaBoyList->at(i)->posX(), mAntenaBoyList->at(i)->posY());
+//        int range =
+    //    }
+}
+
+void EsbekLogic::moveEsbek()
+{
+    searchAntenaBoyToJail();
+
+    if (esbekModel()->posX() % 30 != 0 || esbekModel()->posY() % 30 != 0) {
+        setDirectionMove(lastDirection);
+        return;
     }
-}
 
-void EsbekLogic::checkDirection(DIRECTION from)
-{
     QVector<DIRECTION> possibleDirections = QVector<DIRECTION> {NORTH, SOUTH, WEST, EAST};
-    possibleDirections.removeOne(from);
-
+    possibleDirections.remove(getOppositDirection(lastDirection));
     QVector<DIRECTION> moves;
-    for (int i = 0; i < possibleDirections.count(); i++ ) {
-        switch (possibleDirections.at(i)) {
-            case NORTH:
-                if (canMoveNorth())
-                    moves.append(NORTH);
-                break;
-            case SOUTH:
-                if (canMoveSouth())
-                    moves.append(SOUTH);
-                break;
-            case EAST:
-                if (canMoveEast())
-                    moves.append(EAST);
-                break;
-            case WEST:
-                if (canMoveWest())
-                    moves.append(WEST);
-                break;
+    for (int i=0; i<possibleDirections.count(); i++) {
+        if (canMove(possibleDirections.at(i))) {
+            moves.append(possibleDirections.at(i));
         }
     }
 
-    DIRECTION direction;
-    if (moves.count() == 0) {
-        direction = from;
-    } else {
-        int randomIndex = (qrand() % moves.count());
-        direction = moves.at(randomIndex);
+    if (moves.size() == 0)
+    {
+        setDirectionMove(getOppositDirection(lastDirection));
+        return;
+    }
+    else if (moves.size() == 1 && moves[0] == lastDirection)
+    {
+        setDirectionMove(lastDirection);
+        return;
+    }
+    else if (moves.size() == 1 && moves[0] != lastDirection)
+    {
+        moves.append(getOppositDirection(lastDirection));
     }
 
-    setDirectionMove(direction);
+    int randomIndex = (qrand() % moves.count());
+    qDebug() << "moves.cont " << moves.size() << " RAND " << randomIndex;
+
+    for(int i=0; i<moves.size(); i++) {
+        qDebug() << "moves.at " << i << " ----> " << moves.at(i);
+    }
+
+    setDirectionMove(moves.at(randomIndex));
 }
 
-void EsbekLogic::setDirectionMove(EsbekLogic::DIRECTION directionMove)
+EsbekLogic::DIRECTION EsbekLogic::getOppositDirection(DIRECTION direction) {
+    switch (direction) {
+        case NORTH:
+            return SOUTH;
+        case SOUTH:
+            return NORTH;
+        case EAST:
+            return WEST;
+        case WEST:
+            return EAST;
+    }
+    return SOUTH;
+}
+
+#include <QDebug>
+void EsbekLogic::setDirectionMove(DIRECTION directionMove)
 {
     m_esbekModel->set_moveX(0);
     m_esbekModel->set_moveY(0);
 
-    int row = m_esbekModel->row();
-    int column = m_esbekModel->column();
+    lastDirection = directionMove;
 
+    int newPosX;
+    int newPosY;
     switch (directionMove) {
         case WEST:
             m_esbekModel->set_moveX(-1);
-            m_esbekModel->set_row(row - 1);
+            newPosX = m_esbekModel->posX() - SPEED;
+            if (newPosX < 0) {
+                newPosX = 0;
+            }
+            m_esbekModel->set_posX(newPosX);
             break;
         case EAST:
             m_esbekModel->set_moveX(1);
-            m_esbekModel->set_row(row + 1);
+            m_esbekModel->set_posX(m_esbekModel->posX() + SPEED);
             break;
         case NORTH:
             m_esbekModel->set_moveY(-1);
-            m_esbekModel->set_column(column - 1);
+            newPosY = m_esbekModel->posY() - SPEED;
+            if (newPosY < 0) {
+                newPosY = 0;
+            }
+            m_esbekModel->set_posY(newPosY);
             break;
         case SOUTH:
             m_esbekModel->set_moveY(1);
-            m_esbekModel->set_column(column + 1);
+            m_esbekModel->set_posY(m_esbekModel->posY() + SPEED);
             break;
         default:
             break;
     }
 }
 
+bool EsbekLogic::canMove(DIRECTION direction) {
+    switch (direction) {
+        case NORTH:
+            return canMoveNorth();
+        case SOUTH:
+            return canMoveSouth();
+        case EAST:
+            return canMoveEast();
+        case WEST:
+            return canMoveWest();
+    }
+    return false;
+}
+
 bool EsbekLogic::canMoveNorth()
 {
-    return m_esbekModel->column() > 0 && m_mapModel->getTileByposition(m_esbekModel->row(), m_esbekModel->column() - 1)->tileType() == TileType::Street;
+    if (esbekModel()->posY() - SPEED < 0) return false;
+    return mapModel()->tryToMove(esbekModel()->posX(), esbekModel()->posY() - SPEED, TILE_SIZE);
 }
 
 bool EsbekLogic::canMoveSouth()
 {
-    return m_esbekModel->column() < m_mapModel->height() - 1 && m_mapModel->getTileByposition(m_esbekModel->row(), m_esbekModel->column() + 1)->tileType() == TileType::Street;
+    return mapModel()->tryToMove(esbekModel()->posX(), esbekModel()->posY() + SPEED, TILE_SIZE);
 }
 
 bool EsbekLogic::canMoveEast()
 {
-    return m_esbekModel->row() < m_mapModel->width() - 1 && m_mapModel->getTileByposition(m_esbekModel->row() + 1, m_esbekModel->column())->tileType() == TileType::Street;
+    if (esbekModel()->posX() - SPEED < 0) return false;
+    return mapModel()->tryToMove(esbekModel()->posX() - SPEED, esbekModel()->posY(), TILE_SIZE);
 }
 
 bool EsbekLogic::canMoveWest()
 {
-    return m_esbekModel->row() > 0 && m_mapModel->getTileByposition(m_esbekModel->row() - 1, m_esbekModel->column())->tileType() == TileType::Street;
+    return mapModel()->tryToMove(esbekModel()->posX() + SPEED, esbekModel()->posY(), TILE_SIZE);
 }
 

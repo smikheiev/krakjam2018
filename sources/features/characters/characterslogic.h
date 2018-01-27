@@ -25,9 +25,7 @@ public:
 
     void setMapModel(MapModel* mapModel);
 
-    bool tryToMove(int posX, int posY, int boySize);
-
-    QList<AntenaBoyModel*> mAntenaBoyModel;
+    QList<AntenaBoyModel*> mAntenaBoyList;
 
 private:
     int antenaBoySelected = 0;

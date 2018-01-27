@@ -1,16 +1,18 @@
 import QtQuick 2.10
 
 import "map/MapConstants.js" as MapConstants
+import "range"
 
 Rectangle {
     id: esbek
+
     readonly property QtObject esbekModel: features.gameplay.esbekLogic.esbekModel
 
     width: MapConstants.TILE_SIZE
     height: MapConstants.TILE_SIZE
 
-    x: mapXStart + esbekModel.row * width
-    y: mapYStart + esbekModel.column * width
+    x: mapXStart + esbekModel.posX
+    y: mapYStart + esbekModel.posY
 
     radius: width * 0.5
 
@@ -18,11 +20,15 @@ Rectangle {
     property int mapXStart
     property int mapYStart
 
-    Behavior on x {
-        NumberAnimation { duration: moveDuration }
+    Range {
+        id: seenRange
+
+        model: esbekModel.seenRange
     }
 
-    Behavior on y {
-        NumberAnimation { duration: moveDuration }
+    Range {
+        id: killRange
+
+        model: esbekModel.killRange
     }
 }

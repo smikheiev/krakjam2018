@@ -18,6 +18,8 @@ GameplayFeature::GameplayFeature(QObject *parent)
 
     transmissionLogic()->init(charactersLogic(), mapModel());
 
+    esbekLogic()->setAntenaBoyList(&charactersLogic()->mAntenaBoyList);
+
     TEST_mSetRandomRangeOnMapTimer.setInterval(1500);
     TEST_mSetRandomRangeOnMapTimer.setSingleShot(false);
     connect(&TEST_mSetRandomRangeOnMapTimer, SIGNAL(timeout()), this, SLOT(setRandomRangeOnMap()));

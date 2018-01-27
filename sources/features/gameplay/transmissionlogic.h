@@ -28,7 +28,6 @@ private:
     QList<AntenaBoyModel*> mAntenaBoyList;
     QList<ObjectiveModel*> mObjectiveList;
 
-    qreal distance(int posX_1, int posY_1, int posX_2, int posY_2);
     bool isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QList<int>* alreadyTouchedBoys);
     void addAntenaBoyModel(AntenaBoyModel* antenaBoyModel);
     void addObejctiveModel(ObjectiveModel* objectiveModel);

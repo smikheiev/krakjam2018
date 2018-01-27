@@ -43,7 +43,7 @@ Item {
         radius: width / 2
         color: "transparent"
         border {
-            color: "cyan"
+            color: model ? model.rangeColor : "cyan"
             width: rangeCircle.width * 0.3
         }
     }

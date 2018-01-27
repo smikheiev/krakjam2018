@@ -12,7 +12,7 @@ void TransmissionLogic::setHQModel(HQModel *hqModel)
 
 void TransmissionLogic::init(CharactersLogic *charactersLogic, MapModel *mapModel)
 {
-    for (AntenaBoyModel* antenaBoy : charactersLogic->mAntenaBoyModel) {
+    for (AntenaBoyModel* antenaBoy : charactersLogic->mAntenaBoyList) {
         mAntenaBoyList.append(antenaBoy);
     }
 
@@ -47,10 +47,7 @@ void TransmissionLogic::addObejctiveModel(ObjectiveModel *objectiveModel)
 
 #include <QtMath>
 #include <QDebug>
-qreal TransmissionLogic::distance(int posX_1, int posY_1, int posX_2, int posY_2) {
-    return qSqrt(qPow(posX_2 - posX_1, 2) + qPow(posY_2 - posY_1, 2));
-}
-
+#include "../../utils.h"
 void TransmissionLogic::checkTransmission()
 {
     mHqModel->set_isTransitionOnLine(false);
@@ -60,7 +57,7 @@ void TransmissionLogic::checkTransmission()
 
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
         int range = antenaBoy->range()->radius() + mHqModel->range();
-        qreal distanceValue = distance(antenaBoy->posX(), antenaBoy->posY(), mHqModel->posX(), mHqModel->posY());
+        qreal distanceValue = Utils::distance(antenaBoy->posX(), antenaBoy->posY(), mHqModel->posX(), mHqModel->posY());
         if (range > distanceValue) {
             QList<int> touchedIdList;
             touchedIdList.append(antenaBoy->id());
@@ -80,7 +77,7 @@ bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QLi
         if (alreadyTouchedBoys->contains(antenaBoy->id())) continue;
 
         int range = rootAntenaBoy->range()->radius() + antenaBoy->range()->radius();
-        qreal distanceValue = distance(antenaBoy->posX(), antenaBoy->posY(), rootAntenaBoy->posX(), rootAntenaBoy->posY());
+        qreal distanceValue = Utils::distance(antenaBoy->posX(), antenaBoy->posY(), rootAntenaBoy->posX(), rootAntenaBoy->posY());
         if (range > distanceValue) {
             alreadyTouchedBoys->append(antenaBoy->id());
             if (isTransmissionReached(antenaBoy, alreadyTouchedBoys)) {
@@ -93,7 +90,7 @@ bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QLi
     for (ObjectiveModel* objectiveModel : mObjectiveList) {
         objectiveModel->set_isTransmissionOnLine(false);
         int range = rootAntenaBoy->range()->radius() + objectiveModel->range();
-        qreal distanceValue = distance(objectiveModel->posX(), objectiveModel->posY(), rootAntenaBoy->posX(), rootAntenaBoy->posY());
+        qreal distanceValue = Utils::distance(objectiveModel->posX(), objectiveModel->posY(), rootAntenaBoy->posX(), rootAntenaBoy->posY());
         if (range > distanceValue) {
             objectiveModel->set_isTransmissionOnLine(true);
             qDebug() << "SUKCES";
