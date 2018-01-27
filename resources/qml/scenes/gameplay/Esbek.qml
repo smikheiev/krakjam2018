@@ -14,7 +14,7 @@ Rectangle {
 
     radius: width * 0.5
 
-    property int moveDuration: 1000
+    property int moveDuration: 300
     property int mapXStart
     property int mapYStart
 

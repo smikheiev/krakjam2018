@@ -30,7 +30,7 @@ TileType MapModel::getTileType(int posX, int posY)
 
 TileModel *MapModel::getTileByposition(const int column, const int row)
 {
-    TileModel* tileModel = mTiles.at(column)->at(row);
+    TileModel* tileModel = mTiles.at(row)->at(column);
     return tileModel;
 }
 

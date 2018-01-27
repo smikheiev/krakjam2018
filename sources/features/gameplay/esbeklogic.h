@@ -30,7 +30,12 @@ private:
 
 private slots:
     void onTimeout();
-    void setNewDirection();
+    void checkDirection(DIRECTION from);
+    void setDirectionMove(DIRECTION directionMove);
+    bool canMoveNorth();
+    bool canMoveSouth();
+    bool canMoveEast();
+    bool canMoveWest();
 };
 
 #endif // ESBEKLOGIC_H
