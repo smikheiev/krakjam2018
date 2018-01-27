@@ -7,6 +7,7 @@ GameplayFeature::GameplayFeature(QObject *parent)
     : QObject(parent)
     , m_currentGameplayState(GameplayState::None)
     , m_charactersLogic(new CharactersLogic(this))
+    , m_mapModel(new MapModel(this))
 {
     setupPossibleStateTransitions();
 }

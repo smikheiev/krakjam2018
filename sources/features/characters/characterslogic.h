@@ -22,7 +22,7 @@ public:
     void moveKeyReleased(int keyReleased);
 
 private:
-    int antenaBoySelected = 1;
+    int antenaBoySelected = 0;
 
     AntenaBoyModel* getAntenaBoySelected();
 

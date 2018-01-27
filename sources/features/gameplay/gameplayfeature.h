@@ -8,6 +8,7 @@
 #include "gameplaystate.h"
 #include "../appState/appstate.h"
 #include "../characters/characterslogic.h"
+#include "map/mapmodel.h"
 
 class GameplayFeature : public QObject
 {
@@ -15,6 +16,7 @@ class GameplayFeature : public QObject
 
     AUTO_Q_PROPERTY(GameplayState, currentGameplayState)
     AUTO_Q_PROPERTY(CharactersLogic*, charactersLogic)
+    AUTO_Q_PROPERTY(MapModel*, mapModel)
 
 public:
     explicit GameplayFeature(QObject *parent = nullptr);

@@ -7,46 +7,18 @@ import "../"
 import "./gameEndPopup"
 import "../../common"
 import "./characters"
+import "./map"
 
 BaseScene {
     id: gameplayScene
 
     sceneAppState: AppState.Gameplay
 
-    Rectangle {
+    Map {
+        id: map
+
         anchors {
             fill: parent
-        }
-        color: "blue"
-    }
-
-    Column {
-        id: buttondColumn
-
-        anchors {
-            centerIn: parent
-        }
-
-        spacing: 20
-
-        ButtonWithText {
-            id: winButton
-
-            textString: "Win"
-
-            onClicked: {
-                features.gameplay.tryChangeStateTo(GameplayState.Won)
-            }
-        }
-
-        ButtonWithText {
-            id: looseButton
-
-            textString: "Loose"
-
-            onClicked: {
-                features.gameplay.tryChangeStateTo(GameplayState.Lose)
-            }
         }
     }
 

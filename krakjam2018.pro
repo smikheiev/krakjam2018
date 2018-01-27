@@ -12,7 +12,9 @@ SOURCES += \
     sources/features/exitApp/exitappfeature.cpp \
     sources/features/gameplay/gameplayfeature.cpp \
     sources/features/characters/antenaboymodel.cpp \
-    sources/features/characters/characterslogic.cpp
+    sources/features/characters/characterslogic.cpp \
+    sources/features/gameplay/map/mapmodel.cpp \
+    sources/features/gameplay/map/tilemodel.cpp
 
 RESOURCES += \
     resources/qml.qrc \
@@ -29,4 +31,7 @@ HEADERS += \
     sources/features/gameplay/gameplayfeature.h \
     sources/features/gameplay/gameplaystate.h \
     sources/features/characters/antenaboymodel.h \
-    sources/features/characters/characterslogic.h
+    sources/features/characters/characterslogic.h \
+    sources/features/gameplay/map/mapmodel.h \
+    sources/features/gameplay/map/tiletype.h \
+    sources/features/gameplay/map/tilemodel.h

@@ -32,6 +32,6 @@ Item {
     }
 
     Component.onCompleted: {
-        features.appState.tryChangeStateTo(AppState.Loading)
+        features.appState.tryChangeStateTo(AppState.Gameplay)
     }
 }
