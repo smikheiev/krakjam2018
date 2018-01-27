@@ -12,8 +12,8 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_esbekLogic(new EsbekLogic(mapModel(), charactersLogic(), this))
     , m_transmissionLogic(new TransmissionLogic(this))
     , m_objectiveLogic(new ObjectivesLogic(mapModel(), this))
+    , m_roundTime(ROUND_TIME_MS)
     , mHQRange(new RangeModel(this))
-    , m_roundTime(20000)
 {
     setupPossibleStateTransitions();
     setupInitialRanges();

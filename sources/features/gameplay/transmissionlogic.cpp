@@ -5,9 +5,9 @@
 
 TransmissionLogic::TransmissionLogic(QObject* parent)
     : QObject(parent)
+    , m_isRoundFailed(false)
     , mHQRangeModel(nullptr)
     , mObjectivesList(nullptr)
-    , m_isRoundFailed(false)
 {
 }
 
