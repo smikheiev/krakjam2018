@@ -2,7 +2,7 @@ import QtQuick 2.10
 import QtQuick.Controls 2.2
 
 Rectangle {
-    id :roundWonPopup
+    id: roundLosePopup
 
     property int marginSize: 16
 
@@ -24,7 +24,7 @@ Rectangle {
             topMargin: marginSize
         }
 
-        source: "qrc:/images/happy.png"
+        source: "qrc:/images/sad.png"
     }
 
     Text {
@@ -36,8 +36,8 @@ Rectangle {
             topMargin: marginSize
         }
 
-        color: "white"
-        text: "Congrats! Hospital was saved!"
+        color: "red"
+        text: "Mission failed"
     }
 
     Button {
@@ -49,11 +49,11 @@ Rectangle {
             topMargin: marginSize
         }
 
-        text: "START NEXT ROUND"
+        text: "RESTART ROUND"
 
         onClicked: {
-            features.gameplay.newRoundStartNeeded()
-            roundWonPopup.visible = false
+            features.gameplay.restartRoundNeeded()
+            roundLosePopup.visible = false
         }
     }
 }

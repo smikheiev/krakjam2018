@@ -21,5 +21,7 @@
         <file>qml/scenes/gameplay/range/RangeCircle.qml</file>
         <file>qml/common/CircleProgressShader.qml</file>
         <file>qml/scenes/gameplay/RoundWonPopup.qml</file>
+        <file>qml/scenes/gameplay/GameTimer.qml</file>
+        <file>qml/scenes/gameplay/RoundLosePopup.qml</file>
     </qresource>
 </RCC>

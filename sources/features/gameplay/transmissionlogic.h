@@ -14,6 +14,8 @@ class TransmissionLogic : public QObject
 {
     Q_OBJECT
 
+    AUTO_Q_PROPERTY(bool, isRoundFailed)
+
 public:
     TransmissionLogic(QObject* parent);
 

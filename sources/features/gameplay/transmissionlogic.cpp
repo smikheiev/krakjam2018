@@ -7,6 +7,7 @@ TransmissionLogic::TransmissionLogic(QObject* parent)
     : QObject(parent)
     , mHQRangeModel(nullptr)
     , mObjectivesList(nullptr)
+    , m_isRoundFailed(false)
 {
 }
 
@@ -58,6 +59,10 @@ void TransmissionLogic::checkTransmission()
 
 bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QList<AntenaBoyModel*>* alreadyCheckedBoys, QList<AntenaBoyModel*>* transmittingBoys, QList<ObjectiveModel*>* transmittingObjectives)
 {
+    if (isRoundFailed()) {
+        return true;
+    }
+
     bool result = false;
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
         if (alreadyCheckedBoys->contains(antenaBoy)) continue;

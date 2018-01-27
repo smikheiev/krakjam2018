@@ -21,6 +21,53 @@ BaseScene {
         }
     }
 
+    GameTimer {
+        id: gameTimer
+
+        height: 18
+        width: map.gridMapWidth
+        x: map.mapGridPosX
+        y: map.mapGridPosY - (height + 8)
+
+        onRoundFailed: {
+            features.gameplay.roundFailed()
+            roundLosePopup.visible = true
+        }
+
+        Component.onCompleted: {
+            gameTimer.startTimer()
+        }
+    }
+
+    Item {
+        id: charactersContainer
+
+        x: map.mapGridPosX
+        y: map.mapGridPosY
+
+        Repeater {
+            model: features.gameplay.charactersLogic.antenaBoyList
+
+            AntenaBoy {
+                antenaBoyModel: modelData
+            }
+        }
+
+        Timer {
+            id: moveTimer
+
+            running: true
+            repeat: true
+            interval: 15
+
+            onTriggered: {
+                features.gameplay.charactersLogic.move()
+                features.gameplay.transmissionLogic.checkTransmission()
+                features.gameplay.esbekLogic.moveEsbek()
+            }
+        }
+    }
+
     WonPopup {
         id: wonPopup
 
@@ -38,7 +85,17 @@ BaseScene {
     RoundWonPopup {
         id: roundWonPopup
 
-        opacity: 0.0
+        visible: false
+
+        anchors {
+            centerIn: parent
+        }
+    }
+
+    RoundLosePopup {
+        id: roundLosePopup
+
+        visible: false
 
         anchors {
             centerIn: parent
@@ -49,7 +106,12 @@ BaseScene {
         target: features.gameplay
 
         onObjectiveCompleted: {
-            roundWonPopup.opacity = 1.0
+            gameTimer.pauseTimer()
+            roundWonPopup.visible = true
+        }
+
+        onRestartTimerNeeded: {
+            gameTimer.startTimer()
         }
     }
 }

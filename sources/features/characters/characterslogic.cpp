@@ -48,6 +48,14 @@ void CharactersLogic::catchedByEsbek(AntenaBoyModel *boy)
     setBoyToStartPosition(boy);
 }
 
+void CharactersLogic::restartPositionsAllAntenaBoys()
+{
+    for (int i = 0; i < mAntenaBoyList.count(); ++i)
+    {
+       setBoyToStartPosition(mAntenaBoyList.at(i));
+    }
+}
+
 AntenaBoyModel* CharactersLogic::getAntenaBoySelected() {
     return mAntenaBoyList.at(antenaBoySelected);
 }
