@@ -4,32 +4,45 @@
 
 EsbekLogic::EsbekLogic(MapModel* mapModel, CharactersLogic* charactersLogic, QObject *parent)
     : QObject(parent)
-    , m_esbekModel(new EsbekModel(this))
     , mMapModel(mapModel)
     , mCharactersLogic(charactersLogic)
 {
-    setEsbekToStartPosition(esbekModel());
-    esbekModel()->set_moveX(1);
+    for (int i = 0; i < 2; ++i)
+    {
+        EsbekModel* esbek = new EsbekModel(i, this);
+        setEsbekToStartPosition(esbek, 1, 3 + i);
+        esbek->set_moveX(1);
+        mEsbekModelsList.append(esbek);
+    }
+
+    QVariantList vl;
+    for (int i = 0; i < mEsbekModelsList.count(); ++i)
+    {
+        vl.append(QVariant::fromValue(mEsbekModelsList.at(i)));
+    }
+    set_esbekList(vl);
 }
 
 void EsbekLogic::tryToCatchAntenaBoyToJail()
 {
-    for (int i = 0; i < mCharactersLogic->mAntenaBoyList.count(); ++i)
-    {
-        AntenaBoyModel* boy = mCharactersLogic->mAntenaBoyList.at(i);
-        if (boy->isInactive()) continue;
-
-        qreal distanse = Utils::distance(esbekModel()->posX(), esbekModel()->posY(), boy->posX(), boy->posY());
-        if (distanse < esbekModel()->killRadius())
+    for (EsbekModel* esbek : mEsbekModelsList) {
+        for (int i = 0; i < mCharactersLogic->mAntenaBoyList.count(); ++i)
         {
-            mCharactersLogic->catchedByEsbek(boy);
+            AntenaBoyModel* boy = mCharactersLogic->mAntenaBoyList.at(i);
+            if (boy->isInactive()) continue;
+
+            qreal distanse = Utils::distance(esbek->posX(), esbek->posY(), boy->posX(), boy->posY());
+            if (distanse < esbek->killRadius())
+            {
+                mCharactersLogic->catchedByEsbek(boy);
+            }
         }
     }
 }
 
-void EsbekLogic::setEsbekToStartPosition(EsbekModel *esbek)
+void EsbekLogic::setEsbekToStartPosition(EsbekModel *esbek, int startX, int startY)
 {
-    QPoint startPosition = QPoint(1, 3);
+    QPoint startPosition = QPoint(startX, startY);
     int posX = startPosition.x() * TILE_SIZE;
     int posY = startPosition.y() * TILE_SIZE;
 
@@ -37,29 +50,38 @@ void EsbekLogic::setEsbekToStartPosition(EsbekModel *esbek)
     esbek->set_posY(posY);
 }
 
+#include <QDebug>
 void EsbekLogic::moveEsbek()
+{
+    for (EsbekModel* esbek : mEsbekModelsList) {
+        moveEsbek(esbek);
+    }
+}
+
+void EsbekLogic::moveEsbek(EsbekModel* esbekModel)
 {
     tryToCatchAntenaBoyToJail();
 
-    if (esbekModel()->posX() % TILE_SIZE != 0 || esbekModel()->posY() % TILE_SIZE != 0) {
-        setDirectionMove(lastDirection);
+    if (esbekModel->posX() % TILE_SIZE != 0 || esbekModel->posY() % TILE_SIZE != 0) {
+        setDirectionMove(esbekModel, esbekModel->lastDirection);
         return;
     }
 
-    QVector<DIRECTION> allPossibleDirections = QVector<DIRECTION> {UP, DOWN, LEFT, RIGHT};
-    QVector<DIRECTION> directionsToSelectRandom;
+    QVector<EsbekModel::DIRECTION> allPossibleDirections = QVector<EsbekModel::DIRECTION>
+            {EsbekModel::UP, EsbekModel::DOWN, EsbekModel::LEFT, EsbekModel::RIGHT};
+    QVector<EsbekModel::DIRECTION> directionsToSelectRandom;
     for (int i=0; i<allPossibleDirections.count(); i++) {
-        if (allPossibleDirections.at(i) == getOppositDirection(lastDirection)) continue;
+        if (allPossibleDirections.at(i) == getOppositDirection(esbekModel->lastDirection)) continue;
 
-        if (canMove(allPossibleDirections.at(i))) {
+        if (canMove(esbekModel, allPossibleDirections.at(i))) {
             directionsToSelectRandom.append(allPossibleDirections.at(i));
         }
     }
 
-    DIRECTION directionToMove = DIRECTION::NONE;
+    EsbekModel::DIRECTION directionToMove = EsbekModel::DIRECTION::NONE;
     if (directionsToSelectRandom.size() == 0)
     {
-        directionToMove = getOppositDirection(lastDirection);
+        directionToMove = getOppositDirection(esbekModel->lastDirection);
     }
     else
     {
@@ -67,57 +89,57 @@ void EsbekLogic::moveEsbek()
         directionToMove = directionsToSelectRandom.at(randomIndex);
     }
 
-    setDirectionMove(directionToMove);
+    setDirectionMove(esbekModel, directionToMove);
 }
 
-EsbekLogic::DIRECTION EsbekLogic::getOppositDirection(DIRECTION direction) {
+EsbekModel::DIRECTION EsbekLogic::getOppositDirection(EsbekModel::DIRECTION direction) {
     switch (direction) {
-        case UP:
-            return DOWN;
-        case DOWN:
-            return UP;
-        case RIGHT:
-            return LEFT;
-        case LEFT:
-            return RIGHT;
+        case EsbekModel::UP:
+            return EsbekModel::DOWN;
+        case EsbekModel::DOWN:
+            return EsbekModel::UP;
+        case EsbekModel::RIGHT:
+            return EsbekModel::LEFT;
+        case EsbekModel::LEFT:
+            return EsbekModel::RIGHT;
         default:
-            return NONE;
+            return EsbekModel::NONE;
     }
 }
 
-void EsbekLogic::setDirectionMove(DIRECTION directionMove)
+void EsbekLogic::setDirectionMove(EsbekModel* esbekModel, EsbekModel::DIRECTION directionMove)
 {
-    m_esbekModel->set_moveX(0);
-    m_esbekModel->set_moveY(0);
+    esbekModel->set_moveX(0);
+    esbekModel->set_moveY(0);
 
-    lastDirection = directionMove;
+    esbekModel->lastDirection = directionMove;
 
     int newPosX;
     int newPosY;
     switch (directionMove) {
-        case LEFT:
-            m_esbekModel->set_moveX(-1);
-            newPosX = m_esbekModel->posX() - ESBEK_SPEED;
+        case EsbekModel::LEFT:
+            esbekModel->set_moveX(-1);
+            newPosX = esbekModel->posX() - ESBEK_SPEED;
             if (newPosX < 0) {
                 newPosX = 0;
             }
-            m_esbekModel->set_posX(newPosX);
+            esbekModel->set_posX(newPosX);
             break;
-        case RIGHT:
-            m_esbekModel->set_moveX(1);
-            m_esbekModel->set_posX(m_esbekModel->posX() + ESBEK_SPEED);
+        case EsbekModel::RIGHT:
+            esbekModel->set_moveX(1);
+            esbekModel->set_posX(esbekModel->posX() + ESBEK_SPEED);
             break;
-        case UP:
-            m_esbekModel->set_moveY(-1);
-            newPosY = m_esbekModel->posY() - ESBEK_SPEED;
+        case EsbekModel::UP:
+            esbekModel->set_moveY(-1);
+            newPosY = esbekModel->posY() - ESBEK_SPEED;
             if (newPosY < 0) {
                 newPosY = 0;
             }
-            m_esbekModel->set_posY(newPosY);
+            esbekModel->set_posY(newPosY);
             break;
-        case DOWN:
-            m_esbekModel->set_moveY(1);
-            m_esbekModel->set_posY(m_esbekModel->posY() + ESBEK_SPEED);
+        case EsbekModel::DOWN:
+            esbekModel->set_moveY(1);
+            esbekModel->set_posY(esbekModel->posY() + ESBEK_SPEED);
             break;
         default:
             qDebug() << "ERROR ERROR ERROR !!!!!!!!!!!!!!!!";
@@ -125,40 +147,40 @@ void EsbekLogic::setDirectionMove(DIRECTION directionMove)
     }
 }
 
-bool EsbekLogic::canMove(DIRECTION direction) {
+bool EsbekLogic::canMove(EsbekModel* esbekModel, EsbekModel::DIRECTION direction) {
     switch (direction) {
-        case UP:
-            return canMoveUp();
-        case DOWN:
-            return canMoveDown();
-        case RIGHT:
-            return canMoveRight();
-        case LEFT:
-            return canMoveLeft();
+        case EsbekModel::UP:
+            return canMoveUp(esbekModel);
+        case EsbekModel::DOWN:
+            return canMoveDown(esbekModel);
+        case EsbekModel::RIGHT:
+            return canMoveRight(esbekModel);
+        case EsbekModel::LEFT:
+            return canMoveLeft(esbekModel);
         default:
             return false;
     }
 }
 
-bool EsbekLogic::canMoveUp()
+bool EsbekLogic::canMoveUp(EsbekModel* esbekModel)
 {
-    if (esbekModel()->posY() - ESBEK_SPEED < 0) return false;
-    return mMapModel->tryToMove(esbekModel()->posX(), esbekModel()->posY() - ESBEK_SPEED, TILE_SIZE);
+    if (esbekModel->posY() - ESBEK_SPEED < 0) return false;
+    return mMapModel->tryToMove(esbekModel->posX(), esbekModel->posY() - ESBEK_SPEED, TILE_SIZE);
 }
 
-bool EsbekLogic::canMoveDown()
+bool EsbekLogic::canMoveDown(EsbekModel* esbekModel)
 {
-    return mMapModel->tryToMove(esbekModel()->posX(), esbekModel()->posY() + ESBEK_SPEED, TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel->posX(), esbekModel->posY() + ESBEK_SPEED, TILE_SIZE);
 }
 
-bool EsbekLogic::canMoveLeft()
+bool EsbekLogic::canMoveLeft(EsbekModel* esbekModel)
 {
-    if (esbekModel()->posX() - ESBEK_SPEED < 0) return false;
-    return mMapModel->tryToMove(esbekModel()->posX() - ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
+    if (esbekModel->posX() - ESBEK_SPEED < 0) return false;
+    return mMapModel->tryToMove(esbekModel->posX() - ESBEK_SPEED, esbekModel->posY(), TILE_SIZE);
 }
 
-bool EsbekLogic::canMoveRight()
+bool EsbekLogic::canMoveRight(EsbekModel* esbekModel)
 {
-    return mMapModel->tryToMove(esbekModel()->posX() + ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel->posX() + ESBEK_SPEED, esbekModel->posY(), TILE_SIZE);
 }
 

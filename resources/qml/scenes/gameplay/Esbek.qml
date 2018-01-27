@@ -6,7 +6,7 @@ import "range"
 Item {
     id: esbek
 
-    readonly property QtObject esbekModel: features.gameplay.esbekLogic.esbekModel
+    property QtObject esbekModel
 
     width: MapConstants.TILE_SIZE
     height: MapConstants.TILE_SIZE

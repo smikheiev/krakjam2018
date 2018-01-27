@@ -79,8 +79,14 @@ Item {
         x: mapGrid.x
         y: mapGrid.y
 
-        Esbek {
-            id: esbek
+        Repeater {
+            model: features.gameplay.esbekLogic.esbekList
+
+            Esbek {
+                id: esbek
+
+                esbekModel: modelData
+            }
         }
     }
 

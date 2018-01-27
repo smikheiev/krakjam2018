@@ -88,7 +88,7 @@ Item {
         var allHouses = [
             "qrc:/images/map/Domki_1DoPoprawki.png",
             "qrc:/images/map/Domki_2DoPoprawki.png",
-            ""
+            "" // dodac jakies inne obazki domkow
         ]
         var rand = Math.floor((Math.random() * allHouses.length))
         return allHouses[rand]
