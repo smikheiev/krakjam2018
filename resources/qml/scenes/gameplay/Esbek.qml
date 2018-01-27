@@ -14,15 +14,12 @@ Item {
     x: esbekModel.posX
     y: esbekModel.posY
 
-    Rectangle {
-        width: MapConstants.TILE_SIZE * 0.75
-        height: MapConstants.TILE_SIZE * 0.75
+    Image {
+        source: "qrc:/images/map/SBK_probka1.png"
+
         anchors {
             centerIn: parent
         }
-
-        radius: width * 0.5
-        color: "pink"
     }
 
     RangeCircle {
