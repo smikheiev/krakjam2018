@@ -12,11 +12,12 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_esbekLogic(new EsbekLogic(mapModel(), charactersLogic(), this))
     , m_transmissionLogic(new TransmissionLogic(this))
     , m_objectiveLogic(new ObjectivesLogic(mapModel(), this))
+    , mHQRange(new RangeModel(this))
 {
     setupPossibleStateTransitions();
     setupInitialRanges();
 
-    transmissionLogic()->init(charactersLogic(), mapModel(), objectiveLogic()->objectives());
+    transmissionLogic()->init(charactersLogic(), objectiveLogic()->objectives(), mHQRange);
     connect(objectiveLogic(), SIGNAL(objectiveCompleted()), this, SIGNAL(objectiveCompleted()));
 }
 
@@ -80,6 +81,13 @@ void GameplayFeature::setupInitialRanges()
         AntenaBoyModel* antenaBoyModel = antenaBoyModelQVariant.value<AntenaBoyModel*>();
         ranges()->add(antenaBoyModel->range());
     }
+
+    QPoint hqPos = mapModel()->getHQPosition();
+    mHQRange->set_posX(hqPos.x() * TILE_SIZE);
+    mHQRange->set_posY(hqPos.y() * TILE_SIZE);
+    mHQRange->set_radius(HQ_RANGE_RADIUS);
+
+    ranges()->add(mHQRange);
 }
 
 void GameplayFeature::setupPossibleStateTransitions()

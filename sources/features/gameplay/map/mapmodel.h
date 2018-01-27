@@ -28,7 +28,7 @@ public:
     TileType getTileType(int posX, int posY);
     bool tryToMove(int posX, int posY, int boySize);
 
-    QPoint getStartAntenaBoyPosition();
+    QPoint getHQPosition();
 
 private:
     void initTiles();

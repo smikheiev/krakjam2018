@@ -17,9 +17,7 @@ class TransmissionLogic : public QObject
 public:
     TransmissionLogic(QObject* parent);
 
-    void setHQRange(RangeModel* rangeModel);
-
-    void init(CharactersLogic* charactersLogic, MapModel* mapModel, ObjectivesListModel* objectivesList);
+    void init(CharactersLogic* charactersLogic, ObjectivesListModel* objectivesList, RangeModel* hqRange);
     Q_INVOKABLE void checkTransmission();
 
 private:

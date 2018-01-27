@@ -103,10 +103,6 @@ Item {
 
             delegate: Objective {
                 model: display // display - standart Qt Role "Qt::DisplayRole"
-
-                Component.onCompleted: {
-                    console.log(123)
-                }
             }
         }
     }
