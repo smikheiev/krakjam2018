@@ -7,10 +7,14 @@ AntenaBoyModel::AntenaBoyModel(int id, int rangeRadius, QObject* parent)
     , m_boySize(ANTENA_BOY_SIZE)
     , m_posX(0)
     , m_posY(0)
-    , m_transmissionOnLine(false)
     , m_range(new RangeModel(this))
 {
     range()->set_radius(rangeRadius);
+
+    connect(this, SIGNAL(posXChanged(int)), this, SLOT(onPosChanged()));
+    connect(this, SIGNAL(posYChanged(int)), this, SLOT(onPosChanged()));
+
+    onPosChanged();
 }
 
 void AntenaBoyModel::moveKeyPressed(int keyPressed)
@@ -27,4 +31,10 @@ void AntenaBoyModel::moveKeyReleased(int keyReleased)
     if (keyReleased == Qt::Key_S || keyReleased == Qt::Key_Down) moveY = 0;
     if (keyReleased == Qt::Key_A || keyReleased == Qt::Key_Left) moveX = 0;
     if (keyReleased == Qt::Key_D || keyReleased == Qt::Key_Right) moveX = 0;
+}
+
+void AntenaBoyModel::onPosChanged()
+{
+    range()->set_posX(posX() - boySize() / 2);
+    range()->set_posY(posY() - boySize() / 2);
 }

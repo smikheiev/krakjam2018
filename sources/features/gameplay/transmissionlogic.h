@@ -5,11 +5,10 @@
 #include <QList>
 
 #include "../characters/antenaboymodel.h"
-#include "map/hqmodel.h"
-#include "map/objectivemodel.h"
 #include "map/mapmodel.h"
 #include "../characters/characterslogic.h"
 #include "../../macros.h"
+#include "objectives/objectiveslistmodel.h"
 
 class TransmissionLogic : public QObject
 {
@@ -18,20 +17,18 @@ class TransmissionLogic : public QObject
 public:
     TransmissionLogic(QObject* parent);
 
-    void setHQModel(HQModel* hqModel_);
+    void setHQRange(RangeModel* rangeModel);
 
-    void init(CharactersLogic* charactersLogic, MapModel* mapModel);
+    void init(CharactersLogic* charactersLogic, MapModel* mapModel, ObjectivesListModel* objectivesList);
     Q_INVOKABLE void checkTransmission();
 
 private:
-    HQModel* mHqModel;
+    RangeModel* mHQRangeModel;
     QList<AntenaBoyModel*> mAntenaBoyList;
-    QList<ObjectiveModel*> mObjectiveList;
+    ObjectivesListModel* mObjectivesList;
 
     qreal distance(int posX_1, int posY_1, int posX_2, int posY_2);
-    bool isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QList<int>* alreadyTouchedBoys);
-    void addAntenaBoyModel(AntenaBoyModel* antenaBoyModel);
-    void addObejctiveModel(ObjectiveModel* objectiveModel);
+    bool isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QList<AntenaBoyModel*>* alreadyCheckedBoys, QList<AntenaBoyModel*>* transmittingBoys, QList<ObjectiveModel*>* transmittingObjectives);
 };
 
 #endif // TRANSMISSIONLOGIC_H

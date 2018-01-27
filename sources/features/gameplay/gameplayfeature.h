@@ -13,6 +13,7 @@
 #include "range/rangeslistmodel.h"
 #include "esbeklogic.h"
 #include "transmissionlogic.h"
+#include "objectives/objectiveslogic.h"
 
 class GameplayFeature : public QObject
 {
@@ -24,6 +25,7 @@ class GameplayFeature : public QObject
     AUTO_Q_PROPERTY(RangesListModel*, ranges)
     AUTO_Q_PROPERTY(EsbekLogic*, esbekLogic)
     AUTO_Q_PROPERTY(TransmissionLogic*, transmissionLogic)
+    AUTO_Q_PROPERTY(ObjectivesLogic*, objectiveLogic)
 
 public:
     explicit GameplayFeature(QObject *parent = nullptr);
@@ -37,6 +39,7 @@ public slots:
     void setRandomRangeOnMap();
 
 private:
+    void setupInitialRanges();
     void setupPossibleStateTransitions();
     bool canChangeStateFromTo(const GameplayState stateFrom, const GameplayState stateTo) const;
 

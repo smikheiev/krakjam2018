@@ -6,6 +6,7 @@ Item {
     id: range
 
     property QtObject model: null
+    readonly property bool isTransmitting: model ? model.isTransmitting : false
 
     QtObject {
         id: priv
@@ -43,8 +44,8 @@ Item {
         radius: width / 2
         color: "transparent"
         border {
-            color: "cyan"
-            width: rangeCircle.width * 0.3
+            color: range.isTransmitting ? "cyan" : "pink"
+            width: 5
         }
     }
 }

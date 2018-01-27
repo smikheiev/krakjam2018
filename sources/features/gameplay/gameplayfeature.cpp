@@ -11,17 +11,18 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_ranges(new RangesListModel(this))
     , m_esbekLogic(new EsbekLogic(m_mapModel, this))
     , m_transmissionLogic(new TransmissionLogic(this))
+    , m_objectiveLogic(new ObjectivesLogic(mapModel(), this))
 {
     setupPossibleStateTransitions();
+    setupInitialRanges();
 
     charactersLogic()->setMapModel(mapModel());
+    transmissionLogic()->init(charactersLogic(), mapModel(), objectiveLogic()->objectives());
 
-    transmissionLogic()->init(charactersLogic(), mapModel());
-
-    TEST_mSetRandomRangeOnMapTimer.setInterval(1500);
-    TEST_mSetRandomRangeOnMapTimer.setSingleShot(false);
-    connect(&TEST_mSetRandomRangeOnMapTimer, SIGNAL(timeout()), this, SLOT(setRandomRangeOnMap()));
-    TEST_mSetRandomRangeOnMapTimer.start();
+//    TEST_mSetRandomRangeOnMapTimer.setInterval(1500);
+//    TEST_mSetRandomRangeOnMapTimer.setSingleShot(false);
+//    connect(&TEST_mSetRandomRangeOnMapTimer, SIGNAL(timeout()), this, SLOT(setRandomRangeOnMap()));
+//    TEST_mSetRandomRangeOnMapTimer.start();
 }
 
 GameplayFeature::~GameplayFeature()
@@ -69,6 +70,16 @@ void GameplayFeature::setRandomRangeOnMap()
     rangeModel->set_radius(randomRadius);
 
     m_ranges->add(rangeModel);
+}
+
+void GameplayFeature::setupInitialRanges()
+{
+    for (int i = 0; i < charactersLogic()->antenaBoyList().count(); ++i)
+    {
+        QVariant antenaBoyModelQVariant = charactersLogic()->antenaBoyList().at(i);
+        AntenaBoyModel* antenaBoyModel = antenaBoyModelQVariant.value<AntenaBoyModel*>();
+        ranges()->add(antenaBoyModel->range());
+    }
 }
 
 void GameplayFeature::setupPossibleStateTransitions()

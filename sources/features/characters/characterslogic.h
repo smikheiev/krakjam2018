@@ -26,6 +26,7 @@ public:
     void setMapModel(MapModel* mapModel);
 
     bool tryToMove(int posX, int posY, int boySize);
+    bool canMoveOnPosition(int posX, int posY);
 
     QList<AntenaBoyModel*> mAntenaBoyModel;
 
