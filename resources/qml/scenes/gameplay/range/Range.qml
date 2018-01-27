@@ -24,28 +24,19 @@ Item {
 
     visible: priv.hasRange
 
-    SequentialAnimation {
-        loops: Animation.Infinite
-        running: priv.hasRange
+    Repeater {
+        id: rangeCirclesRepeater
 
-        NumberAnimation { target: range; property: "opacity"; duration: 1500; from: 1; to: 0 }
-        NumberAnimation { target: range; property: "opacity"; duration: 1500; from: 0; to: 1 }
-    }
+        model: 3
 
-    Rectangle {
-        id: rangeCircle
+        delegate: RangeCircle {
+            anchors {
+                centerIn: parent
+            }
 
-        width: priv.radius * 2
-        height: width
-        anchors {
-            centerIn: parent
-        }
-
-        radius: width / 2
-        color: "transparent"
-        border {
-            color: range.isTransmitting ? "cyan" : "pink"
-            width: 5
+            size: priv.radius * 2
+            borderColor: range.isTransmitting ? "cyan" : "pink"
+            sonarDelay: index * 500
         }
     }
 }

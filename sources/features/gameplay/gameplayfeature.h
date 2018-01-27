@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QMap>
-#include <QTimer>
 
 #include "../../macros.h"
 #include "gameplaystate.h"
@@ -45,7 +44,6 @@ private:
 
 private:
     QMap<GameplayState, QVector<GameplayState>*> mPossibleStateTransitions;
-    QTimer TEST_mSetRandomRangeOnMapTimer;
 };
 
 #endif // GAMEPLAYFEATURE_H

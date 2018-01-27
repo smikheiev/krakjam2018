@@ -39,14 +39,14 @@ void MapModel::initTiles()
 {
     QVector<QVector<int>> tileTypes;
     tileTypes.append(QVector<int>{2,2,2,2,2,2,2,2,2,2});
-    tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,3,2});
+    tileTypes.append(QVector<int>{2,3,4,4,2,4,4,4,3,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
     tileTypes.append(QVector<int>{2,2,2,2,1,2,2,2,2,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,4,2,4,4,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,2,2,4,4,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
-    tileTypes.append(QVector<int>{2,3,4,4,2,4,4,4,4,2});
+    tileTypes.append(QVector<int>{2,3,4,4,2,4,4,4,3,2});
     tileTypes.append(QVector<int>{2,2,2,2,2,2,2,2,2,2});
 
     for (int i = 0; i < width(); ++i)

@@ -18,11 +18,6 @@ GameplayFeature::GameplayFeature(QObject *parent)
 
     charactersLogic()->setMapModel(mapModel());
     transmissionLogic()->init(charactersLogic(), mapModel(), objectiveLogic()->objectives());
-
-//    TEST_mSetRandomRangeOnMapTimer.setInterval(1500);
-//    TEST_mSetRandomRangeOnMapTimer.setSingleShot(false);
-//    connect(&TEST_mSetRandomRangeOnMapTimer, SIGNAL(timeout()), this, SLOT(setRandomRangeOnMap()));
-//    TEST_mSetRandomRangeOnMapTimer.start();
 }
 
 GameplayFeature::~GameplayFeature()

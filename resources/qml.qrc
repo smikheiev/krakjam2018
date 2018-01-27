@@ -18,5 +18,6 @@
         <file>qml/scenes/gameplay/range/Range.qml</file>
         <file>qml/scenes/gameplay/Esbek.qml</file>
         <file>qml/scenes/gameplay/objective/Objective.qml</file>
+        <file>qml/scenes/gameplay/range/RangeCircle.qml</file>
     </qresource>
 </RCC>
