@@ -57,7 +57,7 @@ void TransmissionLogic::checkTransmission()
     bool isAnyTransmissionReached = false;
 
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
-        antenaBoy->set_transmissionOnLine(false);
+        antenaBoy->range()->set_isTransmitting(false);
     }
 
     QList<AntenaBoyModel*> alreadyTouchedBoys;
@@ -68,7 +68,7 @@ void TransmissionLogic::checkTransmission()
         if (range > distanceValue) {
             alreadyTouchedBoys.append(antenaBoy);
             if (isTransmissionReached(antenaBoy, &alreadyTouchedBoys, &transmittingObjectives)) {
-                antenaBoy->set_transmissionOnLine(true);
+                antenaBoy->range()->set_isTransmitting(true);
                 isAnyTransmissionReached = true;
             }
         }
@@ -93,7 +93,7 @@ bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QLi
         if (range > distanceValue) {
             alreadyTouchedBoys->append(antenaBoy);
             if (isTransmissionReached(antenaBoy, alreadyTouchedBoys, transmittingObjectives)) {
-                antenaBoy->set_transmissionOnLine(true);
+                antenaBoy->range()->set_isTransmitting(true);
                 result = true;
             }
         }

@@ -7,7 +7,6 @@ AntenaBoyModel::AntenaBoyModel(int id, int rangeRadius, QObject* parent)
     , m_boySize(ANTENA_BOY_SIZE)
     , m_posX(0)
     , m_posY(0)
-    , m_transmissionOnLine(false)
     , m_range(new RangeModel(this))
 {
     range()->set_radius(rangeRadius);

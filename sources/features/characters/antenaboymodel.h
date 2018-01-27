@@ -18,8 +18,6 @@ class AntenaBoyModel : public QObject
     AUTO_Q_PROPERTY(int, posX)
     AUTO_Q_PROPERTY(int, posY)
 
-    AUTO_Q_PROPERTY(bool, transmissionOnLine)
-
     AUTO_Q_PROPERTY_CONSTANT(RangeModel*, range)
 
 public:

@@ -6,6 +6,7 @@ Item {
     id: range
 
     property QtObject model: null
+    readonly property bool isTransmitting: model ? model.isTransmitting : false
 
     QtObject {
         id: priv
