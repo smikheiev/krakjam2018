@@ -11,14 +11,19 @@ class MapModel : public QObject
 {
     Q_OBJECT
 
+    AUTO_Q_PROPERTY_CONSTANT(int, tileSize)
+
     AUTO_Q_PROPERTY(int, width)
     AUTO_Q_PROPERTY(int, height)
+    AUTO_Q_PROPERTY(int, count)
 
 public:
     explicit MapModel(QObject *parent = nullptr);
 
 public:
     Q_INVOKABLE TileModel* getTileByIndex(const int tileIndex);
+
+    TileType getTileType(int posX, int posY);
 
 private:
     void initTiles();

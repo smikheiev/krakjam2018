@@ -22,11 +22,30 @@ BaseScene {
         }
     }
 
-    Repeater {
-        model: features.gameplay.charactersLogic.antenaBoyList
+    Item {
+        id: charactersContainer
 
-        AntenaBoy {
-            antenaBoyModel: modelData
+        x: map.mapGridPosX
+        y: map.mapGridPosY
+
+        Repeater {
+            model: features.gameplay.charactersLogic.antenaBoyList
+
+            AntenaBoy {
+                antenaBoyModel: modelData
+            }
+        }
+
+        Timer {
+            id: moveTimer
+
+            running: true
+            repeat: true
+            interval: 15
+
+            onTriggered: {
+                features.gameplay.charactersLogic.move()
+            }
         }
     }
 

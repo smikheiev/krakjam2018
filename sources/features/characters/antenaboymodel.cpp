@@ -1,6 +1,10 @@
 #include "antenaboymodel.h"
 
 AntenaBoyModel::AntenaBoyModel(QObject* parent)
+    : QObject(parent)
+    , m_boySize(15)
+    , m_posX(0)
+    , m_posY(0)
 {
 }
 
@@ -18,13 +22,4 @@ void AntenaBoyModel::moveKeyReleased(int keyReleased)
     if (keyReleased == Qt::Key_S || keyReleased == Qt::Key_Down) moveY = 0;
     if (keyReleased == Qt::Key_A || keyReleased == Qt::Key_Left) moveX = 0;
     if (keyReleased == Qt::Key_D || keyReleased == Qt::Key_Right) moveX = 0;
-}
-
-float SPEED = 2;
-
-void AntenaBoyModel::move() {
-    float newX = posX() + SPEED * moveX;
-    float newY = posY() + SPEED * moveY;
-    set_posX(newX);
-    set_posY(newY);
 }

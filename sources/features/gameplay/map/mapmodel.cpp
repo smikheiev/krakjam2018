@@ -4,8 +4,10 @@
 
 MapModel::MapModel(QObject *parent)
     : QObject(parent)
+    , m_tileSize(30)
     , m_width(10)
     , m_height(10)
+    , m_count(m_width * m_height)
 {
     initTiles();
 }
@@ -17,6 +19,13 @@ TileModel *MapModel::getTileByIndex(const int tileIndex)
 
     TileModel* tileModel = mTiles.at(row)->at(column);
     return tileModel;
+}
+
+TileType MapModel::getTileType(int posX, int posY)
+{
+    if (posY / tileSize() > mTiles.size() - 1) return TileType::None;
+    if (posX / tileSize() > mTiles.at(posY / tileSize())->size() - 1) return TileType::None;
+    return mTiles.at(posY / tileSize())->at(posX / tileSize())->tileType();
 }
 
 void MapModel::initTiles()

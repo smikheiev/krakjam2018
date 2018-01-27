@@ -7,6 +7,9 @@ Item {
 
     readonly property QtObject mapModel: features.gameplay.mapModel
 
+    property int mapGridPosX: mapGrid.x
+    property int mapGridPosY: mapGrid.y
+
     Rectangle {
         id: background
 

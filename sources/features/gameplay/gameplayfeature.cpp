@@ -10,6 +10,8 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_mapModel(new MapModel(this))
 {
     setupPossibleStateTransitions();
+
+    charactersLogic()->setMapModel(mapModel());
 }
 
 GameplayFeature::~GameplayFeature()
