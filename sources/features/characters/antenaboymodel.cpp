@@ -1,6 +1,7 @@
 #include "antenaboymodel.h"
 
 AntenaBoyModel::AntenaBoyModel(QObject* parent)
+    : QObject(parent)
 {
 }
 
