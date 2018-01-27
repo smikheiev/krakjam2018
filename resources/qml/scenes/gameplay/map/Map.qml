@@ -13,6 +13,10 @@ Item {
     readonly property var objectives: features.gameplay.objectiveLogic.objectives
 
     scale: 0.65
+    property int gridMapWidth: mapGrid.width
+
+    property int mapGridPosX: mapGrid.x
+    property int mapGridPosY: mapGrid.y
 
     Image {
         id: mapBg

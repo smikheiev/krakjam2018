@@ -25,6 +25,7 @@ class GameplayFeature : public QObject
     AUTO_Q_PROPERTY(EsbekLogic*, esbekLogic)
     AUTO_Q_PROPERTY(TransmissionLogic*, transmissionLogic)
     AUTO_Q_PROPERTY(ObjectivesLogic*, objectiveLogic)
+    AUTO_Q_PROPERTY(qint64, roundTime)
 
 public:
     explicit GameplayFeature(QObject *parent = nullptr);
@@ -33,6 +34,8 @@ public:
 public:
     Q_INVOKABLE void tryChangeStateTo(const GameplayState newGameplayState);
     Q_INVOKABLE void newRoundStartNeeded();
+    Q_INVOKABLE void restartRoundNeeded();
+    Q_INVOKABLE void roundFailed();
 
 public slots:
     void onAppStateChanged(const AppState appState);
@@ -40,6 +43,7 @@ public slots:
 
 signals:
     void objectiveCompleted();
+    void restartTimerNeeded();
 
 private:
     void setupInitialRanges();

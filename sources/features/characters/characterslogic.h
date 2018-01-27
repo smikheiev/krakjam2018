@@ -27,6 +27,7 @@ public:
     QList<AntenaBoyModel*> mAntenaBoyList;
 
     void catchedByEsbek(AntenaBoyModel* boy);
+    void restartPositionsAllAntenaBoys();
 
 private:
     int antenaBoySelected = 0;

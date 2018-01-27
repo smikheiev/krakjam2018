@@ -13,6 +13,7 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_transmissionLogic(new TransmissionLogic(this))
     , m_objectiveLogic(new ObjectivesLogic(mapModel(), this))
     , mHQRange(new RangeModel(this))
+    , m_roundTime(20000)
 {
     setupPossibleStateTransitions();
     setupInitialRanges();
@@ -43,7 +44,22 @@ void GameplayFeature::tryChangeStateTo(const GameplayState newGameplayState)
 
 void GameplayFeature::newRoundStartNeeded()
 {
+    charactersLogic()->restartPositionsAllAntenaBoys();
     objectiveLogic()->startNextObjectiveTimeout();
+    transmissionLogic()->set_isRoundFailed(false);
+    emit restartTimerNeeded();
+}
+
+void GameplayFeature::restartRoundNeeded()
+{
+    charactersLogic()->restartPositionsAllAntenaBoys();
+    transmissionLogic()->set_isRoundFailed(false);
+    emit restartTimerNeeded();
+}
+
+void GameplayFeature::roundFailed()
+{
+    transmissionLogic()->set_isRoundFailed(true);
 }
 
 void GameplayFeature::onAppStateChanged(const AppState appState)

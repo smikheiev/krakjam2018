@@ -21,6 +21,25 @@ BaseScene {
         }
     }
 
+    GameTimer {
+        id: gameTimer
+
+        height: 50
+        width: 1000
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+        }
+
+        onRoundFailed: {
+            features.gameplay.roundFailed()
+            roundLosePopup.visible = true
+        }
+
+        Component.onCompleted: {
+            gameTimer.startTimer()
+        }
+    }
+
     WonPopup {
         id: wonPopup
 
@@ -38,7 +57,17 @@ BaseScene {
     RoundWonPopup {
         id: roundWonPopup
 
-        opacity: 0.0
+        visible: false
+
+        anchors {
+            centerIn: parent
+        }
+    }
+
+    RoundLosePopup {
+        id: roundLosePopup
+
+        visible: false
 
         anchors {
             centerIn: parent
@@ -49,7 +78,12 @@ BaseScene {
         target: features.gameplay
 
         onObjectiveCompleted: {
-            roundWonPopup.opacity = 1.0
+            gameTimer.pauseTimer()
+            roundWonPopup.visible = true
+        }
+
+        onRestartTimerNeeded: {
+            gameTimer.startTimer()
         }
     }
 }
