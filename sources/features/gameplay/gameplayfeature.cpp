@@ -19,6 +19,8 @@ GameplayFeature::GameplayFeature(QObject *parent)
     charactersLogic()->setMapModel(mapModel());
     transmissionLogic()->init(charactersLogic(), mapModel(), objectiveLogic()->objectives());
     esbekLogic()->setAntenaBoyList(&charactersLogic()->mAntenaBoyList);
+
+    connect(objectiveLogic(), SIGNAL(objectiveCompleted()), this, SIGNAL(objectiveCompleted()));
 }
 
 GameplayFeature::~GameplayFeature()
@@ -39,6 +41,11 @@ void GameplayFeature::tryChangeStateTo(const GameplayState newGameplayState)
     {
         qDebug() << "Can not change state from" << m_currentGameplayState << "to" << newGameplayState;
     }
+}
+
+void GameplayFeature::newRoundStartNeeded()
+{
+    objectiveLogic()->startNextObjectiveTimeout();
 }
 
 void GameplayFeature::onAppStateChanged(const AppState appState)

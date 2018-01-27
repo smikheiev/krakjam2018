@@ -1,4 +1,5 @@
 #include "objectiveslogic.h"
+#include <QDebug>
 
 ObjectivesLogic::ObjectivesLogic(MapModel* mapModel, QObject *parent)
     : QObject(parent)
@@ -47,6 +48,11 @@ void ObjectivesLogic::clearObjective(ObjectiveModel *objective)
     objectives()->remove(objective);
 }
 
+void ObjectivesLogic::startNextObjectiveTimeout()
+{
+    mSetNextObjectiveTimer.start();
+}
+
 void ObjectivesLogic::connectObjective(ObjectiveModel *objective)
 {
     connect(objective, SIGNAL(isDoneChanged(bool)), this, SLOT(onObjectiveIsDone()));
@@ -88,5 +94,5 @@ void ObjectivesLogic::onObjectiveIsDone()
         mLastDoneObjectivePosY = -1;
     }
 
-    mSetNextObjectiveTimer.start();
+    emit objectiveCompleted();
 }

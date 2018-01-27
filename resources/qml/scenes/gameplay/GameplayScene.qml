@@ -64,4 +64,22 @@ BaseScene {
         width: parent.width
         height: parent.height
     }
+
+    RoundWonPopup {
+        id: roundWonPopup
+
+        opacity: 0.0
+
+        anchors {
+            centerIn: parent
+        }
+    }
+
+    Connections {
+        target: features.gameplay
+
+        onObjectiveCompleted: {
+            roundWonPopup.opacity = 1.0
+        }
+    }
 }

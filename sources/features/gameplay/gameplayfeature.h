@@ -32,10 +32,14 @@ public:
 
 public:
     Q_INVOKABLE void tryChangeStateTo(const GameplayState newGameplayState);
+    Q_INVOKABLE void newRoundStartNeeded();
 
 public slots:
     void onAppStateChanged(const AppState appState);
     void setRandomRangeOnMap();
+
+signals:
+    void objectiveCompleted();
 
 private:
     void setupInitialRanges();

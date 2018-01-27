@@ -19,10 +19,14 @@ public:
 
     void setNextRandomObjective(int excludePosX, int excludePosY);
     void clearObjective(ObjectiveModel* objective);
+    void startNextObjectiveTimeout();
 
 private:
     void connectObjective(ObjectiveModel* objective);
     void disconnectObjective(ObjectiveModel* objective);
+
+signals:
+    void objectiveCompleted();
 
 private slots:
     void onSetNextObjectiveTimeout();
