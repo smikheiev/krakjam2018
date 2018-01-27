@@ -15,4 +15,16 @@ Rectangle {
     x: antenaBoyModel ? antenaBoyModel.posX : 0
     y: antenaBoyModel ? antenaBoyModel.posY : 0
     color: isTransmitting ? "#900" : "white"
+
+    Text {
+        anchors {
+            centerIn: parent
+        }
+
+        text: (antenaBoyModel.id + 1)
+        font {
+            bold: true
+            pixelSize: 14
+        }
+    }
 }
