@@ -7,11 +7,12 @@ Item {
     id: antenaBoy
 
     property QtObject antenaBoyModel
-    property bool isTransmitting: antenaBoyModel ? antenaBoyModel.range.isTransmitting : false
-    property bool isInactive: antenaBoyModel ? antenaBoyModel.isInactive : false
-    property int posX: antenaBoyModel ? antenaBoyModel.posX : 0
-    property int posY: antenaBoyModel ? antenaBoyModel.posY : 0
-    property int moveX: antenaBoyModel ? antenaBoyModel.moveX : 0
+    readonly property bool isTransmitting: antenaBoyModel ? antenaBoyModel.range.isTransmitting : false
+    readonly property bool isInactive: antenaBoyModel ? antenaBoyModel.isInactive : false
+    readonly property int posX: antenaBoyModel ? antenaBoyModel.posX : 0
+    readonly property int posY: antenaBoyModel ? antenaBoyModel.posY : 0
+    readonly property bool isSelected: antenaBoyModel ? antenaBoyModel.isSelected : false
+    readonly property int moveX: antenaBoyModel ? antenaBoyModel.moveX : 0
     property bool flipImage: false
 
     width: antenaBoyModel.boySize

@@ -10,6 +10,7 @@ AntenaBoyModel::AntenaBoyModel(int id, int rangeRadius, int posX, int posY, QObj
     , m_moveX(0)
     , m_moveY(0)
     , m_isInactive(false)
+    , m_isSelected(false)
     , m_range(new RangeModel(this))
 {
     range()->set_radius(rangeRadius);

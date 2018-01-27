@@ -19,6 +19,7 @@ public:
 
 public:
     void changSelectedAntenaBoy(int antenaBoySelected);
+    void selectAntenaBoy(int id);
     void moveKeyPressed(int keyPressed);
     void moveKeyReleased(int keyReleased);
     Q_INVOKABLE void move();
@@ -30,7 +31,7 @@ public:
     void restartPositionsAllAntenaBoys();
 
 private:
-    int antenaBoySelected = 0;
+    int antenaBoySelected = -1;
 
     AntenaBoyModel* getAntenaBoySelected();
     void setBoyToStartPosition(AntenaBoyModel* boy);

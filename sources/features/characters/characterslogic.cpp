@@ -20,6 +20,8 @@ CharactersLogic::CharactersLogic(MapModel* mapModel, QObject* parent)
         vl.append(QVariant::fromValue(mAntenaBoyList.at(i)));
     }
     set_antenaBoyList(vl);
+
+    selectAntenaBoy(0);
 }
 
 void CharactersLogic::changSelectedAntenaBoy(int keyPressed)
@@ -27,9 +29,20 @@ void CharactersLogic::changSelectedAntenaBoy(int keyPressed)
     getAntenaBoySelected()->moveKeyReleased(Qt::Key_Up); // haczorek
     getAntenaBoySelected()->moveKeyReleased(Qt::Key_Left);
 
-    if (keyPressed == Qt::Key_1) antenaBoySelected = 0;
-    if (keyPressed == Qt::Key_2) antenaBoySelected = 1;
-    if (keyPressed == Qt::Key_3) antenaBoySelected = 2;
+    getAntenaBoySelected()->set_isSelected(false);
+
+    int selectedId = -1;
+    if (keyPressed == Qt::Key_1) selectedId = 0;
+    if (keyPressed == Qt::Key_2) selectedId = 1;
+    if (keyPressed == Qt::Key_3) selectedId = 2;
+
+    selectAntenaBoy(selectedId);
+}
+
+void CharactersLogic::selectAntenaBoy(int id)
+{
+    antenaBoySelected = id;
+    getAntenaBoySelected()->set_isSelected(true);
 }
 
 void CharactersLogic::moveKeyPressed(int keyPressed)

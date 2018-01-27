@@ -23,5 +23,7 @@
         <file>qml/scenes/gameplay/RoundWonPopup.qml</file>
         <file>qml/scenes/gameplay/GameTimer.qml</file>
         <file>qml/scenes/gameplay/RoundLosePopup.qml</file>
+        <file>qml/scenes/gameplay/UI/BottomPanel.qml</file>
+        <file>qml/scenes/gameplay/UI/Head.qml</file>
     </qresource>
 </RCC>
