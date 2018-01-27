@@ -9,12 +9,14 @@ Rectangle {
     property QtObject antenaBoyModel
     property bool isTransmitting: antenaBoyModel ? antenaBoyModel.range.isTransmitting : false
     property bool isInactive: antenaBoyModel ? antenaBoyModel.isInactive : false
+    property int posX: antenaBoyModel ? antenaBoyModel.posX : 0
+    property int posY: antenaBoyModel ? antenaBoyModel.posY : 0
 
     width: antenaBoyModel.boySize
     height: antenaBoyModel.boySize
 
-    x: antenaBoyModel ? antenaBoyModel.posX : 0
-    y: antenaBoyModel ? antenaBoyModel.posY : 0
+    x: posX
+    y: posY
     color: isInactive ? "black" : (isTransmitting ? "#900" : "white")
 
     Text {

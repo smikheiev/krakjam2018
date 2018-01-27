@@ -1,3 +1,3 @@
 .pragma library
 
-var TILE_SIZE = 30
+var TILE_SIZE = 100

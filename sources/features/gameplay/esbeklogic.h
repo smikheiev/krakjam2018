@@ -36,6 +36,7 @@ private:
     DIRECTION lastDirection = DIRECTION::NONE;
 
     void tryToCatchAntenaBoyToJail();
+    void setEsbekToStartPosition(EsbekModel* esbek);
 
 private slots:
     void setDirectionMove(DIRECTION directionMove);

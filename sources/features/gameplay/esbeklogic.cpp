@@ -8,7 +8,8 @@ EsbekLogic::EsbekLogic(MapModel* mapModel, CharactersLogic* charactersLogic, QOb
     , mMapModel(mapModel)
     , mCharactersLogic(charactersLogic)
 {
-   esbekModel()->set_moveX(1);
+    setEsbekToStartPosition(esbekModel());
+    esbekModel()->set_moveX(1);
 }
 
 void EsbekLogic::tryToCatchAntenaBoyToJail()
@@ -26,11 +27,21 @@ void EsbekLogic::tryToCatchAntenaBoyToJail()
     }
 }
 
+void EsbekLogic::setEsbekToStartPosition(EsbekModel *esbek)
+{
+    QPoint startPosition = QPoint(1, 3);
+    int posX = startPosition.x() * TILE_SIZE;
+    int posY = startPosition.y() * TILE_SIZE;
+
+    esbek->set_posX(posX);
+    esbek->set_posY(posY);
+}
+
 void EsbekLogic::moveEsbek()
 {
     tryToCatchAntenaBoyToJail();
 
-    if (esbekModel()->posX() % 30 != 0 || esbekModel()->posY() % 30 != 0) {
+    if (esbekModel()->posX() % TILE_SIZE != 0 || esbekModel()->posY() % TILE_SIZE != 0) {
         setDirectionMove(lastDirection);
         return;
     }

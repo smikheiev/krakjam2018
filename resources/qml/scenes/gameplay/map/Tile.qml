@@ -2,11 +2,16 @@ import QtQuick 2.10
 
 import Enums 1.0
 
+import "./MapConstants.js" as MapConstants
+
 Item {
     id: tile
 
     readonly property QtObject mapModel: features.gameplay.mapModel
     property int tileIndex: -1
+
+    width: MapConstants.TILE_SIZE
+    height: MapConstants.TILE_SIZE
 
     QtObject {
         id: priv
@@ -20,29 +25,66 @@ Item {
         priv.tileModel = mapModel.getTileByIndex(tileIndex)
     }
 
-    // TODO: replace to image
-    Rectangle {
+    Image {
         id: tileImage
 
         anchors {
-            fill: parent
+            centerIn: parent
         }
 
-        color: getTileImageSource(priv.tileType)
+        source: getTileImageSource(priv.tileType)
     }
 
     function getTileImageSource(tileType) {
         var imageSource = ""
         switch (tileType) {
-        case TileType.Headquarter.valueOf():
-            imageSource = "red"
+        case TileType.Headquarter:
+            imageSource = "qrc:/images/map/HeadQuaters.png"
             break
-        case TileType.Street.valueOf():
-            imageSource = "green"
+        case TileType.House1:
+            imageSource = "qrc:/images/map/Domki_1DoPoprawki.png"
             break
-        case TileType.Target.valueOf():
-        case TileType.Wall.valueOf():
-            imageSource = "blue"
+        case TileType.House2:
+            imageSource = "qrc:/images/map/Domki_2DoPoprawki.png"
+            break
+        case TileType.Street4x:
+            imageSource = "qrc:/images/map/Droga_4x.png"
+            break
+        case TileType.Street3xBottom:
+            imageSource = "qrc:/images/map/Droga_3x_Dol.png"
+            break
+        case TileType.Street3xTop:
+            imageSource = "qrc:/images/map/Droga_3x_Gorna.png"
+            break
+        case TileType.Street3xLeft:
+            imageSource = "qrc:/images/map/Droga_3x_Lewa.png"
+            break
+        case TileType.Street3xRight:
+            imageSource = "qrc:/images/map/Droga_3x_Prawa.png"
+            break
+        case TileType.StreetCornerLeftBottom:
+            imageSource = "qrc:/images/map/Droga_LewyDolnyRog.png"
+            break
+        case TileType.StreetCornerLeftTop:
+            imageSource = "qrc:/images/map/Droga_LewyGorny_Rog.png"
+            break
+        case TileType.StreetCornerRightBottom:
+            imageSource = "qrc:/images/map/Droga_PrawyDolny_Rog.png"
+            break
+        case TileType.StreetCornerRightTop:
+            imageSource = "qrc:/images/map/Droga_PrawyGornyRog.png"
+            break
+        case TileType.StreetVertical:
+            imageSource = "qrc:/images/map/Droga_Pion.png"
+            break
+        case TileType.StreetHorizontal:
+            imageSource = "qrc:/images/map/Droga_poziom.png"
+            break
+        case TileType.PossibleTarget:
+            imageSource = ""
+            break
+        case TileType.Wall:
+            imageSource = ""
             break
         default:
             imageSource = "white"

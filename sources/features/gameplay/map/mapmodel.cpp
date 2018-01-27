@@ -6,7 +6,7 @@
 MapModel::MapModel(QObject *parent)
     : QObject(parent)
     , m_tileSize(TILE_SIZE)
-    , m_width(10)
+    , m_width(15)
     , m_height(10)
     , m_count(m_width * m_height)
 {
@@ -35,13 +35,12 @@ TileModel *MapModel::getTileByposition(const int column, const int row)
     return tileModel;
 }
 
-#include <QDebug>
 bool MapModel::tryToMove(int posX, int posY, int boySize)
 {
-    if (getTileType(posX, posY) != TileType::Street) return false;
-    if (getTileType(posX + boySize - 1, posY) != TileType::Street) return false;
-    if (getTileType(posX, posY + boySize - 1) != TileType::Street) return false;
-    if (getTileType(posX + boySize - 1, posY + boySize - 1) != TileType::Street) return false;
+    if (!TileTypeEnumWrapper::isStreet(getTileType(posX, posY))) return false;
+    if (!TileTypeEnumWrapper::isStreet(getTileType(posX + boySize - 1, posY))) return false;
+    if (!TileTypeEnumWrapper::isStreet(getTileType(posX, posY + boySize - 1))) return false;
+    if (!TileTypeEnumWrapper::isStreet(getTileType(posX + boySize - 1, posY + boySize - 1))) return false;
     return true;
 }
 
@@ -51,7 +50,7 @@ QPoint MapModel::getStartAntenaBoyPosition()
     {
         for (int j = 0; j < height(); ++j)
         {
-            TileModel* tile = mTiles.at(i)->at(j);
+            TileModel* tile = mTiles.at(j)->at(i);
             if (tile->tileType() == TileType::Headquarter)
             {
                 return QPoint(i, j + 1);
@@ -64,20 +63,20 @@ QPoint MapModel::getStartAntenaBoyPosition()
 void MapModel::initTiles()
 {
     QVector<QVector<int>> tileTypes;
-    tileTypes.append(QVector<int>{2,2,2,2,2,2,2,2,2,2});
-    tileTypes.append(QVector<int>{2,3,4,4,2,4,4,4,3,2});
-    tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
-    tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
-    tileTypes.append(QVector<int>{2,2,2,2,1,2,2,2,2,2});
-    tileTypes.append(QVector<int>{2,4,4,4,2,4,2,4,4,2});
-    tileTypes.append(QVector<int>{2,4,4,4,2,2,2,4,4,2});
-    tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
-    tileTypes.append(QVector<int>{2,3,4,4,2,4,4,4,3,2});
-    tileTypes.append(QVector<int>{2,2,2,2,2,2,2,2,2,2});
+    tileTypes.append(QVector<int>{200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200});
+    tileTypes.append(QVector<int>{200, 200, 200, 200, 200, 200, 200,  32,  42,  42,  42,  34, 200, 200, 200});
+    tileTypes.append(QVector<int>{200, 200, 200, 200,  32,  42,  42,  24,  11,  11,  11,  41, 200, 200, 200});
+    tileTypes.append(QVector<int>{200,  32,  42,  42,  24,  11,  11,  31,  42,  22,  11,  41, 200, 200, 200});
+    tileTypes.append(QVector<int>{200,  41,  11,  11,  41,  11,  11, 200,  11,  41,  11,  41,  11,  11, 200});
+    tileTypes.append(QVector<int>{200,  41,  11,  32,  21,  42,  42,  10,  42,  21,  42,  21,  42,  34, 200});
+    tileTypes.append(QVector<int>{200,  31,  42,  24, 200, 200, 200,  41, 200, 200, 200, 200, 200,  41, 200});
+    tileTypes.append(QVector<int>{200, 200, 200,  31,  42,  34, 200,  41, 200, 200, 200, 200, 200,  41, 200});
+    tileTypes.append(QVector<int>{200, 200, 200, 200, 200,  31,  42,  21,  42,  42,  42,  42,  42,  33, 200});
+    tileTypes.append(QVector<int>{200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200});
 
-    for (int i = 0; i < width(); ++i)
+    for (int i = 0; i < height(); ++i)
     {
-        for (int j = 0; j < height(); ++j)
+        for (int j = 0; j < width(); ++j)
         {
             int tileTypeInt = tileTypes.value(i).value(j);
             TileType tileType = static_cast<TileType>(tileTypeInt);

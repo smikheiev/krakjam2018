@@ -2,5 +2,20 @@
     <qresource prefix="/">
         <file>images/happy.png</file>
         <file>images/sad.png</file>
+        <file>images/map/Domki_1DoPoprawki.png</file>
+        <file>images/map/Domki_2DoPoprawki.png</file>
+        <file>images/map/HeadQuaters.png</file>
+        <file>images/map/tlo_f_1.png</file>
+        <file>images/map/Droga_3x_Dol.png</file>
+        <file>images/map/Droga_3x_Gorna.png</file>
+        <file>images/map/Droga_3x_Lewa.png</file>
+        <file>images/map/Droga_3x_Prawa.png</file>
+        <file>images/map/Droga_4x.png</file>
+        <file>images/map/Droga_LewyDolnyRog.png</file>
+        <file>images/map/Droga_LewyGorny_Rog.png</file>
+        <file>images/map/Droga_Pion.png</file>
+        <file>images/map/Droga_poziom.png</file>
+        <file>images/map/Droga_PrawyDolny_Rog.png</file>
+        <file>images/map/Droga_PrawyGornyRog.png</file>
     </qresource>
 </RCC>

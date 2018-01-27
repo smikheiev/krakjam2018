@@ -1,9 +1,9 @@
 import QtQuick 2.10
 
-import "./MapConstants.js" as MapConstants
 import "../"
 import "../range"
 import "../objective"
+import "../characters"
 
 Item {
     id: map
@@ -12,17 +12,16 @@ Item {
     readonly property var ranges: features.gameplay.ranges
     readonly property var objectives: features.gameplay.objectiveLogic.objectives
 
-    property int mapGridPosX: mapGrid.x
-    property int mapGridPosY: mapGrid.y
+    scale: 0.65
 
-    Rectangle {
-        id: background
+    Image {
+        id: mapBg
 
         anchors {
-            fill: parent
+            centerIn: parent
         }
 
-        color: "black"
+        source: "qrc:/images/map/tlo_f_1.png"
     }
 
     Grid {
@@ -31,6 +30,7 @@ Item {
         anchors {
             centerIn: parent
         }
+
         columns: mapModel.width
         rows: mapModel.height
         spacing: 0
@@ -39,11 +39,48 @@ Item {
             model: mapModel.width * mapModel.height
 
             delegate: Tile {
-                width: MapConstants.TILE_SIZE
-                height: MapConstants.TILE_SIZE
-
                 tileIndex: index
             }
+        }
+    }
+
+    Item {
+        id: charactersContainer
+
+        x: mapGrid.x
+        y: mapGrid.y
+
+        Repeater {
+            model: features.gameplay.charactersLogic.antenaBoyList
+
+            AntenaBoy {
+                antenaBoyModel: modelData
+            }
+        }
+
+        Timer {
+            id: moveTimer
+
+            running: true
+            repeat: true
+            interval: 15
+
+            onTriggered: {
+                features.gameplay.charactersLogic.move()
+                features.gameplay.transmissionLogic.checkTransmission()
+                features.gameplay.esbekLogic.moveEsbek()
+            }
+        }
+    }
+
+    Item {
+        id: esbeksContainer
+
+        x: mapGrid.x
+        y: mapGrid.y
+
+        Esbek {
+            id: esbek
         }
     }
 
@@ -78,17 +115,6 @@ Item {
             delegate: Range {
                 model: display // display - standart Qt Role "Qt::DisplayRole"
             }
-        }
-    }
-
-    Item {
-        id: esbeksContainer
-
-        x: mapGrid.x
-        y: mapGrid.y
-
-        Esbek {
-            id: esbek
         }
     }
 }

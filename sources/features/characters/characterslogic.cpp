@@ -62,16 +62,14 @@ void CharactersLogic::setBoyToStartPosition(AntenaBoyModel *boy)
     boy->set_posY(posY);
 }
 
-float SPEED = 2;
-
 void CharactersLogic::move() {
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
         if (antenaBoy->moveX == 0 && antenaBoy->moveY == 0) continue;
 
-        float newX = antenaBoy->posX() + SPEED * antenaBoy->moveX;
+        float newX = antenaBoy->posX() + ANTENA_BOY_SPEED * antenaBoy->moveX;
         if (newX < 0) newX = 0;
 
-        float newY = antenaBoy->posY() + SPEED * antenaBoy->moveY;
+        float newY = antenaBoy->posY() + ANTENA_BOY_SPEED * antenaBoy->moveY;
         if (newY < 0) newY = 0;
 
         if (!mMapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
@@ -79,7 +77,7 @@ void CharactersLogic::move() {
         }
 
         if (!mMapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
-            newX = antenaBoy->posX() + SPEED * antenaBoy->moveX;
+            newX = antenaBoy->posX() + ANTENA_BOY_SPEED * antenaBoy->moveX;
             if (newX < 0) newX = 0;
             newY = antenaBoy->posY(); // jesli sie nie da sprobuj sie ruszyc tylko w poziomie
         }
