@@ -48,6 +48,25 @@ Item {
         }
 
         source: getAntenaBoyImage()
+        visible: !isSelected
+    }
+
+    BrightnessContrast {
+        anchors {
+            fill: image
+        }
+        source: image
+        brightness: 0.7
+        contrast: 0.8
+        visible: isSelected
+
+        transform:
+            Rotation {
+            origin.x: image.width/2;
+            origin.y: image.height/2;
+            axis.x:0; axis.y:1; axis.z:0
+            angle: flipImage ? 180 : 0
+        }
     }
 
     SequentialAnimation {
