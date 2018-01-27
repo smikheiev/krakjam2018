@@ -56,19 +56,19 @@ void TransmissionLogic::checkTransmission()
 {
     bool isAnyTransmissionReached = false;
 
-    for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
-        antenaBoy->range()->set_isTransmitting(false);
-    }
-
     QList<AntenaBoyModel*> alreadyTouchedBoys;
+    QList<AntenaBoyModel*> transmittingBoys;
     QList<ObjectiveModel*> transmittingObjectives;
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
         int range = antenaBoy->range()->radius() + mHQRangeModel->radius();
         qreal distanceValue = distance(antenaBoy->posX(), antenaBoy->posY(), mHQRangeModel->posX(), mHQRangeModel->posY());
         if (range > distanceValue) {
             alreadyTouchedBoys.append(antenaBoy);
-            if (isTransmissionReached(antenaBoy, &alreadyTouchedBoys, &transmittingObjectives)) {
-                antenaBoy->range()->set_isTransmitting(true);
+            if (isTransmissionReached(antenaBoy, &alreadyTouchedBoys, &transmittingBoys, &transmittingObjectives)) {
+                if (!transmittingBoys.contains(antenaBoy))
+                {
+                    transmittingBoys.append(antenaBoy);
+                }
                 isAnyTransmissionReached = true;
             }
         }
@@ -80,20 +80,29 @@ void TransmissionLogic::checkTransmission()
         bool isTransmitting = transmittingObjectives.contains(objectiveModel);
         objectiveModel->range()->set_isTransmitting(isTransmitting);
     }
+    for (AntenaBoyModel* antenaBoy : mAntenaBoyList)
+    {
+        bool isTransmitting = transmittingBoys.contains(antenaBoy);
+        antenaBoy->range()->set_isTransmitting(isTransmitting);
+    }
 }
 
-bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QList<AntenaBoyModel*>* alreadyTouchedBoys, QList<ObjectiveModel*>* transmittingObjectives)
+bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QList<AntenaBoyModel*>* alreadyCheckedBoys, QList<AntenaBoyModel*>* transmittingBoys, QList<ObjectiveModel*>* transmittingObjectives)
 {
     bool result = false;
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
-        if (alreadyTouchedBoys->contains(antenaBoy)) continue;
+        if (alreadyCheckedBoys->contains(antenaBoy)) continue;
 
         int range = rootAntenaBoy->range()->radius() + antenaBoy->range()->radius();
         qreal distanceValue = distance(antenaBoy->posX(), antenaBoy->posY(), rootAntenaBoy->posX(), rootAntenaBoy->posY());
         if (range > distanceValue) {
-            alreadyTouchedBoys->append(antenaBoy);
-            if (isTransmissionReached(antenaBoy, alreadyTouchedBoys, transmittingObjectives)) {
+            alreadyCheckedBoys->append(antenaBoy);
+            if (isTransmissionReached(antenaBoy, alreadyCheckedBoys, transmittingBoys, transmittingObjectives)) {
                 antenaBoy->range()->set_isTransmitting(true);
+                if (!transmittingBoys->contains(antenaBoy))
+                {
+                    transmittingBoys->append(antenaBoy);
+                }
                 result = true;
             }
         }

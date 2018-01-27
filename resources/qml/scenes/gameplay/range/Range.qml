@@ -44,8 +44,8 @@ Item {
         radius: width / 2
         color: "transparent"
         border {
-            color: "cyan"
-            width: rangeCircle.width * 0.3
+            color: range.isTransmitting ? "cyan" : "pink"
+            width: 5
         }
     }
 }
