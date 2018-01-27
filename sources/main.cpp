@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
     Spinacz* spinacz = new Spinacz(engine.rootContext());
     context->setContextProperty("features", spinacz->featuresRoot());
 
+    app.installEventFilter(spinacz);
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     if (engine.rootObjects().isEmpty())
     {

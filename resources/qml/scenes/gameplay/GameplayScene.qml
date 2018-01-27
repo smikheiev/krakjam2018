@@ -6,6 +6,7 @@ import Enums 1.0
 import "../"
 import "./gameEndPopup"
 import "../../common"
+import "./characters"
 
 BaseScene {
     id: gameplayScene
@@ -46,6 +47,14 @@ BaseScene {
             onClicked: {
                 features.gameplay.tryChangeStateTo(GameplayState.Lose)
             }
+        }
+    }
+
+    Repeater {
+        model: features.gameplay.charactersLogic.antenaBoyList
+
+        AntenaBoy {
+            antenaBoyModel: modelData
         }
     }
 

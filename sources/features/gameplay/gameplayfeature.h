@@ -7,12 +7,14 @@
 #include "../../macros.h"
 #include "gameplaystate.h"
 #include "../appState/appstate.h"
+#include "../characters/characterslogic.h"
 
 class GameplayFeature : public QObject
 {
     Q_OBJECT
 
     AUTO_Q_PROPERTY(GameplayState, currentGameplayState)
+    AUTO_Q_PROPERTY(CharactersLogic*, charactersLogic)
 
 public:
     explicit GameplayFeature(QObject *parent = nullptr);

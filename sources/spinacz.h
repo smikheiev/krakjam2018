@@ -14,6 +14,8 @@ public:
 
     FeaturesRoot* featuresRoot() const;
 
+    bool eventFilter(QObject *watched, QEvent *event) override;
+
 private:
     FeaturesRoot* mFeaturesRoot;
 };
