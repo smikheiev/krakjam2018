@@ -2,6 +2,7 @@
 #define RANGE_H
 
 #include <QObject>
+#include <QString>
 
 #include "../../../macros.h"
 
@@ -13,6 +14,7 @@ class RangeModel : public QObject
     AUTO_Q_PROPERTY(int, posX)
     AUTO_Q_PROPERTY(int, posY)
     AUTO_Q_PROPERTY(bool, isTransmitting)
+    AUTO_Q_PROPERTY(QString, rangeColor)
 
 public:
     explicit RangeModel(QObject *parent = nullptr);

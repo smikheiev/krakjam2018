@@ -18,6 +18,7 @@ GameplayFeature::GameplayFeature(QObject *parent)
 
     charactersLogic()->setMapModel(mapModel());
     transmissionLogic()->init(charactersLogic(), mapModel(), objectiveLogic()->objectives());
+    esbekLogic()->setAntenaBoyList(&charactersLogic()->mAntenaBoyList);
 }
 
 GameplayFeature::~GameplayFeature()

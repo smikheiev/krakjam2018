@@ -51,4 +51,5 @@ HEADERS += \
     sources/features/gameplay/transmissionlogic.h \
     sources/features/gameplay/map/objectivemodel.h \
     sources/features/gameplay/objectives/objectiveslogic.h \
-    sources/features/gameplay/objectives/objectiveslistmodel.h
+    sources/features/gameplay/objectives/objectiveslistmodel.h \
+    sources/utils.h

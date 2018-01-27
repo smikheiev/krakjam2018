@@ -46,6 +46,7 @@ BaseScene {
             onTriggered: {
                 features.gameplay.charactersLogic.move()
                 features.gameplay.transmissionLogic.checkTransmission()
+                features.gameplay.esbekLogic.moveEsbek()
             }
         }
     }

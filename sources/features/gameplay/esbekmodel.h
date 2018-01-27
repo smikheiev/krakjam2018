@@ -4,15 +4,19 @@
 #include <QObject>
 
 #include "../../macros.h"
+#include "range/rangemodel.h"
 
 class EsbekModel : public QObject
 {
     Q_OBJECT
 
-    AUTO_Q_PROPERTY(qint64, row)
-    AUTO_Q_PROPERTY(qint64, column)
-    AUTO_Q_PROPERTY(qint64, moveX)
-    AUTO_Q_PROPERTY(qint64, moveY)
+    AUTO_Q_PROPERTY(int, posX)
+    AUTO_Q_PROPERTY(int, posY)
+    AUTO_Q_PROPERTY(int, moveX)
+    AUTO_Q_PROPERTY(int, moveY)
+
+    AUTO_Q_PROPERTY_CONSTANT(RangeModel*, killRange)
+    AUTO_Q_PROPERTY_CONSTANT(RangeModel*, seenRange)
 
 public:
     explicit EsbekModel(QObject *parent = nullptr);

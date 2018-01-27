@@ -3,14 +3,14 @@
 CharactersLogic::CharactersLogic(QObject* parent)
     : QObject(parent)
 {
-    mAntenaBoyModel.append(new AntenaBoyModel(0, 60, this));
-    mAntenaBoyModel.append(new AntenaBoyModel(1, 60, this));
-    mAntenaBoyModel.append(new AntenaBoyModel(2, 60, this));
+    mAntenaBoyList.append(new AntenaBoyModel(0, 60, this));
+    mAntenaBoyList.append(new AntenaBoyModel(1, 60, this));
+    mAntenaBoyList.append(new AntenaBoyModel(2, 60, this));
 
     QVariantList vl;
-    for (int i = 0; i < mAntenaBoyModel.count(); ++i)
+    for (int i = 0; i < mAntenaBoyList.count(); ++i)
     {
-        vl.append(QVariant::fromValue(mAntenaBoyModel.at(i)));
+        vl.append(QVariant::fromValue(mAntenaBoyList.at(i)));
     }
     set_antenaBoyList(vl);
 }
@@ -40,23 +40,14 @@ void CharactersLogic::setMapModel(MapModel* mapModel_)
     mapModel = mapModel_;
 }
 
-bool CharactersLogic::tryToMove(int posX, int posY, int boySize)
-{
-    if (mapModel->getTileType(posX, posY) != TileType::Street) return false;
-    if (mapModel->getTileType(posX + boySize, posY) != TileType::Street) return false;
-    if (mapModel->getTileType(posX, posY + boySize) != TileType::Street) return false;
-    if (mapModel->getTileType(posX + boySize, posY + boySize) != TileType::Street) return false;
-    return true;
-}
-
 AntenaBoyModel* CharactersLogic::getAntenaBoySelected() {
-    return mAntenaBoyModel.at(antenaBoySelected);
+    return mAntenaBoyList.at(antenaBoySelected);
 }
 
 float SPEED = 2;
 
 void CharactersLogic::move() {
-    for (AntenaBoyModel* antenaBoy : mAntenaBoyModel) {
+    for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
         if (antenaBoy->moveX == 0 && antenaBoy->moveY == 0) continue;
 
         float newX = antenaBoy->posX() + SPEED * antenaBoy->moveX;
@@ -65,17 +56,17 @@ void CharactersLogic::move() {
         float newY = antenaBoy->posY() + SPEED * antenaBoy->moveY;
         if (newY < 0) newY = 0;
 
-        if (!tryToMove(newX, newY, antenaBoy->boySize())) {
-            newX = antenaBoy->posX(); // jesli sie nie da sprobuj sie roszyc tylko w pionie
+        if (!mapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
+            newX = antenaBoy->posX(); // jesli sie nie da sprobuj sie ruszyc tylko w pionie
         }
 
-        if (!tryToMove(newX, newY, antenaBoy->boySize())) {
+        if (!mapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
             newX = antenaBoy->posX() + SPEED * antenaBoy->moveX;
             if (newX < 0) newX = 0;
-            newY = antenaBoy->posY(); // jesli sie nie da sprobuj sie roszyc tylko w pionie
+            newY = antenaBoy->posY(); // jesli sie nie da sprobuj sie ruszyc tylko w poziomie
         }
 
-        if (!tryToMove(newX, newY, antenaBoy->boySize())) {
+        if (!mapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
             continue; // jesli sie nie da no to chu...
         }
 

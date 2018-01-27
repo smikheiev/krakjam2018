@@ -25,6 +25,7 @@ public:
     Q_INVOKABLE TileModel* getTileByposition(const int row, const int column);
 
     TileType getTileType(int posX, int posY);
+    bool tryToMove(int posX, int posY, int boySize);
 
 private:
     void initTiles();

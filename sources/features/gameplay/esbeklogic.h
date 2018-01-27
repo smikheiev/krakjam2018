@@ -3,10 +3,13 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QList>
 
 #include "../../macros.h"
 #include "esbekmodel.h"
 #include "map/mapmodel.h"
+#include "../characters/antenaboymodel.h"
+#include "constants.h"
 
 class EsbekLogic : public QObject
 {
@@ -19,23 +22,30 @@ public:
     explicit EsbekLogic(MapModel* mapModel, QObject *parent = nullptr);
 
     enum DIRECTION {
-        NORTH = 0,
-        SOUTH,
-        EAST,
-        WEST
+        NONE = 0,
+        UP = 1,
+        DOWN = 2,
+        RIGHT = 3,
+        LEFT = 4
     };
 
+    Q_INVOKABLE void moveEsbek();
+    void setAntenaBoyList(QList<AntenaBoyModel*>* antenaBoyList);
+
 private:
-    QTimer timer;
+    QList<AntenaBoyModel*>* mAntenaBoyList;
+    DIRECTION lastDirection = DIRECTION::NONE;
+
+    void searchAntenaBoyToJail();
 
 private slots:
-    void onTimeout();
-    void checkDirection(DIRECTION from);
     void setDirectionMove(DIRECTION directionMove);
-    bool canMoveNorth();
-    bool canMoveSouth();
-    bool canMoveEast();
-    bool canMoveWest();
+    DIRECTION getOppositDirection(DIRECTION direction);
+    bool canMove(DIRECTION direction);
+    bool canMoveUp();
+    bool canMoveDown();
+    bool canMoveRight();
+    bool canMoveLeft();
 };
 
 #endif // ESBEKLOGIC_H
