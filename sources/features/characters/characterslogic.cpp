@@ -9,7 +9,7 @@ CharactersLogic::CharactersLogic(MapModel* mapModel, QObject* parent)
 {
     for (int i = 0; i < 3; ++i)
     {
-        AntenaBoyModel* boy = new AntenaBoyModel(i, 60, 0, 0, this);
+        AntenaBoyModel* boy = new AntenaBoyModel(i, ANTENA_BOY_RANGE_RADIUS, 0, 0, this);
         setBoyToStartPosition(boy);
         mAntenaBoyList.append(boy);
     }

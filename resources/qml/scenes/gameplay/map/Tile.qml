@@ -41,11 +41,9 @@ Item {
         case TileType.Headquarter:
             imageSource = "qrc:/images/map/HeadQuaters.png"
             break
-        case TileType.House1:
-            imageSource = "qrc:/images/map/Domki_1DoPoprawki.png"
-            break
-        case TileType.House2:
-            imageSource = "qrc:/images/map/Domki_2DoPoprawki.png"
+        case TileType.House:
+        case tileType.House_PossibleTarget:
+            imageSource = getRandomHouseImage()
             break
         case TileType.Street4x:
             imageSource = "qrc:/images/map/Droga_4x.png"
@@ -80,15 +78,18 @@ Item {
         case TileType.StreetHorizontal:
             imageSource = "qrc:/images/map/Droga_poziom.png"
             break
-        case TileType.PossibleTarget:
-            imageSource = ""
-            break
-        case TileType.Wall:
-            imageSource = ""
-            break
         default:
-            imageSource = "white"
+            imageSource = ""
         }
         return imageSource
+    }
+
+    function getRandomHouseImage() {
+        var allHouses = [
+            "qrc:/images/map/Domki_1DoPoprawki.png",
+            "qrc:/images/map/Domki_2DoPoprawki.png"
+        ]
+        var rand = Math.floor((Math.random() * allHouses.length))
+        return allHouses[rand]
     }
 }

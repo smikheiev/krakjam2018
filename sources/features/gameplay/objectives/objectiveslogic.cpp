@@ -20,7 +20,7 @@ void ObjectivesLogic::setNextRandomObjective(int excludePosX, int excludePosY)
     {
         TileModel* tile = mMapModel->getTileByIndex(i);
         if (tile->posX() == excludePosX && tile->posY() == excludePosY) continue;
-        if (tile->tileType() == TileType::PossibleTarget) objectiveTiles.append(tile);
+        if (tile->tileType() == TileType::House_PossibleTarget) objectiveTiles.append(tile);
     }
 
     if (objectiveTiles.length() == 0)

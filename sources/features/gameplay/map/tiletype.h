@@ -11,8 +11,8 @@ public:
     enum Enum {
         None = 0,
         Headquarter = 10,
-        House1 = 11,
-        House2 = 12,
+        House = 11,
+        House_PossibleTarget = 15,
         Street4x = 20,
         Street3xBottom = 21,
         Street3xTop = 22,
@@ -24,7 +24,6 @@ public:
         StreetCornerRightTop = 34,
         StreetVertical = 41,
         StreetHorizontal = 42,
-        PossibleTarget = 100,
         Wall = 200,
     };
     Q_ENUM(Enum)
