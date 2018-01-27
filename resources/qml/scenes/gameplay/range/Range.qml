@@ -12,14 +12,14 @@ Item {
 
         readonly property bool hasRange: model
         readonly property double radius: model ? model.radius : 0.0
-        readonly property int column: model ? model.column : -1
-        readonly property int row: model ? model.row : -1
+        readonly property int posX: model ? model.posX : 0
+        readonly property int posY: model ? model.posY : 0
     }
 
     width: MapConstants.TILE_SIZE
     height: MapConstants.TILE_SIZE
-    x: priv.column * MapConstants.TILE_SIZE
-    y: priv.row * MapConstants.TILE_SIZE
+    x: priv.posX
+    y: priv.posY
 
     visible: priv.hasRange
 

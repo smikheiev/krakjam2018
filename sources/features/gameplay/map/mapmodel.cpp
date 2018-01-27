@@ -1,10 +1,11 @@
 #include <QDebug>
 
 #include "mapmodel.h"
+#include "../constants.h"
 
 MapModel::MapModel(QObject *parent)
     : QObject(parent)
-    , m_tileSize(30)
+    , m_tileSize(TILE_SIZE)
     , m_width(10)
     , m_height(10)
     , m_count(m_width * m_height)

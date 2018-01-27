@@ -10,11 +10,14 @@ class RangeModel : public QObject
     Q_OBJECT
 
     AUTO_Q_PROPERTY(qreal, radius)
-    AUTO_Q_PROPERTY(int, column)
-    AUTO_Q_PROPERTY(int, row)
+    AUTO_Q_PROPERTY(int, posX)
+    AUTO_Q_PROPERTY(int, posY)
 
 public:
     explicit RangeModel(QObject *parent = nullptr);
+
+    void setToRow(const int row);
+    void setToColumn(const int column);
 };
 
 #endif // RANGE_H

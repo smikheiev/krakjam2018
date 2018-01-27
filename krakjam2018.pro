@@ -38,4 +38,5 @@ HEADERS += \
     sources/features/gameplay/map/tiletype.h \
     sources/features/gameplay/map/tilemodel.h \
     sources/features/gameplay/range/rangemodel.h \
-    sources/features/gameplay/range/rangeslistmodel.h
+    sources/features/gameplay/range/rangeslistmodel.h \
+    sources/features/gameplay/constants.h
