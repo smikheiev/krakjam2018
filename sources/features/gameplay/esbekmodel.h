@@ -15,8 +15,8 @@ class EsbekModel : public QObject
     AUTO_Q_PROPERTY(int, moveX)
     AUTO_Q_PROPERTY(int, moveY)
 
-    AUTO_Q_PROPERTY_CONSTANT(RangeModel*, killRange)
-    AUTO_Q_PROPERTY_CONSTANT(RangeModel*, seenRange)
+    AUTO_Q_PROPERTY_CONSTANT(int, killRadius)
+    AUTO_Q_PROPERTY_CONSTANT(int, seenRadius)
 
 public:
     explicit EsbekModel(QObject *parent = nullptr);
