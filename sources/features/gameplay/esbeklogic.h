@@ -16,7 +16,6 @@ class EsbekLogic : public QObject
     Q_OBJECT
 
     AUTO_Q_PROPERTY(EsbekModel*, esbekModel)
-    AUTO_Q_PROPERTY(MapModel*, mapModel)
 
 public:
     explicit EsbekLogic(MapModel* mapModel, QObject *parent = nullptr);
@@ -35,6 +34,7 @@ public:
 private:
     QList<AntenaBoyModel*>* mAntenaBoyList;
     DIRECTION lastDirection = DIRECTION::NONE;
+    MapModel* mMapModel;
 
     void searchAntenaBoyToJail();
 

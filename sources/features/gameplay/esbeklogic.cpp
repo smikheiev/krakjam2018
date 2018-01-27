@@ -5,7 +5,7 @@
 EsbekLogic::EsbekLogic(MapModel* mapModel, QObject *parent)
     : QObject(parent)
     , m_esbekModel(new EsbekModel(this))
-    , m_mapModel(mapModel)
+    , mMapModel(mapModel)
 {
    esbekModel()->set_moveX(1);
 }
@@ -131,22 +131,22 @@ bool EsbekLogic::canMove(DIRECTION direction) {
 bool EsbekLogic::canMoveUp()
 {
     if (esbekModel()->posY() - ESBEK_SPEED < 0) return false;
-    return mapModel()->tryToMove(esbekModel()->posX(), esbekModel()->posY() - ESBEK_SPEED, TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel()->posX(), esbekModel()->posY() - ESBEK_SPEED, TILE_SIZE);
 }
 
 bool EsbekLogic::canMoveDown()
 {
-    return mapModel()->tryToMove(esbekModel()->posX(), esbekModel()->posY() + ESBEK_SPEED, TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel()->posX(), esbekModel()->posY() + ESBEK_SPEED, TILE_SIZE);
 }
 
 bool EsbekLogic::canMoveLeft()
 {
     if (esbekModel()->posX() - ESBEK_SPEED < 0) return false;
-    return mapModel()->tryToMove(esbekModel()->posX() - ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel()->posX() - ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
 }
 
 bool EsbekLogic::canMoveRight()
 {
-    return mapModel()->tryToMove(esbekModel()->posX() + ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel()->posX() + ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
 }
 
