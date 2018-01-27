@@ -11,12 +11,20 @@ Item {
     property bool isInactive: antenaBoyModel ? antenaBoyModel.isInactive : false
     property int posX: antenaBoyModel ? antenaBoyModel.posX : 0
     property int posY: antenaBoyModel ? antenaBoyModel.posY : 0
+    property int moveX: antenaBoyModel ? antenaBoyModel.moveX : 0
+    property bool flipImage: false
 
     width: antenaBoyModel.boySize
     height: antenaBoyModel.boySize
 
     x: posX
     y: posY
+
+    onMoveXChanged: {
+        if (moveX != 0) {
+            flipImage = moveX == 1
+        }
+    }
 
     onIsInactiveChanged: {
         if (!isInactive) {
@@ -25,11 +33,20 @@ Item {
     }
 
     Image {
+        id: image
         anchors {
             centerIn: parent
         }
 
-        source: "qrc:/images/map/AntenaBoy_DoPoprawki.png"
+        transform:
+            Rotation {
+            origin.x: image.width/2;
+            origin.y: image.height/2;
+            axis.x:0; axis.y:1; axis.z:0
+            angle: flipImage ? 180 : 0
+        }
+
+        source: getAntenaBoyImage()
     }
 
     SequentialAnimation {
@@ -53,5 +70,12 @@ Item {
             pixelSize: 28
         }
         color: "white"
+    }
+
+    function getAntenaBoyImage() {
+        var a = 50 // do manipulowania szybkoscia przebierania nozkami :)
+        var modulo = 1 + (posX + posY) % a
+        var img_nr = modulo > (a/2) - 1 ? 0 : 1
+        return "qrc:/images/map/AntenaBoy_" + img_nr + ".png"
     }
 }
