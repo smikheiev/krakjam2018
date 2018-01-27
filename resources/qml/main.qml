@@ -5,8 +5,8 @@ import "./scenes"
 
 Window {
     visible: true
-    width: 1700
-    height: 1000
+    width: 1920 * 0.65
+    height: 1080 * 0.65
     title: qsTr("Hello World")
 
     Fonts {

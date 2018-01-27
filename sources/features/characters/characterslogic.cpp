@@ -20,6 +20,8 @@ CharactersLogic::CharactersLogic(MapModel* mapModel, QObject* parent)
         vl.append(QVariant::fromValue(mAntenaBoyList.at(i)));
     }
     set_antenaBoyList(vl);
+
+    selectAntenaBoy(0);
 }
 
 void CharactersLogic::changSelectedAntenaBoy(int keyPressed)
@@ -27,9 +29,20 @@ void CharactersLogic::changSelectedAntenaBoy(int keyPressed)
     getAntenaBoySelected()->moveKeyReleased(Qt::Key_Up); // haczorek
     getAntenaBoySelected()->moveKeyReleased(Qt::Key_Left);
 
-    if (keyPressed == Qt::Key_1) antenaBoySelected = 0;
-    if (keyPressed == Qt::Key_2) antenaBoySelected = 1;
-    if (keyPressed == Qt::Key_3) antenaBoySelected = 2;
+    getAntenaBoySelected()->set_isSelected(false);
+
+    int selectedId = -1;
+    if (keyPressed == Qt::Key_1) selectedId = 0;
+    if (keyPressed == Qt::Key_2) selectedId = 1;
+    if (keyPressed == Qt::Key_3) selectedId = 2;
+
+    selectAntenaBoy(selectedId);
+}
+
+void CharactersLogic::selectAntenaBoy(int id)
+{
+    antenaBoySelected = id;
+    getAntenaBoySelected()->set_isSelected(true);
 }
 
 void CharactersLogic::moveKeyPressed(int keyPressed)
@@ -72,12 +85,12 @@ void CharactersLogic::setBoyToStartPosition(AntenaBoyModel *boy)
 
 void CharactersLogic::move() {
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
-        if (antenaBoy->moveX == 0 && antenaBoy->moveY == 0) continue;
+        if (antenaBoy->moveX() == 0 && antenaBoy->moveY() == 0) continue;
 
-        float newX = antenaBoy->posX() + ANTENA_BOY_SPEED * antenaBoy->moveX;
+        float newX = antenaBoy->posX() + ANTENA_BOY_SPEED * antenaBoy->moveX();
         if (newX < 0) newX = 0;
 
-        float newY = antenaBoy->posY() + ANTENA_BOY_SPEED * antenaBoy->moveY;
+        float newY = antenaBoy->posY() + ANTENA_BOY_SPEED * antenaBoy->moveY();
         if (newY < 0) newY = 0;
 
         if (!mMapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
@@ -85,7 +98,7 @@ void CharactersLogic::move() {
         }
 
         if (!mMapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
-            newX = antenaBoy->posX() + ANTENA_BOY_SPEED * antenaBoy->moveX;
+            newX = antenaBoy->posX() + ANTENA_BOY_SPEED * antenaBoy->moveX();
             if (newX < 0) newX = 0;
             newY = antenaBoy->posY(); // jesli sie nie da sprobuj sie ruszyc tylko w poziomie
         }

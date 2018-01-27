@@ -7,16 +7,25 @@ Item {
     id: antenaBoy
 
     property QtObject antenaBoyModel
-    property bool isTransmitting: antenaBoyModel ? antenaBoyModel.range.isTransmitting : false
-    property bool isInactive: antenaBoyModel ? antenaBoyModel.isInactive : false
-    property int posX: antenaBoyModel ? antenaBoyModel.posX : 0
-    property int posY: antenaBoyModel ? antenaBoyModel.posY : 0
+    readonly property bool isTransmitting: antenaBoyModel ? antenaBoyModel.range.isTransmitting : false
+    readonly property bool isInactive: antenaBoyModel ? antenaBoyModel.isInactive : false
+    readonly property int posX: antenaBoyModel ? antenaBoyModel.posX : 0
+    readonly property int posY: antenaBoyModel ? antenaBoyModel.posY : 0
+    readonly property bool isSelected: antenaBoyModel ? antenaBoyModel.isSelected : false
+    readonly property int moveX: antenaBoyModel ? antenaBoyModel.moveX : 0
+    property bool flipImage: false
 
     width: antenaBoyModel.boySize
     height: antenaBoyModel.boySize
 
     x: posX
     y: posY
+
+    onMoveXChanged: {
+        if (moveX != 0) {
+            flipImage = moveX == 1
+        }
+    }
 
     onIsInactiveChanged: {
         if (!isInactive) {
@@ -25,11 +34,20 @@ Item {
     }
 
     Image {
+        id: image
         anchors {
             centerIn: parent
         }
 
-        source: "qrc:/images/map/AntenaBoy_DoPoprawki.png"
+        transform:
+            Rotation {
+            origin.x: image.width/2;
+            origin.y: image.height/2;
+            axis.x:0; axis.y:1; axis.z:0
+            angle: flipImage ? 180 : 0
+        }
+
+        source: getAntenaBoyImage()
     }
 
     SequentialAnimation {
@@ -53,5 +71,18 @@ Item {
             pixelSize: 28
         }
         color: "white"
+    }
+
+    function getAntenaBoyImage() {
+        var a = 70 // do manipulowania szybkoscia przebierania nozkami :)
+        var modulo = 1 + (posX + posY) % a
+        var img_nr = 0
+        if (modulo < a/3) {
+            img_nr = 1
+        } else if (modulo < (2*a/3)) {
+            img_nr = 2
+        }
+
+        return "qrc:/images/map/AntenaBoy_" + antenaBoyModel.id + "_" + img_nr + ".png"
     }
 }

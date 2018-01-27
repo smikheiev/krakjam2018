@@ -18,8 +18,11 @@ class AntenaBoyModel : public QObject
 
     AUTO_Q_PROPERTY(int, posX)
     AUTO_Q_PROPERTY(int, posY)
+    AUTO_Q_PROPERTY(int, moveX) // -1 = left, 0 = nothing, 1 = right
+    AUTO_Q_PROPERTY(int, moveY) // -1 = up, 0 = nothing, 1 = down
 
     AUTO_Q_PROPERTY(bool, isInactive)
+    AUTO_Q_PROPERTY(bool, isSelected)
 
     AUTO_Q_PROPERTY_CONSTANT(RangeModel*, range)
 
@@ -28,9 +31,6 @@ public:
 
     void moveKeyPressed(int keyPressed);
     void moveKeyReleased(int keyReleased);
-
-    int moveX = 0; // -1 = left, 0 = nothing, 1 = right
-    int moveY = 0; // -1 = up, 0 = nothing, 1 = down
 
     void makeInactiveForTime(int timeMs);
 

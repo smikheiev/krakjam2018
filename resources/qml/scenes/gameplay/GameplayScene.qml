@@ -7,6 +7,7 @@ import "../"
 import "./gameEndPopup"
 import "../../common"
 import "./map"
+import "./UI"
 
 BaseScene {
     id: gameplayScene
@@ -37,6 +38,15 @@ BaseScene {
 
         Component.onCompleted: {
             gameTimer.startTimer()
+        }
+    }
+
+    BottomPanel {
+        id: bottomPanel
+
+        anchors {
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
         }
     }
 

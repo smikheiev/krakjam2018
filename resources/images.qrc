@@ -17,12 +17,24 @@
         <file>images/map/Droga_poziom.png</file>
         <file>images/map/Droga_PrawyDolny_Rog.png</file>
         <file>images/map/Droga_PrawyGornyRog.png</file>
-        <file>images/map/AntenaBoy_DoPoprawki.png</file>
         <file>images/map/objective_0.png</file>
         <file>images/map/objective_1.png</file>
         <file>images/map/objective_2.png</file>
         <file>images/map/objective_timer.png</file>
+        <file>images/map/AntenaBoy_0_0.png</file>
+        <file>images/map/AntenaBoy_0_1.png</file>
+        <file>images/map/AntenaBoy_0_2.png</file>
+        <file>images/map/AntenaBoy_1_0.png</file>
+        <file>images/map/AntenaBoy_1_1.png</file>
+        <file>images/map/AntenaBoy_1_2.png</file>
+        <file>images/map/AntenaBoy_2_0.png</file>
+        <file>images/map/AntenaBoy_2_1.png</file>
+        <file>images/map/AntenaBoy_2_2.png</file>
         <file>images/map/SBK_probka1.png</file>
         <file>images/map/bg_popup.png</file>
+        <file>images/ui/Glowa_0_niewybrana.png</file>
+        <file>images/ui/Glowa_1_niewybrana.png</file>
+        <file>images/ui/Glowa_2_niewybrana.png</file>
+        <file>images/ui/panelDolny.png</file>
     </qresource>
 </RCC>
