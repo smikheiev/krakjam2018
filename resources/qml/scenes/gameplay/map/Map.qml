@@ -127,4 +127,14 @@ Item {
             }
         }
     }
+
+    Image {
+        id: frameImage
+
+        anchors {
+            centerIn: parent
+        }
+
+        source: "qrc:/images/map/ramka.png"
+    }
 }
