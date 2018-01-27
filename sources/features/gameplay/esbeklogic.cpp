@@ -7,10 +7,16 @@ EsbekLogic::EsbekLogic(MapModel* mapModel, CharactersLogic* charactersLogic, QOb
     , mMapModel(mapModel)
     , mCharactersLogic(charactersLogic)
 {
+    QVector<QPoint> startPositions
+    {
+        QPoint(1, 3),
+        QPoint(11, 2)
+    };
     for (int i = 0; i < 2; ++i)
     {
         EsbekModel* esbek = new EsbekModel(i, this);
-        setEsbekToStartPosition(esbek, 1, 3 + i);
+        QPoint startPosition = startPositions.at(i);
+        setEsbekToStartPosition(esbek, startPosition.x(), startPosition.y());
         esbek->set_moveX(1);
         mEsbekModelsList.append(esbek);
     }
@@ -50,7 +56,6 @@ void EsbekLogic::setEsbekToStartPosition(EsbekModel *esbek, int startX, int star
     esbek->set_posY(posY);
 }
 
-#include <QDebug>
 void EsbekLogic::moveEsbek()
 {
     for (EsbekModel* esbek : mEsbekModelsList) {
