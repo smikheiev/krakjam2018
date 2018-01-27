@@ -5,7 +5,6 @@
 #include <QList>
 
 #include "../characters/antenaboymodel.h"
-#include "map/hqmodel.h"
 #include "map/objectivemodel.h"
 #include "map/mapmodel.h"
 #include "../characters/characterslogic.h"
@@ -18,13 +17,13 @@ class TransmissionLogic : public QObject
 public:
     TransmissionLogic(QObject* parent);
 
-    void setHQModel(HQModel* hqModel_);
+    void setHQRange(RangeModel* rangeModel);
 
     void init(CharactersLogic* charactersLogic, MapModel* mapModel);
     Q_INVOKABLE void checkTransmission();
 
 private:
-    HQModel* mHqModel;
+    RangeModel* mHQRangeModel;
     QList<AntenaBoyModel*> mAntenaBoyList;
     QList<ObjectiveModel*> mObjectiveList;
 

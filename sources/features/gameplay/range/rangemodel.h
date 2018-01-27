@@ -12,6 +12,7 @@ class RangeModel : public QObject
     AUTO_Q_PROPERTY(qreal, radius)
     AUTO_Q_PROPERTY(int, posX)
     AUTO_Q_PROPERTY(int, posY)
+    AUTO_Q_PROPERTY(bool, isTransmitting)
 
 public:
     explicit RangeModel(QObject *parent = nullptr);

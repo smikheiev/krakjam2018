@@ -7,9 +7,9 @@ TransmissionLogic::TransmissionLogic(QObject* parent)
 {
 }
 
-void TransmissionLogic::setHQModel(HQModel *hqModel)
+void TransmissionLogic::setHQRange(RangeModel *rangeModel)
 {
-    mHqModel = hqModel;
+    mHQRangeModel = rangeModel;
 }
 
 void TransmissionLogic::init(CharactersLogic *charactersLogic, MapModel *mapModel)
@@ -22,10 +22,11 @@ void TransmissionLogic::init(CharactersLogic *charactersLogic, MapModel *mapMode
         TileModel* tile = mapModel->getTileByIndex(i);
 
         if (tile->tileType() == TileType::Headquarter) {
-            HQModel* headquarter = new HQModel(this);
-            headquarter->set_posX(tile->posX());
-            headquarter->set_posY(tile->posY());
-            setHQModel(headquarter);
+            RangeModel* hqRangeModel = new RangeModel(this);
+            hqRangeModel->set_posX(tile->posX());
+            hqRangeModel->set_posY(tile->posY());
+            hqRangeModel->set_radius(15);
+            setHQRange(hqRangeModel);
         }
 
         if (tile->tileType() == TileType::Target) {
@@ -53,7 +54,8 @@ qreal TransmissionLogic::distance(int posX_1, int posY_1, int posX_2, int posY_2
 
 void TransmissionLogic::checkTransmission()
 {
-    mHqModel->set_isTransitionOnLine(false);
+    bool isAnyTransmissionReached = false;
+
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
         antenaBoy->set_transmissionOnLine(false);
     }
@@ -61,16 +63,18 @@ void TransmissionLogic::checkTransmission()
     QList<AntenaBoyModel*> alreadyTouchedBoys;
     QList<ObjectiveModel*> transmittingObjectives;
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
-        int range = antenaBoy->range()->radius() + mHqModel->range();
-        qreal distanceValue = distance(antenaBoy->posX(), antenaBoy->posY(), mHqModel->posX(), mHqModel->posY());
+        int range = antenaBoy->range()->radius() + mHQRangeModel->radius();
+        qreal distanceValue = distance(antenaBoy->posX(), antenaBoy->posY(), mHQRangeModel->posX(), mHQRangeModel->posY());
         if (range > distanceValue) {
             alreadyTouchedBoys.append(antenaBoy);
             if (isTransmissionReached(antenaBoy, &alreadyTouchedBoys, &transmittingObjectives)) {
                 antenaBoy->set_transmissionOnLine(true);
-                mHqModel->set_isTransitionOnLine(true);
+                isAnyTransmissionReached = true;
             }
         }
     }
+
+    mHQRangeModel->set_isTransmitting(isAnyTransmissionReached);
     for (ObjectiveModel* objectiveModel : mObjectiveList)
     {
         bool isTransmitting = transmittingObjectives.contains(objectiveModel);
