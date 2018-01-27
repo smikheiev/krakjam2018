@@ -42,8 +42,8 @@ void MapModel::initTiles()
     tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
-    tileTypes.append(QVector<int>{2,2,2,2,1,1,2,2,2,2});
-    tileTypes.append(QVector<int>{2,4,4,4,1,1,2,4,4,2});
+    tileTypes.append(QVector<int>{2,2,2,2,1,2,2,2,2,2});
+    tileTypes.append(QVector<int>{2,4,4,4,2,4,2,4,4,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,2,2,4,4,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
     tileTypes.append(QVector<int>{2,4,4,4,2,4,4,4,4,2});
@@ -58,6 +58,8 @@ void MapModel::initTiles()
 
             TileModel* tileModel = new TileModel(this);
             tileModel->set_tileType(tileType);
+            tileModel->set_posX((j + 0.5)* tileSize());
+            tileModel->set_posY((i + 0.5)* tileSize());
 
             if (mTiles.count() == i)
             {

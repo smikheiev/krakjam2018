@@ -13,8 +13,7 @@ Rectangle {
 
     x: antenaBoyModel ? antenaBoyModel.posX : 0
     y: antenaBoyModel ? antenaBoyModel.posY : 0
-
-    color: "white"
+    color: antenaBoyModel.transmissionOnLine ? "#900" : "white"
 
     Range {
         id: range

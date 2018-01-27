@@ -3,9 +3,9 @@
 CharactersLogic::CharactersLogic(QObject* parent)
     : QObject(parent)
 {
-    mAntenaBoyModel.append(new AntenaBoyModel(1, this));
-    mAntenaBoyModel.append(new AntenaBoyModel(2, this));
-    mAntenaBoyModel.append(new AntenaBoyModel(3, this));
+    mAntenaBoyModel.append(new AntenaBoyModel(0, 60, this));
+    mAntenaBoyModel.append(new AntenaBoyModel(1, 60, this));
+    mAntenaBoyModel.append(new AntenaBoyModel(2, 60, this));
 
     QVariantList vl;
     for (int i = 0; i < mAntenaBoyModel.count(); ++i)

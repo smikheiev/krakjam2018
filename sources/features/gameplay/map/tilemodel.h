@@ -10,6 +10,8 @@ class TileModel : public QObject
 {
     Q_OBJECT
 
+    AUTO_Q_PROPERTY(int, posX) // pozycja srodka tila, zeby latwiej bylo liczyc "range"
+    AUTO_Q_PROPERTY(int, posY)
     AUTO_Q_PROPERTY(TileType, tileType)
 
 public:

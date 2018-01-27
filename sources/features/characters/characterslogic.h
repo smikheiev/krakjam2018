@@ -27,12 +27,13 @@ public:
 
     bool tryToMove(int posX, int posY, int boySize);
 
+    QList<AntenaBoyModel*> mAntenaBoyModel;
+
 private:
     int antenaBoySelected = 0;
 
     AntenaBoyModel* getAntenaBoySelected();
 
-    QList<AntenaBoyModel*> mAntenaBoyModel;
     MapModel* mapModel;
 };
 

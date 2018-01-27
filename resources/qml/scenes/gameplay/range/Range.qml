@@ -34,7 +34,7 @@ Item {
     Rectangle {
         id: rangeCircle
 
-        width: MapConstants.TILE_SIZE * priv.radius
+        width: priv.radius * 2
         height: width
         anchors {
             centerIn: parent

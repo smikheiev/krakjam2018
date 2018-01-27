@@ -1,12 +1,14 @@
 #include "antenaboymodel.h"
 #include "../gameplay/constants.h"
 
-AntenaBoyModel::AntenaBoyModel(int rangeRadius, QObject* parent)
+AntenaBoyModel::AntenaBoyModel(int id, int rangeRadius, QObject* parent)
     : QObject(parent)
+    , m_id(id)
     , m_boySize(ANTENA_BOY_SIZE)
-    , m_range(new RangeModel(this))
     , m_posX(0)
     , m_posY(0)
+    , m_transmissionOnLine(false)
+    , m_range(new RangeModel(this))
 {
     range()->set_radius(rangeRadius);
 }

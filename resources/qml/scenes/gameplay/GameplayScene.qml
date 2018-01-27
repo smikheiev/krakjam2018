@@ -45,6 +45,7 @@ BaseScene {
 
             onTriggered: {
                 features.gameplay.charactersLogic.move()
+                features.gameplay.transmissionLogic.checkTransmission()
             }
         }
     }

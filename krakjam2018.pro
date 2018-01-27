@@ -18,7 +18,10 @@ SOURCES += \
     sources/features/gameplay/range/rangemodel.cpp \
     sources/features/gameplay/range/rangeslistmodel.cpp \
     sources/features/gameplay/esbekmodel.cpp \
-    sources/features/gameplay/esbeklogic.cpp
+    sources/features/gameplay/esbeklogic.cpp \
+    sources/features/gameplay/transmissionlogic.cpp \
+    sources/features/gameplay/map/hqmodel.cpp \
+    sources/features/gameplay/map/objectivemodel.cpp
 
 RESOURCES += \
     resources/qml.qrc \
@@ -43,4 +46,7 @@ HEADERS += \
     sources/features/gameplay/range/rangeslistmodel.h \
     sources/features/gameplay/esbekmodel.h \
     sources/features/gameplay/esbeklogic.h \
-    sources/features/gameplay/constants.h
+    sources/features/gameplay/constants.h \
+    sources/features/gameplay/transmissionlogic.h \
+    sources/features/gameplay/map/hqmodel.h \
+    sources/features/gameplay/map/objectivemodel.h

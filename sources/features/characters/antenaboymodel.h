@@ -11,14 +11,19 @@ class AntenaBoyModel : public QObject
 {
     Q_OBJECT
 
+    AUTO_Q_PROPERTY(int, id)
+
     AUTO_Q_PROPERTY_CONSTANT(int, boySize)
-    AUTO_Q_PROPERTY_CONSTANT(RangeModel*, range)
 
     AUTO_Q_PROPERTY(int, posX)
     AUTO_Q_PROPERTY(int, posY)
 
+    AUTO_Q_PROPERTY(bool, transmissionOnLine)
+
+    AUTO_Q_PROPERTY_CONSTANT(RangeModel*, range)
+
 public:
-    AntenaBoyModel(int rangeRadius, QObject* parent = nullptr);
+    AntenaBoyModel(int id, int rangeRadius, QObject* parent = nullptr);
 
     void moveKeyPressed(int keyPressed);
     void moveKeyReleased(int keyReleased);
