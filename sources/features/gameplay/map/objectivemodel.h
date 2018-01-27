@@ -5,24 +5,24 @@
 #include <QTimer>
 
 #include "../../../macros.h"
+#include "../range/rangemodel.h"
 
 class ObjectiveModel : public QObject
 {
     Q_OBJECT
 
-    AUTO_Q_PROPERTY_CONSTANT(int, range)
+    AUTO_Q_PROPERTY_CONSTANT(RangeModel*, range)
     AUTO_Q_PROPERTY_CONSTANT(int, transmissionTime)
 
     AUTO_Q_PROPERTY(int, posX)
     AUTO_Q_PROPERTY(int, posY)
-    AUTO_Q_PROPERTY(bool, isTransmissionOnLine)
     AUTO_Q_PROPERTY(bool, isDone)
 
 public:
     ObjectiveModel(QObject* parent);
 
 private slots:
-    void onIsTransmissionOnlineChanged();
+    void onIsTransmittingChanged();
     void onTransmissionTimerTimeout();
 
 private:

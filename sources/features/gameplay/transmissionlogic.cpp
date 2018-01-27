@@ -78,7 +78,7 @@ void TransmissionLogic::checkTransmission()
     for (ObjectiveModel* objectiveModel : mObjectiveList)
     {
         bool isTransmitting = transmittingObjectives.contains(objectiveModel);
-        objectiveModel->set_isTransmissionOnLine(isTransmitting);
+        objectiveModel->range()->set_isTransmitting(isTransmitting);
     }
 }
 
@@ -100,7 +100,7 @@ bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QLi
     }
 
     for (ObjectiveModel* objectiveModel : mObjectiveList) {
-        int range = rootAntenaBoy->range()->radius() + objectiveModel->range();
+        int range = rootAntenaBoy->range()->radius() + objectiveModel->range()->radius();
         qreal distanceValue = distance(objectiveModel->posX(), objectiveModel->posY(), rootAntenaBoy->posX(), rootAntenaBoy->posY());
         if (range > distanceValue) {
             transmittingObjectives->append(objectiveModel);
