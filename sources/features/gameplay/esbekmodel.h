@@ -11,6 +11,8 @@ class EsbekModel : public QObject
 
     AUTO_Q_PROPERTY(qint64, row)
     AUTO_Q_PROPERTY(qint64, column)
+    AUTO_Q_PROPERTY(qint64, moveX)
+    AUTO_Q_PROPERTY(qint64, moveY)
 
 public:
     explicit EsbekModel(QObject *parent = nullptr);
