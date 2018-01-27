@@ -44,7 +44,7 @@ bool MapModel::tryToMove(int posX, int posY, int boySize)
     return true;
 }
 
-QPoint MapModel::getStartAntenaBoyPosition()
+QPoint MapModel::getHQPosition()
 {
     for (int i = 0; i < width(); ++i)
     {
@@ -53,7 +53,7 @@ QPoint MapModel::getStartAntenaBoyPosition()
             TileModel* tile = mTiles.at(j)->at(i);
             if (tile->tileType() == TileType::Headquarter)
             {
-                return QPoint(i, j + 1);
+                return QPoint(i, j);
             }
         }
     }

@@ -54,9 +54,9 @@ AntenaBoyModel* CharactersLogic::getAntenaBoySelected() {
 
 void CharactersLogic::setBoyToStartPosition(AntenaBoyModel *boy)
 {
-    QPoint startPosition = mMapModel->getStartAntenaBoyPosition();
-    int posX = startPosition.x() * TILE_SIZE;
-    int posY = startPosition.y() * TILE_SIZE;
+    QPoint startPosition = mMapModel->getHQPosition();
+    int posX = startPosition.x() * TILE_SIZE + (TILE_SIZE - ANTENA_BOY_SIZE) / 2;
+    int posY = (startPosition.y() + 1) * TILE_SIZE + (TILE_SIZE - ANTENA_BOY_SIZE) / 2;
 
     boy->set_posX(posX);
     boy->set_posY(posY);

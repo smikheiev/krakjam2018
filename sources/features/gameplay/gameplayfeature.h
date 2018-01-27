@@ -48,6 +48,7 @@ private:
 
 private:
     QMap<GameplayState, QVector<GameplayState>*> mPossibleStateTransitions;
+    RangeModel* mHQRange;
 };
 
 #endif // GAMEPLAYFEATURE_H

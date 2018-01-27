@@ -10,29 +10,13 @@ TransmissionLogic::TransmissionLogic(QObject* parent)
 {
 }
 
-void TransmissionLogic::setHQRange(RangeModel *rangeModel)
-{
-    mHQRangeModel = rangeModel;
-}
-
-void TransmissionLogic::init(CharactersLogic *charactersLogic, MapModel *mapModel, ObjectivesListModel *objectivesList)
+void TransmissionLogic::init(CharactersLogic *charactersLogic, ObjectivesListModel *objectivesList, RangeModel *hqRange)
 {
     mObjectivesList = objectivesList;
+    mHQRangeModel = hqRange;
 
     for (AntenaBoyModel* antenaBoy : charactersLogic->mAntenaBoyList) {
         mAntenaBoyList.append(antenaBoy);
-    }
-
-    for (int i=0; i<mapModel->count(); i++) {
-        TileModel* tile = mapModel->getTileByIndex(i);
-
-        if (tile->tileType() == TileType::Headquarter) {
-            RangeModel* hqRangeModel = new RangeModel(this);
-            hqRangeModel->set_posX(tile->posX());
-            hqRangeModel->set_posY(tile->posY());
-            hqRangeModel->set_radius(15);
-            setHQRange(hqRangeModel);
-        }
     }
 }
 

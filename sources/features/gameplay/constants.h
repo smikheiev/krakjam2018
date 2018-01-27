@@ -8,4 +8,6 @@ const int ANTENA_BOY_SIZE = 50;
 const int ANTENA_BOY_SPEED = 5;
 const int ANTENA_BOY_RANGE_RADIUS = 100;
 
+const int HQ_RANGE_RADIUS = 200;
+
 #endif // CONSTANTS_H
