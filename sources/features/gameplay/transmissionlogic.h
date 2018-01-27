@@ -19,18 +19,16 @@ public:
 
     void setHQRange(RangeModel* rangeModel);
 
-    void init(CharactersLogic* charactersLogic, MapModel* mapModel);
+    void init(CharactersLogic* charactersLogic, MapModel* mapModel, QList<ObjectiveModel*>* objectivesList);
     Q_INVOKABLE void checkTransmission();
 
 private:
     RangeModel* mHQRangeModel;
     QList<AntenaBoyModel*> mAntenaBoyList;
-    QList<ObjectiveModel*> mObjectiveList;
+    QList<ObjectiveModel*>* mObjectivesList;
 
     qreal distance(int posX_1, int posY_1, int posX_2, int posY_2);
     bool isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QList<AntenaBoyModel*>* alreadyCheckedBoys, QList<AntenaBoyModel*>* transmittingBoys, QList<ObjectiveModel*>* transmittingObjectives);
-    void addAntenaBoyModel(AntenaBoyModel* antenaBoyModel);
-    void addObejctiveModel(ObjectiveModel* objectiveModel);
 };
 
 #endif // TRANSMISSIONLOGIC_H

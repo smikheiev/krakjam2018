@@ -11,13 +11,13 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_ranges(new RangesListModel(this))
     , m_esbekLogic(new EsbekLogic(m_mapModel, this))
     , m_transmissionLogic(new TransmissionLogic(this))
+    , m_objectiveLogic(new ObjectivesLogic(mapModel(), this))
 {
     setupPossibleStateTransitions();
     setupInitialRanges();
 
     charactersLogic()->setMapModel(mapModel());
-
-    transmissionLogic()->init(charactersLogic(), mapModel());
+    transmissionLogic()->init(charactersLogic(), mapModel(), objectiveLogic()->objectivesList());
 
 //    TEST_mSetRandomRangeOnMapTimer.setInterval(1500);
 //    TEST_mSetRandomRangeOnMapTimer.setSingleShot(false);

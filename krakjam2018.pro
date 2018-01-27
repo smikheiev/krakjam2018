@@ -20,7 +20,8 @@ SOURCES += \
     sources/features/gameplay/esbekmodel.cpp \
     sources/features/gameplay/esbeklogic.cpp \
     sources/features/gameplay/transmissionlogic.cpp \
-    sources/features/gameplay/map/objectivemodel.cpp
+    sources/features/gameplay/map/objectivemodel.cpp \
+    sources/features/gameplay/objectives/objectiveslogic.cpp
 
 RESOURCES += \
     resources/qml.qrc \
@@ -47,4 +48,5 @@ HEADERS += \
     sources/features/gameplay/esbeklogic.h \
     sources/features/gameplay/constants.h \
     sources/features/gameplay/transmissionlogic.h \
-    sources/features/gameplay/map/objectivemodel.h
+    sources/features/gameplay/map/objectivemodel.h \
+    sources/features/gameplay/objectives/objectiveslogic.h

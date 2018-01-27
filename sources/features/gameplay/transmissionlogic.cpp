@@ -12,8 +12,10 @@ void TransmissionLogic::setHQRange(RangeModel *rangeModel)
     mHQRangeModel = rangeModel;
 }
 
-void TransmissionLogic::init(CharactersLogic *charactersLogic, MapModel *mapModel)
+void TransmissionLogic::init(CharactersLogic *charactersLogic, MapModel *mapModel, QList<ObjectiveModel*>* objectivesList)
 {
+    mObjectivesList = objectivesList;
+
     for (AntenaBoyModel* antenaBoy : charactersLogic->mAntenaBoyModel) {
         mAntenaBoyList.append(antenaBoy);
     }
@@ -28,24 +30,7 @@ void TransmissionLogic::init(CharactersLogic *charactersLogic, MapModel *mapMode
             hqRangeModel->set_radius(15);
             setHQRange(hqRangeModel);
         }
-
-        if (tile->tileType() == TileType::Target) {
-            ObjectiveModel* target = new ObjectiveModel(this);
-            target->set_posX(tile->posX());
-            target->set_posY(tile->posY());
-            addObejctiveModel(target);
-        }
     }
-}
-
-void TransmissionLogic::addAntenaBoyModel(AntenaBoyModel *antenaBoyModel)
-{
-    mAntenaBoyList.append(antenaBoyModel);
-}
-
-void TransmissionLogic::addObejctiveModel(ObjectiveModel *objectiveModel)
-{
-    mObjectiveList.append(objectiveModel);
 }
 
 qreal TransmissionLogic::distance(int posX_1, int posY_1, int posX_2, int posY_2) {
@@ -75,8 +60,9 @@ void TransmissionLogic::checkTransmission()
     }
 
     mHQRangeModel->set_isTransmitting(isAnyTransmissionReached);
-    for (ObjectiveModel* objectiveModel : mObjectiveList)
+    for (int i = 0; i < mObjectivesList->count(); ++i)
     {
+        ObjectiveModel* objectiveModel = mObjectivesList->at(i);
         bool isTransmitting = transmittingObjectives.contains(objectiveModel);
         objectiveModel->range()->set_isTransmitting(isTransmitting);
     }
@@ -108,7 +94,9 @@ bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QLi
         }
     }
 
-    for (ObjectiveModel* objectiveModel : mObjectiveList) {
+    for (int i = 0; i < mObjectivesList->count(); ++i)
+    {
+        ObjectiveModel* objectiveModel = mObjectivesList->at(i);
         int range = rootAntenaBoy->range()->radius() + objectiveModel->range()->radius();
         qreal distanceValue = distance(objectiveModel->posX(), objectiveModel->posY(), rootAntenaBoy->posX(), rootAntenaBoy->posY());
         if (range > distanceValue) {
