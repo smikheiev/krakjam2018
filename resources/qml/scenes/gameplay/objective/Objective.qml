@@ -46,7 +46,7 @@ Item {
         }
 
         visible: isTransmissionMode
-        source: "qrc:/images/happy  .png"
+        source: "qrc:/images/happy.png"
 
         layer.enabled: true
         layer.effect: CircleProgressShader {
