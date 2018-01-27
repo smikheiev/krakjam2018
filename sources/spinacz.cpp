@@ -11,7 +11,7 @@ Spinacz::Spinacz(QObject *parent)
     QmlTypesRegistrator::registerTypes();
 }
 
-FeaturesRoot *Spinacz::featuresRoot() const
+FeaturesRoot* Spinacz::featuresRoot() const
 {
     return mFeaturesRoot;
 }

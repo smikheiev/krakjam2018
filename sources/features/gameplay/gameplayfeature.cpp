@@ -9,6 +9,7 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_charactersLogic(new CharactersLogic(this))
     , m_mapModel(new MapModel(this))
     , m_ranges(new RangesListModel(this))
+    , m_esbekLogic(new EsbekLogic(m_mapModel, this))
 {
     setupPossibleStateTransitions();
 

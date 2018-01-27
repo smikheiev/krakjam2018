@@ -11,6 +11,7 @@
 #include "../characters/characterslogic.h"
 #include "map/mapmodel.h"
 #include "range/rangeslistmodel.h"
+#include "esbeklogic.h"
 
 class GameplayFeature : public QObject
 {
@@ -20,6 +21,7 @@ class GameplayFeature : public QObject
     AUTO_Q_PROPERTY(CharactersLogic*, charactersLogic)
     AUTO_Q_PROPERTY(MapModel*, mapModel)
     AUTO_Q_PROPERTY(RangesListModel*, ranges)
+    AUTO_Q_PROPERTY(EsbekLogic*, esbekLogic)
 
 public:
     explicit GameplayFeature(QObject *parent = nullptr);

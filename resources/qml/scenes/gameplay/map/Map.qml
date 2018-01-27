@@ -1,6 +1,7 @@
 import QtQuick 2.10
 
 import "./MapConstants.js" as MapConstants
+import "../"
 
 import "../range"
 
@@ -60,5 +61,55 @@ Item {
                 model: display // display - standart Qt Role "Qt::DisplayRole"
             }
         }
+    }
+
+    Esbek {
+        id: esbek
+
+        x: mapXStart
+        y: mapYStart
+
+        mapXStart: mapGrid.x
+        mapXEnd: mapGrid.x + mapGrid.width
+        mapYStart: mapGrid.y
+        mapYEnd: mapGrid.y + mapGrid.height
+
+        color: "#ff00ff"
+
+        isVerticalMove: true
+
+    }
+
+    Esbek {
+        id: esbek2
+
+        x: mapXEnd - width
+        y: mapYStart
+
+        mapXStart: mapGrid.x
+        mapXEnd: mapGrid.x + mapGrid.width
+        mapYStart: mapGrid.y
+        mapYEnd: mapGrid.y + mapGrid.height
+
+        color: "#ffff00"
+
+        isVerticalMove: false
+    }
+
+
+    Esbek {
+        id: esbek3
+
+        x: mapXStart
+        y: mapYEnd - height
+
+        mapXStart: mapGrid.x
+        mapXEnd: mapGrid.x + mapGrid.width
+        mapYStart: mapGrid.y
+        mapYEnd: mapGrid.y + mapGrid.height
+
+        color: "#00ffdf"
+
+        isVerticalMove: false
     }
 }
