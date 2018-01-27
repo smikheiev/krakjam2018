@@ -3,9 +3,9 @@
 CharactersLogic::CharactersLogic(QObject* parent)
     : QObject(parent)
 {
-    mAntenaBoyModel.append(new AntenaBoyModel(this));
-    mAntenaBoyModel.append(new AntenaBoyModel(this));
-    mAntenaBoyModel.append(new AntenaBoyModel(this));
+    mAntenaBoyModel.append(new AntenaBoyModel(1, this));
+    mAntenaBoyModel.append(new AntenaBoyModel(2, this));
+    mAntenaBoyModel.append(new AntenaBoyModel(3, this));
 
     QVariantList vl;
     for (int i = 0; i < mAntenaBoyModel.count(); ++i)
@@ -15,7 +15,6 @@ CharactersLogic::CharactersLogic(QObject* parent)
     set_antenaBoyList(vl);
 }
 
-#include <QDebug>
 void CharactersLogic::changSelectedAntenaBoy(int keyPressed)
 {
     getAntenaBoySelected()->moveKeyReleased(Qt::Key_Up); // haczorek
@@ -56,9 +55,7 @@ AntenaBoyModel* CharactersLogic::getAntenaBoySelected() {
 
 float SPEED = 2;
 
-#include <QDebug>
 void CharactersLogic::move() {
-    int cnt = 1;
     for (AntenaBoyModel* antenaBoy : mAntenaBoyModel) {
         if (antenaBoy->moveX == 0 && antenaBoy->moveY == 0) continue;
 

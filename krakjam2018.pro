@@ -42,4 +42,5 @@ HEADERS += \
     sources/features/gameplay/range/rangemodel.h \
     sources/features/gameplay/range/rangeslistmodel.h \
     sources/features/gameplay/esbekmodel.h \
-    sources/features/gameplay/esbeklogic.h
+    sources/features/gameplay/esbeklogic.h \
+    sources/features/gameplay/constants.h

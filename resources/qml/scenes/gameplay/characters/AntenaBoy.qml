@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
+import "../range"
+
 Rectangle {
     id: antenaBoy
 
@@ -13,4 +15,14 @@ Rectangle {
     y: antenaBoyModel ? antenaBoyModel.posY : 0
 
     color: "white"
+
+    Range {
+        id: range
+
+        anchors {
+            centerIn: parent
+        }
+
+        model: antenaBoyModel.range
+    }
 }

@@ -61,8 +61,8 @@ void GameplayFeature::setRandomRangeOnMap()
     qreal randomRadius = ((qrand() % 25 + 5) / (qreal)10);
 
     RangeModel* rangeModel = new RangeModel(this);
-    rangeModel->set_column(randomColumn);
-    rangeModel->set_row(randomRow);
+    rangeModel->setToColumn(randomColumn);
+    rangeModel->setToRow(randomRow);
     rangeModel->set_radius(randomRadius);
 
     m_ranges->add(rangeModel);

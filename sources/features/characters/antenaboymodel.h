@@ -5,18 +5,20 @@
 
 #include "../../macros.h"
 #include "../gameplay/map/mapmodel.h"
+#include "../gameplay/range/rangemodel.h"
 
 class AntenaBoyModel : public QObject
 {
     Q_OBJECT
 
     AUTO_Q_PROPERTY_CONSTANT(int, boySize)
+    AUTO_Q_PROPERTY_CONSTANT(RangeModel*, range)
 
-    AUTO_Q_PROPERTY(float, posX)
-    AUTO_Q_PROPERTY(float, posY)        
+    AUTO_Q_PROPERTY(int, posX)
+    AUTO_Q_PROPERTY(int, posY)
 
 public:
-    AntenaBoyModel(QObject* parent);
+    AntenaBoyModel(int rangeRadius, QObject* parent = nullptr);
 
     void moveKeyPressed(int keyPressed);
     void moveKeyReleased(int keyReleased);

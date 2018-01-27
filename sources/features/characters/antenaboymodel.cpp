@@ -1,11 +1,14 @@
 #include "antenaboymodel.h"
+#include "../gameplay/constants.h"
 
-AntenaBoyModel::AntenaBoyModel(QObject* parent)
+AntenaBoyModel::AntenaBoyModel(int rangeRadius, QObject* parent)
     : QObject(parent)
-    , m_boySize(15)
+    , m_boySize(ANTENA_BOY_SIZE)
+    , m_range(new RangeModel(this))
     , m_posX(0)
     , m_posY(0)
 {
+    range()->set_radius(rangeRadius);
 }
 
 void AntenaBoyModel::moveKeyPressed(int keyPressed)
