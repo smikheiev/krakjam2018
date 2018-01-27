@@ -19,6 +19,7 @@ public:
 
 public:
     Q_INVOKABLE TileModel* getTileByIndex(const int tileIndex);
+    Q_INVOKABLE TileModel* getTileByposition(const int row, const int column);
 
 private:
     void initTiles();

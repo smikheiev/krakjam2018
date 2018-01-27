@@ -14,7 +14,9 @@ SOURCES += \
     sources/features/characters/antenaboymodel.cpp \
     sources/features/characters/characterslogic.cpp \
     sources/features/gameplay/map/mapmodel.cpp \
-    sources/features/gameplay/map/tilemodel.cpp
+    sources/features/gameplay/map/tilemodel.cpp \
+    sources/features/gameplay/range/rangemodel.cpp \
+    sources/features/gameplay/range/rangeslistmodel.cpp
 
 RESOURCES += \
     resources/qml.qrc \
@@ -34,4 +36,6 @@ HEADERS += \
     sources/features/characters/characterslogic.h \
     sources/features/gameplay/map/mapmodel.h \
     sources/features/gameplay/map/tiletype.h \
-    sources/features/gameplay/map/tilemodel.h
+    sources/features/gameplay/map/tilemodel.h \
+    sources/features/gameplay/range/rangemodel.h \
+    sources/features/gameplay/range/rangeslistmodel.h
