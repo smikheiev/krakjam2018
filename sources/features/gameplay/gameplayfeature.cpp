@@ -70,23 +70,14 @@ void GameplayFeature::onAppStateChanged(const AppState appState)
     }
 }
 
-void GameplayFeature::setRandomRangeOnMap()
+void GameplayFeature::onObjectiveAdded(ObjectiveModel *objective)
 {
-    if (m_ranges->rowCount() >= 5)
-    {
-        m_ranges->removeAt(0);
-    }
+    ranges()->add(objective->range());
+}
 
-    int randomColumn = (qrand() % mapModel()->width());
-    int randomRow = (qrand() % mapModel()->height());
-    qreal randomRadius = ((qrand() % 25 + 5) / (qreal)10);
-
-    RangeModel* rangeModel = new RangeModel(this);
-    rangeModel->setToColumn(randomColumn);
-    rangeModel->setToRow(randomRow);
-    rangeModel->set_radius(randomRadius);
-
-    m_ranges->add(rangeModel);
+void GameplayFeature::onObjectiveRemoved(ObjectiveModel *objective)
+{
+    ranges()->remove(objective->range());
 }
 
 void GameplayFeature::setupInitialRanges()

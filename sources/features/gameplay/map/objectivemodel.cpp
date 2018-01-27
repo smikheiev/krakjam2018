@@ -1,4 +1,5 @@
 #include "objectivemodel.h"
+#include "../constants.h"
 
 ObjectiveModel::ObjectiveModel(QObject* parent):
     QObject(parent)
@@ -8,7 +9,7 @@ ObjectiveModel::ObjectiveModel(QObject* parent):
     , m_posY(-1)
     , m_isDone(false)
 {
-    range()->set_radius(15);
+    range()->set_radius(OBJECTIVE_RANGE_RADIUS);
 
     mTransmissionTimer.setInterval(transmissionTime());
     mTransmissionTimer.setSingleShot(true);

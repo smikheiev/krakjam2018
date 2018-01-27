@@ -1,4 +1,5 @@
 #include "objectiveslogic.h"
+#include "../constants.h"
 #include <QDebug>
 
 ObjectivesLogic::ObjectivesLogic(MapModel* mapModel, QObject *parent)
@@ -35,15 +36,17 @@ void ObjectivesLogic::setNextRandomObjective(int excludePosX, int excludePosY)
     TileModel* objectiveTile = objectiveTiles.at(randomTileIndex);
 
     ObjectiveModel* objective = new ObjectiveModel(this);
-    objective->set_posX(objectiveTile->posX());
-    objective->set_posY(objectiveTile->posY());
+    objective->set_posX(objectiveTile->posX() - TILE_SIZE / 2);
+    objective->set_posY(objectiveTile->posY() - TILE_SIZE / 2);
     objectives()->add(objective);
 
+    emit objectiveAdded(objective);
     connectObjective(objective);
 }
 
 void ObjectivesLogic::clearObjective(ObjectiveModel *objective)
 {
+    emit objectiveRemoved(objective);
     disconnectObjective(objective);
     objectives()->remove(objective);
 }

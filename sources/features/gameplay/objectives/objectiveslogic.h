@@ -38,6 +38,10 @@ private:
 
     int mLastDoneObjectivePosX = -1;
     int mLastDoneObjectivePosY = -1;
+
+signals:
+    void objectiveAdded(ObjectiveModel* objective);
+    void objectiveRemoved(ObjectiveModel* objective);
 };
 
 #endif // OBJECTIVESLOGIC_H

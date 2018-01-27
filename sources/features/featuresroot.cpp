@@ -20,4 +20,7 @@ void FeaturesRoot::connectFeatures()
     connect(appState(), SIGNAL(currentAppStateChanged(AppState)), gameplay(), SLOT(onAppStateChanged(AppState)));
 
     connect(gameplay(), SIGNAL(currentGameplayStateChanged(GameplayState)), appState(), SLOT(onGameplayStateChanged(GameplayState)));
+
+    connect(gameplay()->objectiveLogic(), SIGNAL(objectiveAdded(ObjectiveModel*)), gameplay(), SLOT(onObjectiveAdded(ObjectiveModel*)));
+    connect(gameplay()->objectiveLogic(), SIGNAL(objectiveRemoved(ObjectiveModel*)), gameplay(), SLOT(onObjectiveRemoved(ObjectiveModel*)));
 }

@@ -17,6 +17,8 @@ public:
 
     void add(RangeModel* rangeModel);
     void removeAt(int index);
+    void remove(RangeModel* rangeModel);
+    RangeModel* at(int index);
 
 private:
     QList<RangeModel*> mRangesList;

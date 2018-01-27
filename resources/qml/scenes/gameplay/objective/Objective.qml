@@ -28,8 +28,8 @@ Item {
 
     width: MapConstants.TILE_SIZE
     height: MapConstants.TILE_SIZE
-    x: priv.posX - width / 2
-    y: priv.posY - height / 2
+    x: priv.posX
+    y: priv.posY
 
     Rectangle {
         anchors {
@@ -39,8 +39,8 @@ Item {
     }
 
     Image {
-        width: parent.width * 2
-        height: parent.height * 2
+        width: parent.width
+        height: parent.height
         anchors {
             centerIn: parent
         }

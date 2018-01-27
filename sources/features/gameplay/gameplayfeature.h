@@ -39,7 +39,9 @@ public:
 
 public slots:
     void onAppStateChanged(const AppState appState);
-    void setRandomRangeOnMap();
+
+    void onObjectiveAdded(ObjectiveModel* objective);
+    void onObjectiveRemoved(ObjectiveModel* objective);
 
 signals:
     void objectiveCompleted();

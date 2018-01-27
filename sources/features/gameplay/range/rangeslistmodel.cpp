@@ -44,3 +44,21 @@ void RangesListModel::removeAt(int index)
         mRangesList.removeAt(index);
     endRemoveRows();
 }
+
+void RangesListModel::remove(RangeModel *rangeModel)
+{
+    if (mRangesList.contains(rangeModel))
+    {
+        removeAt(mRangesList.indexOf(rangeModel));
+    }
+}
+
+RangeModel *RangesListModel::at(int index)
+{
+    if (index < 0 || index >= mRangesList.count())
+    {
+        return nullptr;
+    }
+
+    return mRangesList.at(index);
+}
