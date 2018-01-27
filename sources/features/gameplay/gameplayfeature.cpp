@@ -6,19 +6,17 @@
 GameplayFeature::GameplayFeature(QObject *parent)
     : QObject(parent)
     , m_currentGameplayState(GameplayState::None)
-    , m_charactersLogic(new CharactersLogic(this))
     , m_mapModel(new MapModel(this))
+    , m_charactersLogic(new CharactersLogic(mapModel(), this))
     , m_ranges(new RangesListModel(this))
-    , m_esbekLogic(new EsbekLogic(m_mapModel, this))
+    , m_esbekLogic(new EsbekLogic(mapModel(), charactersLogic(), this))
     , m_transmissionLogic(new TransmissionLogic(this))
     , m_objectiveLogic(new ObjectivesLogic(mapModel(), this))
 {
     setupPossibleStateTransitions();
     setupInitialRanges();
 
-    charactersLogic()->setMapModel(mapModel());
     transmissionLogic()->init(charactersLogic(), mapModel(), objectiveLogic()->objectives());
-    esbekLogic()->setAntenaBoyList(&charactersLogic()->mAntenaBoyList);
 }
 
 GameplayFeature::~GameplayFeature()

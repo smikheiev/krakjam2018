@@ -2,32 +2,33 @@
 #include "../../utils.h"
 #include <QDebug>
 
-EsbekLogic::EsbekLogic(MapModel* mapModel, QObject *parent)
+EsbekLogic::EsbekLogic(MapModel* mapModel, CharactersLogic* charactersLogic, QObject *parent)
     : QObject(parent)
     , m_esbekModel(new EsbekModel(this))
     , mMapModel(mapModel)
+    , mCharactersLogic(charactersLogic)
 {
    esbekModel()->set_moveX(1);
 }
 
-void EsbekLogic::setAntenaBoyList(QList<AntenaBoyModel *>* antenaBoyList)
+void EsbekLogic::tryToCatchAntenaBoyToJail()
 {
-    mAntenaBoyList = antenaBoyList;
-}
+    for (int i = 0; i < mCharactersLogic->mAntenaBoyList.count(); ++i)
+    {
+        AntenaBoyModel* boy = mCharactersLogic->mAntenaBoyList.at(i);
+        if (boy->isInactive()) continue;
 
-void EsbekLogic::searchAntenaBoyToJail()
-{
-    // TODO
-//    for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
-//    for (int i=0; mAntenaBoyList->size()-1; i++) {
-//        qreal distanceValue = Utils::distance(esbekModel()->posX(), esbekModel()->posY(), mAntenaBoyList->at(i)->posX(), mAntenaBoyList->at(i)->posY());
-//        int range =
-    //    }
+        qreal distanse = Utils::distance(esbekModel()->posX(), esbekModel()->posY(), boy->posX(), boy->posY());
+        if (distanse < esbekModel()->killRadius())
+        {
+            mCharactersLogic->catchedByEsbek(boy);
+        }
+    }
 }
 
 void EsbekLogic::moveEsbek()
 {
-    searchAntenaBoyToJail();
+    tryToCatchAntenaBoyToJail();
 
     if (esbekModel()->posX() % 30 != 0 || esbekModel()->posY() % 30 != 0) {
         setDirectionMove(lastDirection);

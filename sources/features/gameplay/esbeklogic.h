@@ -8,7 +8,7 @@
 #include "../../macros.h"
 #include "esbekmodel.h"
 #include "map/mapmodel.h"
-#include "../characters/antenaboymodel.h"
+#include "../characters/characterslogic.h"
 #include "constants.h"
 
 class EsbekLogic : public QObject
@@ -18,7 +18,7 @@ class EsbekLogic : public QObject
     AUTO_Q_PROPERTY(EsbekModel*, esbekModel)
 
 public:
-    explicit EsbekLogic(MapModel* mapModel, QObject *parent = nullptr);
+    explicit EsbekLogic(MapModel* mapModel, CharactersLogic* charactersLogic, QObject *parent = nullptr);
 
     enum DIRECTION {
         NONE = 0,
@@ -29,14 +29,13 @@ public:
     };
 
     Q_INVOKABLE void moveEsbek();
-    void setAntenaBoyList(QList<AntenaBoyModel*>* antenaBoyList);
 
 private:
-    QList<AntenaBoyModel*>* mAntenaBoyList;
-    DIRECTION lastDirection = DIRECTION::NONE;
     MapModel* mMapModel;
+    CharactersLogic* mCharactersLogic;
+    DIRECTION lastDirection = DIRECTION::NONE;
 
-    void searchAntenaBoyToJail();
+    void tryToCatchAntenaBoyToJail();
 
 private slots:
     void setDirectionMove(DIRECTION directionMove);

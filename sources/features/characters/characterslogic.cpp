@@ -1,11 +1,18 @@
+#include <QDebug>
+#include <QPoint>
 #include "characterslogic.h"
+#include "../gameplay/constants.h"
 
-CharactersLogic::CharactersLogic(QObject* parent)
+CharactersLogic::CharactersLogic(MapModel* mapModel, QObject* parent)
     : QObject(parent)
+    , mMapModel(mapModel)
 {
-    mAntenaBoyList.append(new AntenaBoyModel(0, 60, this));
-    mAntenaBoyList.append(new AntenaBoyModel(1, 60, this));
-    mAntenaBoyList.append(new AntenaBoyModel(2, 60, this));
+    for (int i = 0; i < 3; ++i)
+    {
+        AntenaBoyModel* boy = new AntenaBoyModel(i, 60, 0, 0, this);
+        setBoyToStartPosition(boy);
+        mAntenaBoyList.append(boy);
+    }
 
     QVariantList vl;
     for (int i = 0; i < mAntenaBoyList.count(); ++i)
@@ -35,13 +42,24 @@ void CharactersLogic::moveKeyReleased(int keyReleased)
     getAntenaBoySelected()->moveKeyReleased(keyReleased);
 }
 
-void CharactersLogic::setMapModel(MapModel* mapModel_)
+void CharactersLogic::catchedByEsbek(AntenaBoyModel *boy)
 {
-    mapModel = mapModel_;
+    boy->makeInactiveForTime(2000);
+    setBoyToStartPosition(boy);
 }
 
 AntenaBoyModel* CharactersLogic::getAntenaBoySelected() {
     return mAntenaBoyList.at(antenaBoySelected);
+}
+
+void CharactersLogic::setBoyToStartPosition(AntenaBoyModel *boy)
+{
+    QPoint startPosition = mMapModel->getStartAntenaBoyPosition();
+    int posX = startPosition.x() * TILE_SIZE;
+    int posY = startPosition.y() * TILE_SIZE;
+
+    boy->set_posX(posX);
+    boy->set_posY(posY);
 }
 
 float SPEED = 2;
@@ -56,17 +74,17 @@ void CharactersLogic::move() {
         float newY = antenaBoy->posY() + SPEED * antenaBoy->moveY;
         if (newY < 0) newY = 0;
 
-        if (!mapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
+        if (!mMapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
             newX = antenaBoy->posX(); // jesli sie nie da sprobuj sie ruszyc tylko w pionie
         }
 
-        if (!mapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
+        if (!mMapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
             newX = antenaBoy->posX() + SPEED * antenaBoy->moveX;
             if (newX < 0) newX = 0;
             newY = antenaBoy->posY(); // jesli sie nie da sprobuj sie ruszyc tylko w poziomie
         }
 
-        if (!mapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
+        if (!mMapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
             continue; // jesli sie nie da no to chu...
         }
 

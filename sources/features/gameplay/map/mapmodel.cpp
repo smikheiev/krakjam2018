@@ -45,6 +45,22 @@ bool MapModel::tryToMove(int posX, int posY, int boySize)
     return true;
 }
 
+QPoint MapModel::getStartAntenaBoyPosition()
+{
+    for (int i = 0; i < width(); ++i)
+    {
+        for (int j = 0; j < height(); ++j)
+        {
+            TileModel* tile = mTiles.at(i)->at(j);
+            if (tile->tileType() == TileType::Headquarter)
+            {
+                return QPoint(i, j + 1);
+            }
+        }
+    }
+    return QPoint(0, 0);
+}
+
 void MapModel::initTiles()
 {
     QVector<QVector<int>> tileTypes;

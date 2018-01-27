@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QVector>
+#include <QPoint>
 
 #include "../../../macros.h"
 #include "tilemodel.h"
@@ -26,6 +27,8 @@ public:
 
     TileType getTileType(int posX, int posY);
     bool tryToMove(int posX, int posY, int boySize);
+
+    QPoint getStartAntenaBoyPosition();
 
 private:
     void initTiles();
