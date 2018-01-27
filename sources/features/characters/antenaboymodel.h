@@ -28,6 +28,9 @@ public:
 
     int moveX = 0; // -1 = left, 0 = nothing, 1 = right
     int moveY = 0; // -1 = up, 0 = nothing, 1 = down
+
+private slots:
+    void onPosChanged();
 };
 
 #endif // ANTENABOYMODEL_H

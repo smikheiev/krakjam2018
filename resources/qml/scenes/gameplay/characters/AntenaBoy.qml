@@ -7,21 +7,12 @@ Rectangle {
     id: antenaBoy
 
     property QtObject antenaBoyModel
+    property bool isTransmitting: antenaBoyModel ? antenaBoyModel.range.isTransmitting : false
 
     width: antenaBoyModel.boySize
     height: antenaBoyModel.boySize
 
     x: antenaBoyModel ? antenaBoyModel.posX : 0
     y: antenaBoyModel ? antenaBoyModel.posY : 0
-    color: range.isTransmitting ? "#900" : "white"
-
-    Range {
-        id: range
-
-        anchors {
-            centerIn: parent
-        }
-
-        model: antenaBoyModel.range
-    }
+    color: isTransmitting ? "#900" : "white"
 }

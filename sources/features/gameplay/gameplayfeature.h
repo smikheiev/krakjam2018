@@ -37,6 +37,7 @@ public slots:
     void setRandomRangeOnMap();
 
 private:
+    void setupInitialRanges();
     void setupPossibleStateTransitions();
     bool canChangeStateFromTo(const GameplayState stateFrom, const GameplayState stateTo) const;
 

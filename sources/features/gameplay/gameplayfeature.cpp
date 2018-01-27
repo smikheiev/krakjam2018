@@ -13,6 +13,7 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_transmissionLogic(new TransmissionLogic(this))
 {
     setupPossibleStateTransitions();
+    setupInitialRanges();
 
     charactersLogic()->setMapModel(mapModel());
 
@@ -69,6 +70,16 @@ void GameplayFeature::setRandomRangeOnMap()
     rangeModel->set_radius(randomRadius);
 
     m_ranges->add(rangeModel);
+}
+
+void GameplayFeature::setupInitialRanges()
+{
+    for (int i = 0; i < charactersLogic()->antenaBoyList().count(); ++i)
+    {
+        QVariant antenaBoyModelQVariant = charactersLogic()->antenaBoyList().at(i);
+        AntenaBoyModel* antenaBoyModel = antenaBoyModelQVariant.value<AntenaBoyModel*>();
+        ranges()->add(antenaBoyModel->range());
+    }
 }
 
 void GameplayFeature::setupPossibleStateTransitions()
