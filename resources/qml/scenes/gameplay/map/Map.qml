@@ -81,12 +81,14 @@ Item {
         }
     }
 
-    Esbek {
-        id: esbek
+    Item {
+        id: esbeksContainer
 
-        mapXStart: mapGrid.x
-        mapYStart: mapGrid.y
+        x: mapGrid.x
+        y: mapGrid.y
 
-        color: "#ff00ff"
+        Esbek {
+            id: esbek
+        }
     }
 }

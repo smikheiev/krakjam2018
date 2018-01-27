@@ -2,32 +2,33 @@
 #include "../../utils.h"
 #include <QDebug>
 
-EsbekLogic::EsbekLogic(MapModel* mapModel, QObject *parent)
+EsbekLogic::EsbekLogic(MapModel* mapModel, CharactersLogic* charactersLogic, QObject *parent)
     : QObject(parent)
     , m_esbekModel(new EsbekModel(this))
-    , m_mapModel(mapModel)
+    , mMapModel(mapModel)
+    , mCharactersLogic(charactersLogic)
 {
    esbekModel()->set_moveX(1);
 }
 
-void EsbekLogic::setAntenaBoyList(QList<AntenaBoyModel *>* antenaBoyList)
+void EsbekLogic::tryToCatchAntenaBoyToJail()
 {
-    mAntenaBoyList = antenaBoyList;
-}
+    for (int i = 0; i < mCharactersLogic->mAntenaBoyList.count(); ++i)
+    {
+        AntenaBoyModel* boy = mCharactersLogic->mAntenaBoyList.at(i);
+        if (boy->isInactive()) continue;
 
-void EsbekLogic::searchAntenaBoyToJail()
-{
-    // TODO
-//    for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
-//    for (int i=0; mAntenaBoyList->size()-1; i++) {
-//        qreal distanceValue = Utils::distance(esbekModel()->posX(), esbekModel()->posY(), mAntenaBoyList->at(i)->posX(), mAntenaBoyList->at(i)->posY());
-//        int range =
-    //    }
+        qreal distanse = Utils::distance(esbekModel()->posX(), esbekModel()->posY(), boy->posX(), boy->posY());
+        if (distanse < esbekModel()->killRadius())
+        {
+            mCharactersLogic->catchedByEsbek(boy);
+        }
+    }
 }
 
 void EsbekLogic::moveEsbek()
 {
-    searchAntenaBoyToJail();
+    tryToCatchAntenaBoyToJail();
 
     if (esbekModel()->posX() % 30 != 0 || esbekModel()->posY() % 30 != 0) {
         setDirectionMove(lastDirection);
@@ -131,22 +132,22 @@ bool EsbekLogic::canMove(DIRECTION direction) {
 bool EsbekLogic::canMoveUp()
 {
     if (esbekModel()->posY() - ESBEK_SPEED < 0) return false;
-    return mapModel()->tryToMove(esbekModel()->posX(), esbekModel()->posY() - ESBEK_SPEED, TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel()->posX(), esbekModel()->posY() - ESBEK_SPEED, TILE_SIZE);
 }
 
 bool EsbekLogic::canMoveDown()
 {
-    return mapModel()->tryToMove(esbekModel()->posX(), esbekModel()->posY() + ESBEK_SPEED, TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel()->posX(), esbekModel()->posY() + ESBEK_SPEED, TILE_SIZE);
 }
 
 bool EsbekLogic::canMoveLeft()
 {
     if (esbekModel()->posX() - ESBEK_SPEED < 0) return false;
-    return mapModel()->tryToMove(esbekModel()->posX() - ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel()->posX() - ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
 }
 
 bool EsbekLogic::canMoveRight()
 {
-    return mapModel()->tryToMove(esbekModel()->posX() + ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
+    return mMapModel->tryToMove(esbekModel()->posX() + ESBEK_SPEED, esbekModel()->posY(), TILE_SIZE);
 }
 

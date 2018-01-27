@@ -11,7 +11,7 @@
 class CharactersLogic : public QObject
 {
 public:
-    CharactersLogic(QObject* parent);
+    CharactersLogic(MapModel* mMapModel, QObject* parent = nullptr);
 
     Q_OBJECT
 
@@ -23,17 +23,18 @@ public:
     void moveKeyReleased(int keyReleased);
     Q_INVOKABLE void move();
 
-    void setMapModel(MapModel* mapModel);
-
     bool canMoveOnPosition(int posX, int posY);
     QList<AntenaBoyModel*> mAntenaBoyList;
+
+    void catchedByEsbek(AntenaBoyModel* boy);
 
 private:
     int antenaBoySelected = 0;
 
     AntenaBoyModel* getAntenaBoySelected();
+    void setBoyToStartPosition(AntenaBoyModel* boy);
 
-    MapModel* mapModel;
+    MapModel* mMapModel;
 };
 
 #endif // CHARACTERSLOGIC_H

@@ -3,7 +3,7 @@ import QtQuick 2.10
 import "map/MapConstants.js" as MapConstants
 import "range"
 
-Rectangle {
+Item {
     id: esbek
 
     readonly property QtObject esbekModel: features.gameplay.esbekLogic.esbekModel
@@ -11,24 +11,41 @@ Rectangle {
     width: MapConstants.TILE_SIZE
     height: MapConstants.TILE_SIZE
 
-    x: mapXStart + esbekModel.posX
-    y: mapYStart + esbekModel.posY
+    x: esbekModel.posX
+    y: esbekModel.posY
 
-    radius: width * 0.5
+    Rectangle {
+        width: MapConstants.TILE_SIZE * 0.75
+        height: MapConstants.TILE_SIZE * 0.75
+        anchors {
+            centerIn: parent
+        }
 
-    property int moveDuration: 300
-    property int mapXStart
-    property int mapYStart
-
-    Range {
-        id: seenRange
-
-        model: esbekModel.seenRange
+        radius: width * 0.5
+        color: "pink"
     }
 
-    Range {
-        id: killRange
+    RangeCircle {
+        id: seenRangeCircle
 
-        model: esbekModel.killRange
+        anchors {
+            centerIn: parent
+        }
+
+        size: esbekModel.seenRadius
+        borderColor: "yellow"
+        sonarDelay: 0
+    }
+
+    RangeCircle {
+        id: killRangeCircle
+
+        anchors {
+            centerIn: parent
+        }
+
+        size: esbekModel.killRadius
+        borderColor: "red"
+        sonarDelay: 0
     }
 }
