@@ -73,9 +73,15 @@ Item {
     }
 
     function getAntenaBoyImage() {
-        var a = 50 // do manipulowania szybkoscia przebierania nozkami :)
+        var a = 70 // do manipulowania szybkoscia przebierania nozkami :)
         var modulo = 1 + (posX + posY) % a
-        var img_nr = modulo > (a/2) - 1 ? 0 : 1
-        return "qrc:/images/map/AntenaBoy_" + img_nr + ".png"
+        var img_nr = 0
+        if (modulo < a/3) {
+            img_nr = 1
+        } else if (modulo < (2*a/3)) {
+            img_nr = 2
+        }
+
+        return "qrc:/images/map/AntenaBoy_" + antenaBoyModel.id + "_" + img_nr + ".png"
     }
 }
