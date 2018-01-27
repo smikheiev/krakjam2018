@@ -31,11 +31,14 @@ Item {
     x: priv.posX
     y: priv.posY
 
-    Rectangle {
+    Image {
+        id: icon
+
         anchors {
-            fill: parent
+            centerIn: parent
         }
-        color: "black"
+
+        source: getIcon()
     }
 
     Image {
@@ -46,7 +49,7 @@ Item {
         }
 
         visible: isTransmissionMode
-        source: "qrc:/images/happy.png"
+        source: "qrc:/images/map/objective_timer.png"
 
         layer.enabled: true
         layer.effect: CircleProgressShader {
@@ -64,5 +67,23 @@ Item {
         from: 0.0
         to: 1.0
         duration: transmissionTime
+    }
+
+    SequentialAnimation {
+        id: bounceAnimation
+
+        running: parent.visible
+
+        loops: Animation.Infinite
+
+        NumberAnimation { target: icon; property: "scale"; from: 1.0; to: 1.3; duration: 400 }
+        PauseAnimation { duration:  200 }
+        NumberAnimation { target: icon; property: "scale"; from: 1.3; to: 1.0; duration: 400 }
+        PauseAnimation { duration:  200 }
+    }
+
+    function getIcon() {
+        var index = Math.floor(Math.random() * 3)
+        return "qrc:/images/map/objective_" + index + ".png"
     }
 }
