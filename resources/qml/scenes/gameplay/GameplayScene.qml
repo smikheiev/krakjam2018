@@ -24,10 +24,11 @@ BaseScene {
     GameTimer {
         id: gameTimer
 
-        height: 18
-        width: map.gridMapWidth
-        x: map.mapGridPosX
-        y: map.mapGridPosY - (height + 8)
+        height: 50
+        width: 1000
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+        }
 
         onRoundFailed: {
             features.gameplay.roundFailed()
@@ -36,35 +37,6 @@ BaseScene {
 
         Component.onCompleted: {
             gameTimer.startTimer()
-        }
-    }
-
-    Item {
-        id: charactersContainer
-
-        x: map.mapGridPosX
-        y: map.mapGridPosY
-
-        Repeater {
-            model: features.gameplay.charactersLogic.antenaBoyList
-
-            AntenaBoy {
-                antenaBoyModel: modelData
-            }
-        }
-
-        Timer {
-            id: moveTimer
-
-            running: true
-            repeat: true
-            interval: 15
-
-            onTriggered: {
-                features.gameplay.charactersLogic.move()
-                features.gameplay.transmissionLogic.checkTransmission()
-                features.gameplay.esbekLogic.moveEsbek()
-            }
         }
     }
 

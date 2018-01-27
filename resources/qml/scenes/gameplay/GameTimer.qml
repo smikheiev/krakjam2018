@@ -23,7 +23,7 @@ Rectangle {
         width: 0
         height: parent.height- 2 * borderSize
 
-        color: "orange"
+        color: "#26FF00"
 
         NumberAnimation {
            id: progressAnimation
