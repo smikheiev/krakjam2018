@@ -63,16 +63,16 @@ QPoint MapModel::getStartAntenaBoyPosition()
 void MapModel::initTiles()
 {
     QVector<QVector<int>> tileTypes;
-    tileTypes.append(QVector<int>{200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200});
-    tileTypes.append(QVector<int>{200, 200, 200, 200, 200, 200, 200,  32,  42,  42,  42,  34, 200, 200, 200});
-    tileTypes.append(QVector<int>{200, 200, 200, 200,  32,  42,  42,  24,  15,  11,  15,  41, 200, 200, 200});
-    tileTypes.append(QVector<int>{200,  32,  42,  42,  24,  11,  15,  31,  42,  22,  11,  41, 200, 200, 200});
-    tileTypes.append(QVector<int>{200,  41,  15,  11,  41,  11,  11, 200,  11,  41,  11,  41,  15,  11, 200});
-    tileTypes.append(QVector<int>{200,  41,  11,  32,  21,  42,  42,  10,  42,  21,  42,  21,  42,  34, 200});
-    tileTypes.append(QVector<int>{200,  31,  42,  24, 200, 200, 200,  41, 200, 200, 200, 200, 200,  41, 200});
-    tileTypes.append(QVector<int>{200, 200, 200,  31,  42,  34, 200,  41, 200, 200, 200, 200, 200,  41, 200});
-    tileTypes.append(QVector<int>{200, 200, 200, 200, 200,  31,  42,  21,  42,  42,  42,  42,  42,  33, 200});
-    tileTypes.append(QVector<int>{200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200});
+    tileTypes.append(QVector<int>{200, 200, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 200, 200});
+    tileTypes.append(QVector<int>{200, 11, 11, 11, 11, 11, 11, 32, 42, 42, 42, 34, 11, 11, 200});
+    tileTypes.append(QVector<int>{11, 11, 11, 11, 32, 42, 42, 24, 15, 11, 15, 41, 11, 11, 11});
+    tileTypes.append(QVector<int>{11, 32, 42, 42, 24, 11, 15, 31, 42, 22, 11, 41, 11, 11, 11});
+    tileTypes.append(QVector<int>{11, 41, 15, 11, 41, 11, 11, 11, 11, 41, 11, 41, 15, 11, 11});
+    tileTypes.append(QVector<int>{11, 41, 11, 32, 21, 42, 42, 10, 42, 21, 42, 21, 42, 34, 11});
+    tileTypes.append(QVector<int>{11, 31, 42, 24, 11, 11, 11, 41, 11, 11, 11, 11, 11, 41, 11});
+    tileTypes.append(QVector<int>{11, 11, 11, 31, 42, 34, 11, 41, 11, 11, 11, 11, 11, 41, 11});
+    tileTypes.append(QVector<int>{200, 11, 11, 11, 11, 31, 42, 21, 42, 42, 42, 42, 42, 33, 11});
+    tileTypes.append(QVector<int>{200, 200, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 200});
 
     for (int i = 0; i < height(); ++i)
     {
