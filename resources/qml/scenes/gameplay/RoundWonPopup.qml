@@ -1,17 +1,15 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.2
 
-Rectangle {
+Image {
     id :roundWonPopup
 
     property int marginSize: 16
 
-    width: 400
-    height: button.y + button.height + marginSize
+    width: sourceSize.width
+    height: sourceSize.height
 
-    color: "black"
-    border.color: "red"
-    border.width: 2
+    source: "qrc:/images/map/bg_popup.png"
 
     Image {
         id: icon
@@ -24,20 +22,21 @@ Rectangle {
             topMargin: marginSize
         }
 
-        source: "qrc:/images/happy.png"
+        source: "qrc:/images/map/objective_0.png"
     }
 
     Text {
         id: textInfo
 
         anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: icon.bottom
-            topMargin: marginSize
+            centerIn: parent
         }
 
-        color: "white"
-        text: "Congrats! Hospital was saved!"
+        color: "#FBB03B"
+        text: "Congrats!\nNext round is waiting..."
+        font.pixelSize: 20
+        font.bold: true
+        horizontalAlignment: Text.AlignHCenter
     }
 
     Button {
@@ -45,11 +44,22 @@ Rectangle {
 
         anchors {
             horizontalCenter: parent.horizontalCenter
-            top: textInfo.bottom
-            topMargin: marginSize
+            bottom: parent.bottom
+            bottomMargin: marginSize * 2
         }
 
         text: "START NEXT ROUND"
+        font.bold: true
+
+        background: Rectangle {
+            anchors {
+                fill: parent
+            }
+
+            radius: 6
+
+            color: button.pressed ? "#dd9c33" : "#FBB03B"
+        }
 
         onClicked: {
             features.gameplay.newRoundStartNeeded()
