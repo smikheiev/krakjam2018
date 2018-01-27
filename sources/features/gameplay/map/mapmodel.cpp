@@ -28,6 +28,12 @@ TileType MapModel::getTileType(int posX, int posY)
     return mTiles.at(posY / tileSize())->at(posX / tileSize())->tileType();
 }
 
+TileModel *MapModel::getTileByposition(const int column, const int row)
+{
+    TileModel* tileModel = mTiles.at(column)->at(row);
+    return tileModel;
+}
+
 void MapModel::initTiles()
 {
     QVector<QVector<int>> tileTypes;

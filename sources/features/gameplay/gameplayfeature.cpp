@@ -8,10 +8,16 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_currentGameplayState(GameplayState::None)
     , m_charactersLogic(new CharactersLogic(this))
     , m_mapModel(new MapModel(this))
+    , m_ranges(new RangesListModel(this))
 {
     setupPossibleStateTransitions();
 
     charactersLogic()->setMapModel(mapModel());
+
+    TEST_mSetRandomRangeOnMapTimer.setInterval(1500);
+    TEST_mSetRandomRangeOnMapTimer.setSingleShot(false);
+    connect(&TEST_mSetRandomRangeOnMapTimer, SIGNAL(timeout()), this, SLOT(setRandomRangeOnMap()));
+    TEST_mSetRandomRangeOnMapTimer.start();
 }
 
 GameplayFeature::~GameplayFeature()
@@ -40,6 +46,25 @@ void GameplayFeature::onAppStateChanged(const AppState appState)
     {
         tryChangeStateTo(GameplayState::Playing);
     }
+}
+
+void GameplayFeature::setRandomRangeOnMap()
+{
+    if (m_ranges->rowCount() >= 5)
+    {
+        m_ranges->removeAt(0);
+    }
+
+    int randomColumn = (qrand() % mapModel()->width());
+    int randomRow = (qrand() % mapModel()->height());
+    qreal randomRadius = ((qrand() % 25 + 5) / (qreal)10);
+
+    RangeModel* rangeModel = new RangeModel(this);
+    rangeModel->set_column(randomColumn);
+    rangeModel->set_row(randomRow);
+    rangeModel->set_radius(randomRadius);
+
+    m_ranges->add(rangeModel);
 }
 
 void GameplayFeature::setupPossibleStateTransitions()
