@@ -17,7 +17,7 @@ GameplayFeature::GameplayFeature(QObject *parent)
     setupInitialRanges();
 
     charactersLogic()->setMapModel(mapModel());
-    transmissionLogic()->init(charactersLogic(), mapModel(), objectiveLogic()->objectivesList());
+    transmissionLogic()->init(charactersLogic(), mapModel(), objectiveLogic()->objectives());
 
 //    TEST_mSetRandomRangeOnMapTimer.setInterval(1500);
 //    TEST_mSetRandomRangeOnMapTimer.setSingleShot(false);

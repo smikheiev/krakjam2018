@@ -4,6 +4,8 @@
 
 TransmissionLogic::TransmissionLogic(QObject* parent)
     : QObject(parent)
+    , mHQRangeModel(nullptr)
+    , mObjectivesList(nullptr)
 {
 }
 
@@ -12,7 +14,7 @@ void TransmissionLogic::setHQRange(RangeModel *rangeModel)
     mHQRangeModel = rangeModel;
 }
 
-void TransmissionLogic::init(CharactersLogic *charactersLogic, MapModel *mapModel, QList<ObjectiveModel*>* objectivesList)
+void TransmissionLogic::init(CharactersLogic *charactersLogic, MapModel *mapModel, ObjectivesListModel *objectivesList)
 {
     mObjectivesList = objectivesList;
 
@@ -60,7 +62,7 @@ void TransmissionLogic::checkTransmission()
     }
 
     mHQRangeModel->set_isTransmitting(isAnyTransmissionReached);
-    for (int i = 0; i < mObjectivesList->count(); ++i)
+    for (int i = 0; i < mObjectivesList->rowCount(); ++i)
     {
         ObjectiveModel* objectiveModel = mObjectivesList->at(i);
         bool isTransmitting = transmittingObjectives.contains(objectiveModel);
@@ -94,7 +96,7 @@ bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QLi
         }
     }
 
-    for (int i = 0; i < mObjectivesList->count(); ++i)
+    for (int i = 0; i < mObjectivesList->rowCount(); ++i)
     {
         ObjectiveModel* objectiveModel = mObjectivesList->at(i);
         int range = rootAntenaBoy->range()->radius() + objectiveModel->range()->radius();

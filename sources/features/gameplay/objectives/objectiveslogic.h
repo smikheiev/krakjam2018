@@ -4,20 +4,21 @@
 #include <QObject>
 #include <QTimer>
 
+#include "../../../macros.h"
 #include "../map/mapmodel.h"
-#include "../map/objectivemodel.h"
+#include "objectiveslistmodel.h"
 
 class ObjectivesLogic : public QObject
 {
     Q_OBJECT
+
+    AUTO_Q_PROPERTY_CONSTANT(ObjectivesListModel*, objectives)
 
 public:
     explicit ObjectivesLogic(MapModel* mapModel, QObject *parent = nullptr);
 
     void setNextRandomObjective(int excludePosX, int excludePosY);
     void clearObjective(ObjectiveModel* objective);
-
-    QList<ObjectiveModel*>* objectivesList();
 
 private:
     void connectObjective(ObjectiveModel* objective);
@@ -29,7 +30,6 @@ private slots:
 
 private:
     MapModel* mMapModel;
-    QList<ObjectiveModel*> mObjectivesList;
     QTimer mSetNextObjectiveTimer;
 
     int mLastDoneObjectivePosX = -1;

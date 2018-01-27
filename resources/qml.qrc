@@ -17,5 +17,6 @@
         <file>qml/scenes/gameplay/map/MapConstants.js</file>
         <file>qml/scenes/gameplay/range/Range.qml</file>
         <file>qml/scenes/gameplay/Esbek.qml</file>
+        <file>qml/scenes/gameplay/objective/Objective.qml</file>
     </qresource>
 </RCC>

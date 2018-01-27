@@ -1,5 +1,3 @@
-#include <QDebug>
-
 #include "objectivemodel.h"
 
 ObjectiveModel::ObjectiveModel(QObject* parent):
@@ -42,18 +40,15 @@ void ObjectiveModel::onTransmissionTimerTimeout()
 
 void ObjectiveModel::onTransmissionStarted()
 {
-    qDebug() << "started";
     mTransmissionTimer.start();
 }
 
 void ObjectiveModel::onTransmissionAborted()
 {
-    qDebug() << "aborted";
     mTransmissionTimer.stop();
 }
 
 void ObjectiveModel::onTransmissionFinished()
 {
-    qDebug() << "finished";
     set_isDone(true);
 }

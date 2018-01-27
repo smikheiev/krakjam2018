@@ -41,8 +41,6 @@ Item {
             imageSource = "green"
             break
         case TileType.Target.valueOf():
-            imageSource = "orange"
-            break
         case TileType.Wall.valueOf():
             imageSource = "blue"
             break

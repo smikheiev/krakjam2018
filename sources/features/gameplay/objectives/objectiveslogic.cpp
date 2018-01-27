@@ -2,6 +2,7 @@
 
 ObjectivesLogic::ObjectivesLogic(MapModel* mapModel, QObject *parent)
     : QObject(parent)
+    , m_objectives(new ObjectivesListModel(this))
     , mMapModel(mapModel)
 {
     mSetNextObjectiveTimer.setInterval(1000);
@@ -35,7 +36,7 @@ void ObjectivesLogic::setNextRandomObjective(int excludePosX, int excludePosY)
     ObjectiveModel* objective = new ObjectiveModel(this);
     objective->set_posX(objectiveTile->posX());
     objective->set_posY(objectiveTile->posY());
-    mObjectivesList.append(objective);
+    objectives()->add(objective);
 
     connectObjective(objective);
 }
@@ -43,12 +44,7 @@ void ObjectivesLogic::setNextRandomObjective(int excludePosX, int excludePosY)
 void ObjectivesLogic::clearObjective(ObjectiveModel *objective)
 {
     disconnectObjective(objective);
-    mObjectivesList.removeOne(objective);
-}
-
-QList<ObjectiveModel*> *ObjectivesLogic::objectivesList()
-{
-    return &mObjectivesList;
+    objectives()->remove(objective);
 }
 
 void ObjectivesLogic::connectObjective(ObjectiveModel *objective)
@@ -69,9 +65,9 @@ void ObjectivesLogic::onSetNextObjectiveTimeout()
 void ObjectivesLogic::onObjectiveIsDone()
 {
     ObjectiveModel* doneObjective = nullptr;
-    for (int i = 0; i < mObjectivesList.count(); ++i)
+    for (int i = 0; i < objectives()->rowCount(); ++i)
     {
-        ObjectiveModel* objective = mObjectivesList.at(i);
+        ObjectiveModel* objective = objectives()->at(i);
         if (objective->isDone())
         {
             doneObjective = objective;
@@ -85,7 +81,6 @@ void ObjectivesLogic::onObjectiveIsDone()
         mLastDoneObjectivePosY = doneObjective->posY();
 
         clearObjective(doneObjective);
-        delete doneObjective;
     }
     else
     {
