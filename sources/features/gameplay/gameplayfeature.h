@@ -3,11 +3,13 @@
 
 #include <QObject>
 #include <QMap>
+#include <QTimer>
 
 #include "../../macros.h"
 #include "gameplaystate.h"
 #include "../appState/appstate.h"
 #include "map/mapmodel.h"
+#include "range/rangeslistmodel.h"
 
 class GameplayFeature : public QObject
 {
@@ -15,6 +17,7 @@ class GameplayFeature : public QObject
 
     AUTO_Q_PROPERTY(GameplayState, currentGameplayState)
     AUTO_Q_PROPERTY(MapModel*, mapModel)
+    AUTO_Q_PROPERTY(RangesListModel*, ranges)
 
 public:
     explicit GameplayFeature(QObject *parent = nullptr);
@@ -25,6 +28,7 @@ public:
 
 public slots:
     void onAppStateChanged(const AppState appState);
+    void setRandomRangeOnMap();
 
 private:
     void setupPossibleStateTransitions();
@@ -32,6 +36,7 @@ private:
 
 private:
     QMap<GameplayState, QVector<GameplayState>*> mPossibleStateTransitions;
+    QTimer TEST_mSetRandomRangeOnMapTimer;
 };
 
 #endif // GAMEPLAYFEATURE_H

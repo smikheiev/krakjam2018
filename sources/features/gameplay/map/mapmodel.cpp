@@ -19,6 +19,12 @@ TileModel *MapModel::getTileByIndex(const int tileIndex)
     return tileModel;
 }
 
+TileModel *MapModel::getTileByposition(const int column, const int row)
+{
+    TileModel* tileModel = mTiles.at(column)->at(row);
+    return tileModel;
+}
+
 void MapModel::initTiles()
 {
     QVector<QVector<int>> tileTypes;
