@@ -5,7 +5,7 @@ import Enums 1.0
 BaseScene {
     id: loadingScene
 
-    property int loadingTimeMs: 2000
+    property int loadingTimeMs: 1500
     property int maxLoadingPoints: 3
 
     sceneAppState: AppState.Loading
