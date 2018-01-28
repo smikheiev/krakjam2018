@@ -7,6 +7,7 @@ RangeModel::RangeModel(QObject *parent)
     , m_posX(-1)
     , m_posY(-1)
     , m_isTransmitting(false)
+    , m_isInactive(false)
     , m_rangeColor("cyan")
 {
 }

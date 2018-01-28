@@ -32,7 +32,8 @@ public:
     void moveKeyPressed(int keyPressed);
     void moveKeyReleased(int keyReleased);
 
-    void makeInactiveForTime(int timeMs);
+    void makeInactiveForTime();
+    void backFromJail();
 
 private slots:
     void onPosChanged();

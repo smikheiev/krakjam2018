@@ -25,7 +25,10 @@ void FeaturesRoot::connectFeatures()
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveRemoved(ObjectiveModel*)), gameplay(), SLOT(onObjectiveRemoved(ObjectiveModel*)));
 
     connect(gameplay()->esbekLogic(), SIGNAL(esbekCatchAntenaBoy()), gameplay()->scoreLogic(), SLOT(onEsbekCatchAntenaBoy()));
+    connect(gameplay()->esbekLogic(), SIGNAL(esbekCatchAntenaBoy()), gameplay()->objectiveLogic(), SLOT(onEsbekCatchAntenaBoy()));
 
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), gameplay()->scoreLogic(), SLOT(onMissionCompleted()));
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), gameplay()->esbekLogic(), SLOT(onObjectiveCompleted()));
+
+    connect(gameplay()->objectiveLogic(), SIGNAL(jailOpend()), gameplay()->charactersLogic(), SLOT(onJailOpend()));
 }

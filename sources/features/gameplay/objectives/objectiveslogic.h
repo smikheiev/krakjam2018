@@ -19,14 +19,19 @@ public:
 
     void clearObjective(ObjectiveModel* objective);
     void startNextObjectiveTimeout();
+    void reset();
+
+public slots:
+    void onEsbekCatchAntenaBoy();
 
 private:
-    void setNextRandomObjective(int excludePosX, int excludePosY);
+    void setNextRandomObjective(int excludePosX, int excludePosY, ObjectiveModel::OBJ_TYPE objectiveType);
     void connectObjective(ObjectiveModel* objective);
     void disconnectObjective(ObjectiveModel* objective);
 
 signals:
     void objectiveCompleted();
+    void jailOpend();
 
 private slots:
     void onObjectiveIsDone();

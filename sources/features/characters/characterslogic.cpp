@@ -57,7 +57,9 @@ void CharactersLogic::moveKeyReleased(int keyReleased)
 
 void CharactersLogic::catchedByEsbek(AntenaBoyModel *boy)
 {
-    boy->makeInactiveForTime(2000);
+    boy->makeInactiveForTime();
+    boy->set_moveX(0);
+    boy->set_moveY(0);
     setBoyToStartPosition(boy);
 }
 
@@ -65,7 +67,18 @@ void CharactersLogic::restartPositionsAllAntenaBoys()
 {
     for (int i = 0; i < mAntenaBoyList.count(); ++i)
     {
-       setBoyToStartPosition(mAntenaBoyList.at(i));
+        setBoyToStartPosition(mAntenaBoyList.at(i));
+        mAntenaBoyList.at(i)->set_isInactive(false);
+        mAntenaBoyList.at(i)->range()->set_isInactive(false);
+    }
+}
+
+void CharactersLogic::onJailOpend()
+{
+    for (int i = 0; i < mAntenaBoyList.count(); ++i)
+    {
+       mAntenaBoyList.at(i)->set_isInactive(false);
+       mAntenaBoyList.at(i)->range()->set_isInactive(false);
     }
 }
 
@@ -85,6 +98,8 @@ void CharactersLogic::setBoyToStartPosition(AntenaBoyModel *boy)
 
 void CharactersLogic::move() {
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
+        if (antenaBoy->isInactive()) continue;
+
         if (antenaBoy->moveX() == 0 && antenaBoy->moveY() == 0) continue;
 
         float newX = antenaBoy->posX() + ANTENA_BOY_SPEED * antenaBoy->moveX();

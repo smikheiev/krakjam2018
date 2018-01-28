@@ -21,6 +21,8 @@ Item {
     x: posX
     y: posY
 
+    visible: !isInactive
+
     onMoveXChanged: {
         if (moveX != 0) {
             flipImage = moveX == 1

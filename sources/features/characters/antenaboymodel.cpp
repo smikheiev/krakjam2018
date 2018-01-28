@@ -42,10 +42,15 @@ void AntenaBoyModel::moveKeyReleased(int keyReleased)
     if (keyReleased == Qt::Key_D || keyReleased == Qt::Key_Right) set_moveX(0);
 }
 
-void AntenaBoyModel::makeInactiveForTime(int timeMs)
+void AntenaBoyModel::makeInactiveForTime()
 {
     set_isInactive(true);
-    makeInactiveTimer.start(timeMs);
+    range()->set_isInactive(true);
+}
+
+void AntenaBoyModel::backFromJail() {
+    set_isInactive(false);
+    range()->set_isInactive(false);
 
     set_moveX(0);
     set_moveY(0);
