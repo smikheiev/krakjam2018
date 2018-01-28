@@ -87,10 +87,13 @@ Item {
     function getRandomHouseImage() {
         var allHouses = [
             "qrc:/images/map/Domki_1DoPoprawki.png",
-            "qrc:/images/map/Domki_2DoPoprawki.png",
-            "" // dodac jakies inne obazki domkow
+            "qrc:/images/map/Domki_2DoPoprawki.png" // dodac jakies inne obazki domkow
         ]
+        var others = [
+             "qrc:/images/map/gruz.png",
+             "qrc:/images/map/beczki.png",
+             ""]
         var rand = Math.floor((Math.random() * allHouses.length))
-        return allHouses[rand]
+        return Math.random() < 0.7 ? allHouses[rand] : others[rand]
     }
 }

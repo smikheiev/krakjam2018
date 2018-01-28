@@ -23,18 +23,6 @@ Item {
         }
 
         source: getImageSource(boyId, isSelected)
-        visible: !isSelected
-    }
-
-    BrightnessContrast {
-        anchors {
-            fill: headImage
-        }
-        source: headImage
-        brightness: 0.7
-        contrast: 0.8
-        cached: true
-        visible: isSelected
     }
 
     SequentialAnimation {
@@ -48,6 +36,6 @@ Item {
     }
 
     function getImageSource(boyId) {
-        return "qrc:/images/ui/Glowa_" + boyId + "_niewybrana.png"
+        return "qrc:/images/ui/Glowa_" + boyId + "_" + (isSelected ? "wybrana" : "niewybrana") + ".png"
     }
 }

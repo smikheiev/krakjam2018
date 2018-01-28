@@ -30,12 +30,20 @@
         <file>images/map/AntenaBoy_2_0.png</file>
         <file>images/map/AntenaBoy_2_1.png</file>
         <file>images/map/AntenaBoy_2_2.png</file>
-        <file>images/map/SBK_probka1.png</file>
+        <file>images/map/SBK_1.png</file>
+        <file>images/map/SBK_2.png</file>
+        <file>images/map/SBK_3.png</file>
         <file>images/map/bg_popup.png</file>
         <file>images/ui/Glowa_0_niewybrana.png</file>
         <file>images/ui/Glowa_1_niewybrana.png</file>
         <file>images/ui/Glowa_2_niewybrana.png</file>
+        <file>images/ui/Glowa_0_wybrana.png</file>
+        <file>images/ui/Glowa_1_wybrana.png</file>
+        <file>images/ui/Glowa_2_wybrana.png</file>
         <file>images/ui/panelDolny.png</file>
+        <file>images/map/ramka.png</file>
+        <file>images/map/beczki.png</file>
+        <file>images/map/gruz.png</file>
         <file>images/map/ramka.png</file>
     </qresource>
 </RCC>
