@@ -94,7 +94,7 @@ void EsbekLogic::moveEsbek()
 void EsbekLogic::onObjectiveCompleted()
 {
     objectiveCompletedCnt++;
-    if (objectiveCompletedCnt % 4 == 3) {
+    if (objectiveCompletedCnt % 2 == 0) {
         addEsbekToRandomPosition();
         updateVariantList();
     }

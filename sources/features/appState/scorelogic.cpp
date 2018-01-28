@@ -2,7 +2,7 @@
 
 ScoreLogic::ScoreLogic(QObject* parent)
     : QObject(parent)
-    , m_MAX_LIFE_TIME(3 * 60 * 1000) // 3 * 60 * 1000 // 3min w milisec
+    , m_MAX_LIFE_TIME(90 * 1000) // 3 * 60 * 1000 // 3min w milisec
     , m_lifeTime(3 * 60 * 1000) //MAX_LIFE_TIME())
     , m_score(0)
     , m_missionsCompleted(0)
