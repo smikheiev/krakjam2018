@@ -5,7 +5,7 @@
 
 int AntenaBoyModel::DistanceCounter = 0;
 
-AntenaBoyModel::AntenaBoyModel(int id, int rangeRadius, int posX, int posY, QObject* parent)
+AntenaBoyModel::AntenaBoyModel(int id, int rangeRadius, int speed, int posX, int posY, QObject* parent)
     : QObject(parent)
     , m_id(id)
     , m_boySize(ANTENA_BOY_SIZE)
@@ -16,6 +16,7 @@ AntenaBoyModel::AntenaBoyModel(int id, int rangeRadius, int posX, int posY, QObj
     , m_isInactive(false)
     , m_isSelected(false)
     , m_range(new RangeModel(this))
+    , m_speed(speed)
 {
     range()->set_radius(rangeRadius);
 
