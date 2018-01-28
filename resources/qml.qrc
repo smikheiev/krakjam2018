@@ -26,5 +26,6 @@
         <file>qml/scenes/gameplay/UI/BottomPanel.qml</file>
         <file>qml/scenes/gameplay/UI/Head.qml</file>
         <file>qml/SoundsPlayer.qml</file>
+        <file>qml/scenes/gameplay/Clock.qml</file>
     </qresource>
 </RCC>

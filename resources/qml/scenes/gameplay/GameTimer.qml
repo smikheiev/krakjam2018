@@ -76,4 +76,11 @@ Item {
             }
         }
     }
+
+    Clock {
+        anchors {
+            left: parent.right
+            leftMargin: -50
+        }
+    }
 }
