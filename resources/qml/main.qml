@@ -20,4 +20,8 @@ Window {
             fill: parent
         }
     }
+
+    SoundsPlayer {
+        id: soundsPlayer
+    }
 }
