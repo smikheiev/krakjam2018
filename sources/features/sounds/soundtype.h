@@ -12,6 +12,7 @@ public:
         None = 0,
         AntennaBoyCatched,
         SignalTransmitting,
+        Koza,
     };
     Q_ENUM(Enum)
 };

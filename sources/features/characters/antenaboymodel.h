@@ -40,6 +40,12 @@ private slots:
 
 private:
     QTimer makeInactiveTimer;
+
+    int mLastPosX = 0;
+    int mLastPosY = 0;
+
+public:
+    static int DistanceCounter;
 };
 
 #endif // ANTENABOYMODEL_H

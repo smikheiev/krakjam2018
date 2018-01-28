@@ -1,4 +1,5 @@
 #include "featuresroot.h"
+#include "koza.h"
 
 FeaturesRoot::FeaturesRoot(QObject *parent)
     : QObject(parent)
@@ -13,6 +14,10 @@ void FeaturesRoot::createFeatures()
     m_exitApp = new ExitAppFeature(this);
     m_gameplay = new GameplayFeature(this);
     m_sounds = new SoundsFeature(this);
+
+    Koza* koza = new Koza(this);
+    Koza::theKoza = koza;
+    connect(koza, SIGNAL(showKoza()), this, SLOT(onShowKoza()));
 }
 
 void FeaturesRoot::connectFeatures()
@@ -32,4 +37,16 @@ void FeaturesRoot::connectFeatures()
 
     connect(gameplay()->hqRange(), SIGNAL(isTransmittingChanged(bool)), sounds(), SLOT(onIsSignalTransmittingChanged(bool)));
     connect(gameplay()->esbekLogic(), SIGNAL(esbekCatchAntenaBoy()), sounds(), SLOT(onAntennaBoyCatched()));
+}
+
+void FeaturesRoot::onShowKoza()
+{
+    QTimer::singleShot(300, this, SLOT(playKozaSound()));
+
+    emit showKoza();
+}
+
+void FeaturesRoot::playKozaSound()
+{
+    sounds()->playSound(SoundType::Koza, false);
 }

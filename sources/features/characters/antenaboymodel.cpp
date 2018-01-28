@@ -1,5 +1,9 @@
+#include <QDebug>
 #include "antenaboymodel.h"
 #include "../gameplay/constants.h"
+#include "../koza.h"
+
+int AntenaBoyModel::DistanceCounter = 0;
 
 AntenaBoyModel::AntenaBoyModel(int id, int rangeRadius, int posX, int posY, QObject* parent)
     : QObject(parent)
@@ -55,6 +59,17 @@ void AntenaBoyModel::onPosChanged()
 {
     range()->set_posX(posX() - boySize() / 2);
     range()->set_posY(posY() - boySize() / 2);
+
+    int xDist = qAbs(mLastPosX - posX());
+    int yDist = qAbs(mLastPosY - posY());
+    mLastPosX = posX();
+    mLastPosY = posY();
+    if (xDist > 20 || yDist > 20)
+    {
+        // A little hack, I know, why not :P
+        return;
+    }
+    Koza::AddAntenaBoysDistance(xDist, yDist);
 }
 
 void AntenaBoyModel::onMakeInactiveTimerTimeout()

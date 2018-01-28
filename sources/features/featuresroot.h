@@ -24,6 +24,14 @@ public:
 private:
     void createFeatures();
     void connectFeatures();
+
+
+private slots:
+    void onShowKoza();
+    void playKozaSound();
+
+signals:
+    void showKoza();
 };
 
 #endif // FEATURESROOT_H
