@@ -25,6 +25,11 @@ Item {
     }
 
     SoundEffect {
+        id: kozaSound
+        source: "qrc:/sounds/57794__reinsamba__1202-goat.wav"
+    }
+
+    SoundEffect {
         id: bgSound
         source: "qrc:/sounds/147938__setuniman__military-background-rhythm-0h-wl2k.wav"
         loops: SoundEffect.Infinite
@@ -72,6 +77,8 @@ Item {
             return transmittingSound
         case SoundType.ObjectiveWon:
             return objectiveWonSound
+        case SoundType.Koza:
+            return kozaSound
         }
     }
 
