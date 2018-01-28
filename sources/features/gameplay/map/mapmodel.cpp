@@ -10,7 +10,7 @@ MapModel::MapModel(QObject *parent)
     , m_height(10)
     , m_count(m_width * m_height)
 {
-    initTiles(3);
+    initTiles(1);
 
     set_height(mTiles.count());
     set_width(mTiles.at(0)->count());

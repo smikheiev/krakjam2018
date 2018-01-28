@@ -25,5 +25,6 @@
         <file>qml/scenes/gameplay/RoundLosePopup.qml</file>
         <file>qml/scenes/gameplay/UI/BottomPanel.qml</file>
         <file>qml/scenes/gameplay/UI/Head.qml</file>
+        <file>qml/SoundsPlayer.qml</file>
     </qresource>
 </RCC>

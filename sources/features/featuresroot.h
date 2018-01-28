@@ -7,6 +7,7 @@
 #include "appState/appstatefeature.h"
 #include "exitApp/exitappfeature.h"
 #include "gameplay/gameplayfeature.h"
+#include "sounds/soundsfeature.h"
 
 class FeaturesRoot : public QObject
 {
@@ -15,6 +16,7 @@ class FeaturesRoot : public QObject
     AUTO_Q_PROPERTY_CONSTANT(AppStateFeature*, appState)
     AUTO_Q_PROPERTY_CONSTANT(ExitAppFeature*, exitApp)
     AUTO_Q_PROPERTY_CONSTANT(GameplayFeature*, gameplay)
+    AUTO_Q_PROPERTY_CONSTANT(SoundsFeature*, sounds)
 
 public:
     explicit FeaturesRoot(QObject *parent = nullptr);

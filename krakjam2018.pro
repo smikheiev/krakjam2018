@@ -23,11 +23,13 @@ SOURCES += \
     sources/features/gameplay/map/objectivemodel.cpp \
     sources/features/gameplay/objectives/objectiveslogic.cpp \
     sources/features/gameplay/objectives/objectiveslistmodel.cpp \
-    sources/features/appState/scorelogic.cpp
+    sources/features/appState/scorelogic.cpp \
+    sources/features/sounds/soundsfeature.cpp
 
 RESOURCES += \
     resources/qml.qrc \
-    resources/images.qrc
+    resources/images.qrc \
+    resources/sounds.qrc
 
 HEADERS += \
     sources/spinacz.h \
@@ -54,4 +56,6 @@ HEADERS += \
     sources/features/gameplay/objectives/objectiveslogic.h \
     sources/features/gameplay/objectives/objectiveslistmodel.h \
     sources/utils.h \
-    sources/features/appState/scorelogic.h
+    sources/features/appState/scorelogic.h \
+    sources/features/sounds/soundsfeature.h \
+    sources/features/sounds/soundtype.h
