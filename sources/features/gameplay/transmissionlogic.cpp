@@ -82,7 +82,7 @@ void TransmissionLogic::checkTransmission()
 bool TransmissionLogic::isTransmissionReached(AntenaBoyModel* rootAntenaBoy, QList<AntenaBoyModel*>* alreadyCheckedBoys, QList<AntenaBoyModel*>* transmittingBoys, QList<ObjectiveModel*>* transmittingObjectives)
 {
     if (isRoundFailed()) {
-        return true;
+        return false;
     }
 
     bool result = false;
