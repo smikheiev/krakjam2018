@@ -47,7 +47,7 @@ Item {
             width: sourceSize.width
             height: sourceSize.height
 
-            source: "qrc:/images/ui/time.png"
+            source: "qrc:/images/ui/time_yellow.png"
             fillMode: Image.PreserveAspectCrop
         }
     }
