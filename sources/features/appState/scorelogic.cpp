@@ -21,6 +21,7 @@ void ScoreLogic::reset()
 void ScoreLogic::onEsbekCatchAntenaBoy()
 {
     set_score(score() - 30);
+    set_lifeTime(lifeTime() - 20 * 1000); // + 10s
 }
 
 void ScoreLogic::onMissionCompleted()

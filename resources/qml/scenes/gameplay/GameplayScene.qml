@@ -84,7 +84,6 @@ BaseScene {
         target: features.gameplay
 
         onObjectiveCompleted: {
-            roundWonPopup.visible = true
         }
 
         onRestartTimerNeeded: {
