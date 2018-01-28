@@ -17,11 +17,11 @@ class ObjectivesLogic : public QObject
 public:
     explicit ObjectivesLogic(MapModel* mapModel, QObject *parent = nullptr);
 
-    void setNextRandomObjective(int excludePosX, int excludePosY);
     void clearObjective(ObjectiveModel* objective);
     void startNextObjectiveTimeout();
 
 private:
+    void setNextRandomObjective(int excludePosX, int excludePosY);
     void connectObjective(ObjectiveModel* objective);
     void disconnectObjective(ObjectiveModel* objective);
 
@@ -29,7 +29,6 @@ signals:
     void objectiveCompleted();
 
 private slots:
-    void onSetNextObjectiveTimeout();
     void onObjectiveIsDone();
 
 private:
