@@ -14,6 +14,12 @@ Item {
     }
 
     SoundEffect {
+        id: jainOpenSound
+        source: "qrc:/sounds/siren.wav"
+//        source: "qrc:/sounds/jail_open.wav"
+    }
+
+    SoundEffect {
         id: transmittingSound
         source: "qrc:/sounds/transmitting.wav"
         volume: 0.6
@@ -79,6 +85,8 @@ Item {
             return objectiveWonSound
         case SoundType.Koza:
             return kozaSound
+        case SoundType.Wiezienie:
+            return jainOpenSound
         }
     }
 

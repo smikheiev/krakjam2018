@@ -37,6 +37,7 @@ void FeaturesRoot::connectFeatures()
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), gameplay()->esbekLogic(), SLOT(onObjectiveCompleted()));
 
     connect(gameplay()->objectiveLogic(), SIGNAL(jailOpend()), gameplay()->charactersLogic(), SLOT(onJailOpend()));
+    connect(gameplay()->objectiveLogic(), SIGNAL(jailOpend()), sounds(), SLOT(onJailOpened()));
 
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), sounds(), SLOT(onObjectiveCompleted()));
     connect(gameplay()->hqRange(), SIGNAL(isTransmittingChanged(bool)), sounds(), SLOT(onIsSignalTransmittingChanged(bool)));

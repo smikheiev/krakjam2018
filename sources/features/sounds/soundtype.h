@@ -13,6 +13,7 @@ public:
         AntennaBoyCatched,
         SignalTransmitting,
         ObjectiveWon,
+        Wiezienie,
         Koza,
     };
     Q_ENUM(Enum)
