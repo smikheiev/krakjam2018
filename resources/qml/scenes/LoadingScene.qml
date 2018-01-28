@@ -5,7 +5,7 @@ import Enums 1.0
 BaseScene {
     id: loadingScene
 
-    property int loadingTimeMs: 3000
+    property int loadingTimeMs: 5000
     property int maxLoadingPoints: 3
 
     sceneAppState: AppState.Loading
@@ -26,60 +26,41 @@ BaseScene {
         property string loadingPoints: ""
     }
 
-    Rectangle {
-        anchors {
-            fill: parent
-        }
-        color: "blue"
+    Image {
+        id: splashBg
 
-        ColorAnimation on color{
-            from: "blue"
-            to: "yellow"
-            duration: loadingTimeMs * 0.75
-            running: priv.isLoading
+        anchors.fill: parent
+
+        source: "qrc:/images/Splash_3.png"
+    }
+
+    Image {
+        id: splash1
+
+        width: parent.width
+        height: parent.height
+
+        source: "qrc:/images/Splash_2.png"
+
+        NumberAnimation on y {
+            from: 100;
+            to: 0;
+            duration: 1000
         }
     }
 
-    Text {
-        id: loadingText
-        anchors {
-            centerIn: parent
-        }
+    Image {
+        width: parent.width
+        height: parent.height
 
-        text: qsTr("Loading")
+        x: -parent.width
 
-        font {
-            family: fonts.trebuchet
-            pointSize: 44
-        }
-    }
+        source: "qrc:/images/Splash_1.png"
 
-    Text {
-        id: loadingTextPoints
-
-        anchors {
-            verticalCenter: loadingText.verticalCenter
-            left: loadingText.right
-        }
-
-        text: priv.loadingPoints
-
-        font: loadingText.font
-    }
-
-    Timer {
-        id: loadingPointsTimer
-
-        interval: 250
-        running: priv.isLoading
-        repeat: true
-
-        onTriggered: {
-            if (priv.loadingPoints.length === maxLoadingPoints) {
-                priv.loadingPoints = ""
-            } else {
-                priv.loadingPoints += "."
-            }
+        NumberAnimation on x {
+            to: 0;
+            duration: 1000;
+            running: splash1.y === 0
         }
     }
 
@@ -90,7 +71,7 @@ BaseScene {
         running: priv.isLoading
 
         onTriggered: {
-            features.appState.tryChangeStateTo(AppState.Menu)
+            features.appState.tryChangeStateTo(AppState.Gameplay)
         }
     }
 }

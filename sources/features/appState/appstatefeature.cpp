@@ -41,7 +41,7 @@ void AppStateFeature::onGameplayStateChanged(const GameplayState gameplayState)
 void AppStateFeature::setupPossibleStateTransitions()
 {
     mPossibleStateTransitions.insert(AppState::None, new QVector<AppState>{AppState::Loading, AppState::Gameplay});
-    mPossibleStateTransitions.insert(AppState::Loading, new QVector<AppState>{AppState::Menu});
+    mPossibleStateTransitions.insert(AppState::Loading, new QVector<AppState>{AppState::Menu, AppState::Gameplay});
     mPossibleStateTransitions.insert(AppState::Menu, new QVector<AppState>{AppState::Gameplay, AppState::Quit});
     mPossibleStateTransitions.insert(AppState::Gameplay, new QVector<AppState>{AppState::Menu});
 }
