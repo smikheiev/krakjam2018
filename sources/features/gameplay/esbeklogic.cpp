@@ -56,6 +56,8 @@ void EsbekLogic::tryToCatchAntenaBoyToJail()
                 mCharactersLogic->catchedByEsbek(boy);
 
                 emit esbekCatchAntenaBoy();
+
+                esbek->lastDirection = getOppositDirection(esbek->lastDirection);
             }
         }
     }
