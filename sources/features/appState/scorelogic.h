@@ -22,6 +22,7 @@ public:
 public slots:
     void onEsbekCatchAntenaBoy();
     void onMissionCompleted();
+    void onAllAntenaBoysAreInJail();
 };
 
 #endif // SCORELOGIC_H

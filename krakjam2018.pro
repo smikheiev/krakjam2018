@@ -1,5 +1,6 @@
 QT += quick
 CONFIG += c++11
+CONFIG+= static
 
 DEFINES += QT_DEPRECATED_WARNINGS
 

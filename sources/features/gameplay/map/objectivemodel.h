@@ -21,6 +21,12 @@ class ObjectiveModel : public QObject
 public:
     ObjectiveModel(QObject* parent);
 
+    enum OBJ_TYPE {
+        ORDER = 0, JAIL
+    };
+
+    AUTO_Q_PROPERTY(OBJ_TYPE, type)
+
 private slots:
     void onIsTransmittingChanged();
     void onTransmissionTimerTimeout();

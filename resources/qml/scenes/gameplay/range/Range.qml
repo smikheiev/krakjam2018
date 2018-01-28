@@ -7,6 +7,7 @@ Item {
 
     property QtObject model: null
     readonly property bool isTransmitting: model ? model.isTransmitting : false
+    readonly property bool isInactive: model ? model.isInactive : false
 
     QtObject {
         id: priv
@@ -22,7 +23,7 @@ Item {
     x: priv.posX
     y: priv.posY
 
-    visible: priv.hasRange
+    visible: !isInactive
 
     Repeater {
         id: rangeCirclesRepeater

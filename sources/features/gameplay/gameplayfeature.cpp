@@ -50,7 +50,7 @@ void GameplayFeature::newRoundStartNeeded()
 {
     charactersLogic()->restartPositionsAllAntenaBoys();
     esbekLogic()->resetEsbeks();
-    objectiveLogic()->startNextObjectiveTimeout();
+    objectiveLogic()->reset();
     transmissionLogic()->set_isRoundFailed(false);
     scoreLogic()->reset();
     emit restartTimerNeeded();
@@ -62,6 +62,7 @@ void GameplayFeature::restartRoundNeeded()
     esbekLogic()->resetEsbeks();
     transmissionLogic()->set_isRoundFailed(false);
     scoreLogic()->reset();
+    objectiveLogic()->reset();
     emit restartTimerNeeded();
 }
 

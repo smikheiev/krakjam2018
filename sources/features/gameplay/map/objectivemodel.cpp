@@ -8,6 +8,7 @@ ObjectiveModel::ObjectiveModel(QObject* parent):
     , m_posX(-1)
     , m_posY(-1)
     , m_isDone(false)
+    , m_type(ORDER)
 {
     range()->set_radius(OBJECTIVE_RANGE_RADIUS);
 

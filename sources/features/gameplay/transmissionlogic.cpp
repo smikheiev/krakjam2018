@@ -47,13 +47,35 @@ void TransmissionLogic::checkTransmission()
     for (int i = 0; i < mObjectivesList->rowCount(); ++i)
     {
         ObjectiveModel* objectiveModel = mObjectivesList->at(i);
-        bool isTransmitting = transmittingObjectives.contains(objectiveModel);
-        objectiveModel->range()->set_isTransmitting(isTransmitting);
+        if (objectiveModel->type() == ObjectiveModel::OBJ_TYPE::ORDER) {
+            bool isTransmitting = transmittingObjectives.contains(objectiveModel);
+            objectiveModel->range()->set_isTransmitting(isTransmitting);
+        }
     }
+
     for (AntenaBoyModel* antenaBoy : mAntenaBoyList)
     {
         bool isTransmitting = transmittingBoys.contains(antenaBoy);
         antenaBoy->range()->set_isTransmitting(isTransmitting);
+    }
+
+    // CHECK JAIL
+    for (int i = 0; i < mObjectivesList->rowCount(); ++i)
+    {
+        ObjectiveModel* objectiveModel = mObjectivesList->at(i);
+        if (objectiveModel->type() == ObjectiveModel::OBJ_TYPE::JAIL) {
+            bool isTouched = false;
+            for (AntenaBoyModel* antenaBoy : mAntenaBoyList) {
+                int range = antenaBoy->range()->radius() + objectiveModel->range()->radius();
+                qreal distanceValue = Utils::distance(antenaBoy->posX(), antenaBoy->posY(), objectiveModel->posX(), objectiveModel->posY());
+                if (range > distanceValue) {
+                    antenaBoy->range()->set_isTransmitting(true);
+                    objectiveModel->range()->set_isTransmitting(true);
+                    isTouched = true;
+                }
+            }
+            objectiveModel->range()->set_isTransmitting(isTouched);
+        }
     }
 }
 

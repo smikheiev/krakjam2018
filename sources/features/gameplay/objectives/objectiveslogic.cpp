@@ -9,7 +9,16 @@ ObjectivesLogic::ObjectivesLogic(MapModel* mapModel, QObject *parent)
 {
 }
 
-void ObjectivesLogic::setNextRandomObjective(int excludePosX, int excludePosY)
+void ObjectivesLogic::reset()
+{
+    while (objectives()->rowCount() > 0) {
+        objectives()->removeAt(0);
+    }
+
+    startNextObjectiveTimeout();
+}
+
+void ObjectivesLogic::setNextRandomObjective(int excludePosX, int excludePosY, ObjectiveModel::OBJ_TYPE objectiveType)
 {
     QVector<TileModel*> objectiveTiles;
     for (int i = 0; i < mMapModel->count(); i++)
@@ -31,6 +40,7 @@ void ObjectivesLogic::setNextRandomObjective(int excludePosX, int excludePosY)
     ObjectiveModel* objective = new ObjectiveModel(this);
     objective->set_posX(objectiveTile->posX() - TILE_SIZE / 2);
     objective->set_posY(objectiveTile->posY() - TILE_SIZE / 2);
+    objective->set_type(objectiveType);
     objectives()->add(objective);
 
     emit objectiveAdded(objective);
@@ -46,7 +56,14 @@ void ObjectivesLogic::clearObjective(ObjectiveModel *objective)
 
 void ObjectivesLogic::startNextObjectiveTimeout()
 {
-    setNextRandomObjective(mLastDoneObjectivePosX, mLastDoneObjectivePosY);
+    setNextRandomObjective(mLastDoneObjectivePosX, mLastDoneObjectivePosY, ObjectiveModel::OBJ_TYPE::ORDER);
+}
+
+void ObjectivesLogic::onEsbekCatchAntenaBoy()
+{
+    if (m_objectives->rowCount() == 1) { // TODO haczor
+        setNextRandomObjective(mLastDoneObjectivePosX, mLastDoneObjectivePosY, ObjectiveModel::OBJ_TYPE::JAIL);
+    }
 }
 
 void ObjectivesLogic::connectObjective(ObjectiveModel *objective)
@@ -85,7 +102,11 @@ void ObjectivesLogic::onObjectiveIsDone()
         mLastDoneObjectivePosY = -1;
     }
 
-    emit objectiveCompleted();
+    if (doneObjective->type() == ObjectiveModel::OBJ_TYPE::ORDER) {
+        emit objectiveCompleted();
 
-    startNextObjectiveTimeout();
+        startNextObjectiveTimeout();
+    } else { // OBJ_TYPE::JAIL
+        emit jailOpend();
+    }
 }

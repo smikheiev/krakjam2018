@@ -30,6 +30,9 @@ public:
     void catchedByEsbek(AntenaBoyModel* boy);
     void restartPositionsAllAntenaBoys();
 
+public slots:
+    void onJailOpend();
+
 private:
     int antenaBoySelected = -1;
 

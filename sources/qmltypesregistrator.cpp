@@ -5,6 +5,7 @@
 #include "features/gameplay/gameplaystate.h"
 #include "features/gameplay/map/tiletype.h"
 #include "features/gameplay/map/tilemodel.h"
+#include "features/gameplay/map/objectivemodel.h"
 #include "features/sounds/soundtype.h"
 
 void QmlTypesRegistrator::registerTypes()
@@ -17,6 +18,9 @@ void QmlTypesRegistrator::registerTypes()
 
     qmlRegisterUncreatableType<TileTypeEnumWrapper>("Enums", 1, 0, "TileType", "Cannot create TileType in QML");
     qRegisterMetaType<TileType>("TileType");
+
+    qmlRegisterUncreatableType<AppStateEnumWrapper>("Enums", 1, 0, "OBJ_TYPE", "Cannot create AppState in QML");
+    qRegisterMetaType<ObjectiveModel::OBJ_TYPE>("OBJ_TYPE");
 
     qmlRegisterUncreatableType<SoundTypeEnumWrapper>("Enums", 1, 0, "SoundType", "Cannot create SoundType in QML");
     qRegisterMetaType<SoundType>("SoundType");

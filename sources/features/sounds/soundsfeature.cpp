@@ -25,3 +25,8 @@ void SoundsFeature::onObjectiveCompleted()
 {
     playSound(SoundType::ObjectiveWon, false);
 }
+
+void SoundsFeature::onJailOpened()
+{
+    playSound(SoundType::Wiezienie, false);
+}

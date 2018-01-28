@@ -31,13 +31,19 @@ void FeaturesRoot::connectFeatures()
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveRemoved(ObjectiveModel*)), gameplay(), SLOT(onObjectiveRemoved(ObjectiveModel*)));
 
     connect(gameplay()->esbekLogic(), SIGNAL(esbekCatchAntenaBoy()), gameplay()->scoreLogic(), SLOT(onEsbekCatchAntenaBoy()));
+    connect(gameplay()->esbekLogic(), SIGNAL(esbekCatchAntenaBoy()), gameplay()->objectiveLogic(), SLOT(onEsbekCatchAntenaBoy()));
 
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), gameplay()->scoreLogic(), SLOT(onMissionCompleted()));
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), gameplay()->esbekLogic(), SLOT(onObjectiveCompleted()));
 
+    connect(gameplay()->objectiveLogic(), SIGNAL(jailOpend()), gameplay()->charactersLogic(), SLOT(onJailOpend()));
+    connect(gameplay()->objectiveLogic(), SIGNAL(jailOpend()), sounds(), SLOT(onJailOpened()));
+
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), sounds(), SLOT(onObjectiveCompleted()));
     connect(gameplay()->hqRange(), SIGNAL(isTransmittingChanged(bool)), sounds(), SLOT(onIsSignalTransmittingChanged(bool)));
     connect(gameplay()->esbekLogic(), SIGNAL(esbekCatchAntenaBoy()), sounds(), SLOT(onAntennaBoyCatched()));
+
+    connect(gameplay()->esbekLogic(), SIGNAL(allAntenaBoysAreInJail()), gameplay()->scoreLogic(), SLOT(onAllAntenaBoysAreInJail()));
 }
 
 void FeaturesRoot::onShowKoza()

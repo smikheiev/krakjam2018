@@ -8,6 +8,7 @@ Item {
 
     property QtObject model
 
+    property int type: model ? model.type : 0
     property bool isTransmissionMode: model ? model.range.isTransmitting : false
     property int transmissionTime: model ? model.transmissionTime : 0
     property double progressValue
@@ -83,7 +84,11 @@ Item {
     }
 
     function getIcon() {
-        var index = Math.floor(Math.random() * 3)
-        return "qrc:/images/map/objective_" + index + ".png"
+        if (type == 0) {
+            var index = Math.floor(Math.random() * 3)
+            return "qrc:/images/map/objective_" + index + ".png"
+        } else {
+            return "qrc:/images/map/wiezienie.png"
+        }
     }
 }
