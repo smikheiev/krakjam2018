@@ -22,6 +22,9 @@ public:
 
     Q_INVOKABLE void moveEsbek();
 
+signals:
+    void esbekCatchAntenaBoy();
+
 private:
     MapModel* mMapModel;
     CharactersLogic* mCharactersLogic;

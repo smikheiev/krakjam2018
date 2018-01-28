@@ -13,6 +13,7 @@
 #include "esbeklogic.h"
 #include "transmissionlogic.h"
 #include "objectives/objectiveslogic.h"
+#include "../appState/scorelogic.h"
 
 class GameplayFeature : public QObject
 {
@@ -25,7 +26,7 @@ class GameplayFeature : public QObject
     AUTO_Q_PROPERTY(EsbekLogic*, esbekLogic)
     AUTO_Q_PROPERTY(TransmissionLogic*, transmissionLogic)
     AUTO_Q_PROPERTY(ObjectivesLogic*, objectiveLogic)
-    AUTO_Q_PROPERTY(qint64, roundTime)
+    AUTO_Q_PROPERTY(ScoreLogic*, scoreLogic)
 
 public:
     explicit GameplayFeature(QObject *parent = nullptr);

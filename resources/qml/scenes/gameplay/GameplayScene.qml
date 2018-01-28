@@ -35,10 +35,6 @@ BaseScene {
             features.gameplay.roundFailed()
             roundLosePopup.visible = true
         }
-
-        Component.onCompleted: {
-            gameTimer.startTimer()
-        }
     }
 
     BottomPanel {
@@ -88,12 +84,11 @@ BaseScene {
         target: features.gameplay
 
         onObjectiveCompleted: {
-            gameTimer.pauseTimer()
             roundWonPopup.visible = true
         }
 
         onRestartTimerNeeded: {
-            gameTimer.startTimer()
+            gameTimer.isReady = true
         }
     }
 }

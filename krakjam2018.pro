@@ -22,7 +22,8 @@ SOURCES += \
     sources/features/gameplay/transmissionlogic.cpp \
     sources/features/gameplay/map/objectivemodel.cpp \
     sources/features/gameplay/objectives/objectiveslogic.cpp \
-    sources/features/gameplay/objectives/objectiveslistmodel.cpp
+    sources/features/gameplay/objectives/objectiveslistmodel.cpp \
+    sources/features/appState/scorelogic.cpp
 
 RESOURCES += \
     resources/qml.qrc \
@@ -52,4 +53,5 @@ HEADERS += \
     sources/features/gameplay/map/objectivemodel.h \
     sources/features/gameplay/objectives/objectiveslogic.h \
     sources/features/gameplay/objectives/objectiveslistmodel.h \
-    sources/utils.h
+    sources/utils.h \
+    sources/features/appState/scorelogic.h

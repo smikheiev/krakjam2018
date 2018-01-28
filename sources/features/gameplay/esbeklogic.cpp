@@ -41,6 +41,8 @@ void EsbekLogic::tryToCatchAntenaBoyToJail()
             if (distanse < esbek->killRadius())
             {
                 mCharactersLogic->catchedByEsbek(boy);
+
+                emit esbekCatchAntenaBoy();
             }
         }
     }

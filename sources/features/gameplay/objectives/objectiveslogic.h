@@ -34,7 +34,6 @@ private slots:
 
 private:
     MapModel* mMapModel;
-    QTimer mSetNextObjectiveTimer;
 
     int mLastDoneObjectivePosX = -1;
     int mLastDoneObjectivePosY = -1;

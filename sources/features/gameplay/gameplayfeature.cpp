@@ -12,7 +12,7 @@ GameplayFeature::GameplayFeature(QObject *parent)
     , m_esbekLogic(new EsbekLogic(mapModel(), charactersLogic(), this))
     , m_transmissionLogic(new TransmissionLogic(this))
     , m_objectiveLogic(new ObjectivesLogic(mapModel(), this))
-    , m_roundTime(ROUND_TIME_MS)
+    , m_scoreLogic(new ScoreLogic(this))
     , mHQRange(new RangeModel(this))
 {
     setupPossibleStateTransitions();
@@ -35,6 +35,10 @@ void GameplayFeature::tryChangeStateTo(const GameplayState newGameplayState)
     if (canChangeStateFromTo(m_currentGameplayState, newGameplayState))
     {
         set_currentGameplayState(newGameplayState);
+
+        if (newGameplayState == GameplayState::Playing) { // haczorex?
+            newRoundStartNeeded();
+        }
     }
     else
     {
@@ -47,6 +51,9 @@ void GameplayFeature::newRoundStartNeeded()
     charactersLogic()->restartPositionsAllAntenaBoys();
     objectiveLogic()->startNextObjectiveTimeout();
     transmissionLogic()->set_isRoundFailed(false);
+
+    scoreLogic()->reset();
+
     emit restartTimerNeeded();
 }
 
@@ -54,6 +61,7 @@ void GameplayFeature::restartRoundNeeded()
 {
     charactersLogic()->restartPositionsAllAntenaBoys();
     transmissionLogic()->set_isRoundFailed(false);
+    scoreLogic()->reset();
     emit restartTimerNeeded();
 }
 

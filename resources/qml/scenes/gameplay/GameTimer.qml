@@ -3,10 +3,13 @@ import QtQuick 2.10
 Rectangle {
     id: gameTimer
 
+    property QtObject scoreLogic: features.gameplay.scoreLogic
+
     property int borderSize: 2
-    property int roundTime: features.gameplay.roundTime
     property int progressBarWidth: width - 2 * borderSize
     property bool isPauseMode: false
+
+    property bool isReady: false
 
     signal roundFailed()
 
@@ -20,38 +23,51 @@ Rectangle {
 
         x: borderSize
         y: borderSize
-        width: 0
-        height: parent.height- 2 * borderSize
+        width: parent.width * (scoreLogic.lifeTime / scoreLogic.MAX_LIFE_TIME)
+        height: parent.height
 
         color: "#26FF00"
+    }
 
-        NumberAnimation {
-           id: progressAnimation
+    Text {
+        id: scoreText
 
-           target: progressBar
-           property: "width"
-           from: 0
-           to: progressBarWidth
-           duration: roundTime
-
-           onStopped: {
-               if (!isPauseMode) {
-                   console.log("onStopped called")
-                   roundFailed()
-               }
-           }
+        anchors {
+            left: parent.left
+            leftMargin: 30
+            top: parent.top
+            topMargin: 20
         }
+
+        text: "Score: " + scoreLogic.score
+        color: "red"
     }
 
-    function startTimer() {
-        progressAnimation.restart()
-        isPauseMode = false
+    Text {
+
+        anchors {
+            left: parent.left
+            leftMargin: 30
+            top: scoreText.bottom
+        }
+
+        text: "Misions Completed: " + scoreLogic.missionsCompleted
+        color: "red"
     }
 
-    function pauseTimer() {
-        if (progressAnimation.running) {
-            isPauseMode = true
-            progressAnimation.pause()
+    Timer {
+        id: lifeTimeTimer
+
+        interval: 15
+        repeat: true
+        running: isReady
+
+        onTriggered: {
+            if (scoreLogic.lifeTime > 0) {
+                scoreLogic.lifeTime -= interval
+            } else {
+                roundFailed()
+            }
         }
     }
 }

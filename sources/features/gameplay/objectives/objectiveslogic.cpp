@@ -7,11 +7,7 @@ ObjectivesLogic::ObjectivesLogic(MapModel* mapModel, QObject *parent)
     , m_objectives(new ObjectivesListModel(this))
     , mMapModel(mapModel)
 {
-    mSetNextObjectiveTimer.setInterval(1000);
-    mSetNextObjectiveTimer.setSingleShot(true);
 
-    connect(&mSetNextObjectiveTimer, SIGNAL(timeout()), this, SLOT(onSetNextObjectiveTimeout()));
-    mSetNextObjectiveTimer.start();
 }
 
 void ObjectivesLogic::setNextRandomObjective(int excludePosX, int excludePosY)
@@ -22,14 +18,6 @@ void ObjectivesLogic::setNextRandomObjective(int excludePosX, int excludePosY)
         TileModel* tile = mMapModel->getTileByIndex(i);
         if (tile->posX() == excludePosX && tile->posY() == excludePosY) continue;
         if (tile->tileType() == TileType::House_PossibleTarget) objectiveTiles.append(tile);
-    }
-
-    if (objectiveTiles.length() == 0)
-    {
-        mLastDoneObjectivePosX = -1;
-        mLastDoneObjectivePosY = -1;
-        mSetNextObjectiveTimer.start();
-        return;
     }
 
     int randomTileIndex = qrand() % objectiveTiles.length();
@@ -53,7 +41,7 @@ void ObjectivesLogic::clearObjective(ObjectiveModel *objective)
 
 void ObjectivesLogic::startNextObjectiveTimeout()
 {
-    mSetNextObjectiveTimer.start();
+    onSetNextObjectiveTimeout();
 }
 
 void ObjectivesLogic::connectObjective(ObjectiveModel *objective)
@@ -98,4 +86,6 @@ void ObjectivesLogic::onObjectiveIsDone()
     }
 
     emit objectiveCompleted();
+
+    onSetNextObjectiveTimeout(); // TODO addes new objective
 }
