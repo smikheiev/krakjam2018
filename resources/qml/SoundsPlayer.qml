@@ -15,7 +15,7 @@ Item {
 
     SoundEffect {
         id: transmittingSound
-        source: "qrc:/sounds/390180__debsound__military-communication-loop-37-short.wav"
+        source: "qrc:/sounds/transmitting.wav"
         volume: 0.6
     }
 
@@ -26,12 +26,12 @@ Item {
 
     SoundEffect {
         id: kozaSound
-        source: "qrc:/sounds/57794__reinsamba__1202-goat.wav"
+        source: "qrc:/sounds/goat.wav"
     }
 
     SoundEffect {
         id: bgSound
-        source: "qrc:/sounds/147938__setuniman__military-background-rhythm-0h-wl2k.wav"
+        source: "qrc:/sounds/bg.wav"
         loops: SoundEffect.Infinite
         volume: 0
 
