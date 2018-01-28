@@ -39,31 +39,10 @@ BaseScene {
         }
     }
 
-    Text {
-        id: scoreText
+    ScoreBoard {
+        id: scoreBoard
 
-        anchors {
-            left: parent.left
-            leftMargin: 30
-            top: parent.top
-            topMargin: 20
-        }
-
-        text: "Score: " + features.gameplay.scoreLogic.score
-        color: "red"
-    }
-
-    Text {
-        id: missionText
-
-        anchors {
-            left: parent.left
-            leftMargin: 30
-            top: scoreText.bottom
-        }
-
-        text: "Misions Completed: " + features.gameplay.scoreLogic.missionsCompleted
-        color: "red"
+        rotation: -20
     }
 
     BottomPanel {
