@@ -6,6 +6,9 @@ Image {
     width: sourceSize.width
     height: sourceSize.height
 
+    property int timeToEnd: features.gameplay.scoreLogic.lifeTime
+    property bool isFinishTime: timeToEnd < 10000
+
     source: "qrc:/images/ui/clock_bg.png"
 
     Image {
@@ -24,7 +27,7 @@ Image {
     SequentialAnimation {
         id: bounceAnimation
 
-        running: parent.visible
+        running: parent.visible && !isFinishTime
 
         loops: Animation.Infinite
 
@@ -32,5 +35,18 @@ Image {
         PauseAnimation { duration:  200 }
         NumberAnimation { target: clock; property: "scale"; from: 1.15; to: 1.0; duration: 400 }
         PauseAnimation { duration:  200 }
+    }
+
+    SequentialAnimation {
+        id: bounceAnimationFaster
+
+        running: parent.visible && isFinishTime
+
+        loops: Animation.Infinite
+
+        NumberAnimation { target: clock; property: "scale"; from: 1.0; to: 1.2; duration: 200 }
+        PauseAnimation { duration:  100 }
+        NumberAnimation { target: clock; property: "scale"; from: 1.2; to: 1.0; duration: 200 }
+        PauseAnimation { duration:  100 }
     }
 }
