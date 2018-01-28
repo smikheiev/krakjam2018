@@ -6,6 +6,7 @@
         <file>images/map/Domki_2DoPoprawki.png</file>
         <file>images/map/HeadQuaters.png</file>
         <file>images/map/tlo_f_1.png</file>
+        <file>images/map/tlo_zielone.png</file>
         <file>images/map/Droga_3x_Dol.png</file>
         <file>images/map/Droga_3x_Gorna.png</file>
         <file>images/map/Droga_3x_Lewa.png</file>
@@ -41,6 +42,7 @@
         <file>images/ui/Glowa_1_wybrana.png</file>
         <file>images/ui/Glowa_2_wybrana.png</file>
         <file>images/ui/panelDolny.png</file>
+        <file>images/ui/panelDolny_zielony.png</file>
         <file>images/ui/time_frame.png</file>
         <file>images/ui/time.png</file>
         <file>images/ui/clock_bg.png</file>
@@ -48,6 +50,7 @@
         <file>images/map/beczki.png</file>
         <file>images/map/gruz.png</file>
         <file>images/map/ramka.png</file>
+        <file>images/map/ramka_zielona.png</file>
         <file>images/Splash_1.png</file>
         <file>images/Splash_2.png</file>
         <file>images/Splash_3.png</file>

@@ -13,7 +13,7 @@ Item {
             bottom: parent.bottom
         }
 
-        source: "qrc:/images/ui/panelDolny.png"
+        source: "qrc:/images/ui/panelDolny_zielony.png"
     }
 
     Row {

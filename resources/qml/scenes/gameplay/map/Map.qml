@@ -25,7 +25,7 @@ Item {
             centerIn: parent
         }
 
-        source: "qrc:/images/map/tlo_f_1.png"
+        source: "qrc:/images/map/tlo_zielone.png"
     }
 
     Grid {
@@ -135,6 +135,6 @@ Item {
             centerIn: parent
         }
 
-        source: "qrc:/images/map/ramka.png"
+        source: "qrc:/images/map/ramka_zielona.png"
     }
 }
