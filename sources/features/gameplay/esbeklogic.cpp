@@ -17,18 +17,16 @@ void EsbekLogic::resetEsbeks()
 }
 
 void EsbekLogic::createEsbeks() {
-    QVector<QPoint> startPositions
+    for (int i = 0; i < 2; ++i)
     {
-        QPoint(1, 3),
-        QPoint(11, 2)
-    };
+        addEsbekToRandomPosition();
+    }
 
-    addEsbek(startPositions.at(0));
-    addEsbek(startPositions.at(1));
     updateVariantList();
 }
 
-void EsbekLogic::addEsbek(QPoint startPoint) {
+void EsbekLogic::addEsbekToRandomPosition() {
+    QPoint startPoint = mMapModel->getRandomEsbekStartPosition();
     EsbekModel* esbek = new EsbekModel(mEsbekModelsList.size(), this);
     setEsbekToStartPosition(esbek, startPoint.x(), startPoint.y());
     esbek->set_moveX(1);
@@ -84,7 +82,7 @@ void EsbekLogic::onObjectiveCompleted()
 {
     objectiveCompletedCnt++;
     if (objectiveCompletedCnt % 4 == 3) {
-        addEsbek(QPoint(1, 3));
+        addEsbekToRandomPosition();
         updateVariantList();
     }
 }

@@ -39,7 +39,7 @@ private:
     int objectiveCompletedCnt = 0;
 
     void createEsbeks();
-    void addEsbek(QPoint startPoint);
+    void addEsbekToRandomPosition();
     void updateVariantList();
 
     void tryToCatchAntenaBoyToJail();

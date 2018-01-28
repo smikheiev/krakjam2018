@@ -10,7 +10,10 @@ MapModel::MapModel(QObject *parent)
     , m_height(10)
     , m_count(m_width * m_height)
 {
-    initTiles();
+    initTiles(2);
+
+    set_height(mTiles.count());
+    set_width(mTiles.at(0)->count());
 }
 
 TileModel *MapModel::getTileByIndex(const int tileIndex)
@@ -60,19 +63,44 @@ QPoint MapModel::getHQPosition()
     return QPoint(0, 0);
 }
 
-void MapModel::initTiles()
+QPoint MapModel::getRandomEsbekStartPosition()
+{
+    QVector<QPoint> possibleStartPositions;
+    QPoint hqPosition = getHQPosition();
+    for (int i = 0; i < width(); ++i)
+    {
+        for (int j = 0; j < height(); ++j)
+        {
+            bool isNearHQx = qAbs(hqPosition.x() - i) <= 1;
+            bool isNearHQy = qAbs(hqPosition.y() - j) <= 1;
+
+            if (isNearHQx || isNearHQy) continue;
+
+            TileModel* tile = mTiles.at(j)->at(i);
+            if (TileTypeEnumWrapper::isStreet(tile->tileType()))
+            {
+                possibleStartPositions.append(QPoint(i, j));
+            }
+        }
+    }
+    int randIndex = qrand() % possibleStartPositions.count();
+    return possibleStartPositions.at(randIndex);
+}
+
+void MapModel::initTiles(int mapNumber)
 {
     QVector<QVector<int>> tileTypes;
-    tileTypes.append(QVector<int>{200, 200, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 200, 200});
-    tileTypes.append(QVector<int>{200, 11, 11, 11, 11, 11, 11, 32, 42, 42, 42, 34, 11, 11, 200});
-    tileTypes.append(QVector<int>{11, 11, 11, 11, 32, 42, 42, 24, 15, 11, 15, 41, 11, 11, 11});
-    tileTypes.append(QVector<int>{11, 32, 42, 42, 24, 11, 15, 31, 42, 22, 11, 41, 11, 11, 11});
-    tileTypes.append(QVector<int>{11, 41, 15, 11, 41, 11, 11, 11, 11, 41, 11, 41, 15, 11, 11});
-    tileTypes.append(QVector<int>{11, 41, 11, 32, 21, 42, 42, 10, 42, 21, 42, 21, 42, 34, 11});
-    tileTypes.append(QVector<int>{11, 31, 42, 24, 11, 11, 11, 41, 11, 11, 11, 11, 11, 41, 11});
-    tileTypes.append(QVector<int>{11, 11, 11, 31, 42, 34, 11, 41, 11, 11, 11, 11, 11, 41, 11});
-    tileTypes.append(QVector<int>{200, 11, 11, 11, 11, 31, 42, 21, 42, 42, 42, 42, 42, 33, 11});
-    tileTypes.append(QVector<int>{200, 200, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 200});
+    switch (mapNumber) {
+    case 2:
+        tileTypes = getTilesForMap2();
+        break;
+    case 3:
+        tileTypes = getTilesForMap3();
+        break;
+    default:
+        tileTypes = getTilesForMap1();
+        break;
+    }
 
     for (int i = 0; i < height(); ++i)
     {
@@ -104,4 +132,52 @@ int MapModel::getColumnByIndex(int index) const
 int MapModel::getRowByIndex(int index) const
 {
     return (int)(index / width());
+}
+
+QVector<QVector<int> > MapModel::getTilesForMap1()
+{
+    QVector<QVector<int>> tileTypes;
+    tileTypes.append(QVector<int>{90, 90, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 90, 90});
+    tileTypes.append(QVector<int>{90, 11, 11, 11, 11, 11, 11, 32, 42, 42, 42, 34, 11, 11, 90});
+    tileTypes.append(QVector<int>{11, 11, 11, 11, 32, 42, 42, 24, 15, 11, 15, 41, 11, 11, 11});
+    tileTypes.append(QVector<int>{11, 32, 42, 42, 24, 11, 15, 31, 42, 22, 11, 41, 11, 11, 11});
+    tileTypes.append(QVector<int>{11, 41, 15, 11, 41, 11, 11, 11, 11, 41, 11, 41, 15, 11, 11});
+    tileTypes.append(QVector<int>{11, 41, 11, 32, 21, 42, 42, 10, 42, 21, 42, 21, 42, 34, 11});
+    tileTypes.append(QVector<int>{11, 31, 42, 24, 11, 11, 11, 41, 11, 11, 11, 11, 11, 41, 11});
+    tileTypes.append(QVector<int>{11, 11, 11, 31, 42, 34, 11, 41, 11, 11, 11, 11, 11, 41, 11});
+    tileTypes.append(QVector<int>{90, 11, 11, 11, 11, 31, 42, 21, 42, 42, 42, 42, 42, 33, 11});
+    tileTypes.append(QVector<int>{90, 90, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 90});
+    return tileTypes;
+}
+
+QVector<QVector<int> > MapModel::getTilesForMap2()
+{
+    QVector<QVector<int>> tileTypes;
+    tileTypes.append(QVector<int>{90, 90, 11, 11, 11, 11, 11, 42, 11, 11, 11, 11, 11, 90, 90});
+    tileTypes.append(QVector<int>{90, 11, 15, 11, 11, 41, 42, 32, 42, 42, 42, 34, 42, 11, 90});
+    tileTypes.append(QVector<int>{11, 42, 42, 15, 32, 42, 15, 42, 11, 42, 15, 41, 15, 42, 11});
+    tileTypes.append(QVector<int>{11, 11, 42, 42, 24, 11, 42, 42, 42, 11, 11, 41, 42, 42, 11});
+    tileTypes.append(QVector<int>{11, 41, 42, 11, 41, 33, 11, 11, 11, 41, 11, 41, 15, 42, 11});
+    tileTypes.append(QVector<int>{11, 41, 15, 24, 15, 42, 42, 10, 42, 21, 42, 21, 42, 34, 11});
+    tileTypes.append(QVector<int>{11, 41, 11, 24, 11, 11, 31, 41, 33, 11, 42, 11, 11, 41, 11});
+    tileTypes.append(QVector<int>{11, 31, 41, 31, 42, 34, 11, 41, 11, 42, 42, 15, 42, 41, 11});
+    tileTypes.append(QVector<int>{90, 11, 15, 31, 11, 31, 42, 21, 42, 42, 15, 42, 42, 11, 11});
+    tileTypes.append(QVector<int>{90, 90, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 90});
+    return tileTypes;
+}
+
+QVector<QVector<int> > MapModel::getTilesForMap3()
+{
+    QVector<QVector<int>> tileTypes;
+    tileTypes.append(QVector<int>{90, 90, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 90, 90});
+    tileTypes.append(QVector<int>{90, 11, 11, 11, 11, 11, 11, 32, 42, 42, 42, 34, 11, 11, 90});
+    tileTypes.append(QVector<int>{11, 11, 11, 11, 32, 42, 42, 24, 15, 11, 15, 41, 11, 11, 11});
+    tileTypes.append(QVector<int>{11, 32, 42, 42, 24, 11, 11, 31, 42, 22, 11, 41, 11, 11, 11});
+    tileTypes.append(QVector<int>{11, 41, 15, 11, 41, 11, 11, 11, 11, 41, 11, 41, 15, 11, 11});
+    tileTypes.append(QVector<int>{11, 41, 11, 32, 21, 42, 11, 10, 11, 21, 42, 21, 42, 34, 11});
+    tileTypes.append(QVector<int>{11, 31, 42, 24, 11, 11, 11, 41, 11, 11, 11, 11, 11, 41, 11});
+    tileTypes.append(QVector<int>{11, 11, 11, 31, 42, 34, 11, 41, 11, 11, 11, 11, 11, 41, 11});
+    tileTypes.append(QVector<int>{90, 11, 11, 11, 11, 31, 42, 21, 42, 42, 42, 42, 42, 33, 11});
+    tileTypes.append(QVector<int>{90, 90, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 90});
+    return tileTypes;
 }

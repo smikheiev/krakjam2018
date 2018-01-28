@@ -24,7 +24,7 @@ public:
         StreetCornerRightTop = 34,
         StreetVertical = 41,
         StreetHorizontal = 42,
-        Wall = 200,
+        Wall = 90,
     };
     Q_ENUM(Enum)
 

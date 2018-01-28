@@ -29,11 +29,16 @@ public:
     bool tryToMove(int posX, int posY, int boySize);
 
     QPoint getHQPosition();
+    QPoint getRandomEsbekStartPosition();
 
 private:
-    void initTiles();
+    void initTiles(int mapNumber);
     int getColumnByIndex(int index) const;
     int getRowByIndex(int index) const;
+
+    QVector<QVector<int>> getTilesForMap1();
+    QVector<QVector<int>> getTilesForMap2();
+    QVector<QVector<int>> getTilesForMap3();
 
 private:
     QVector<QVector<TileModel*>*> mTiles;
