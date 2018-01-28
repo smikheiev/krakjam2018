@@ -49,17 +49,17 @@ void GameplayFeature::tryChangeStateTo(const GameplayState newGameplayState)
 void GameplayFeature::newRoundStartNeeded()
 {
     charactersLogic()->restartPositionsAllAntenaBoys();
+    esbekLogic()->resetEsbeks();
     objectiveLogic()->startNextObjectiveTimeout();
     transmissionLogic()->set_isRoundFailed(false);
-
     scoreLogic()->reset();
-
     emit restartTimerNeeded();
 }
 
 void GameplayFeature::restartRoundNeeded()
 {
     charactersLogic()->restartPositionsAllAntenaBoys();
+    esbekLogic()->resetEsbeks();
     transmissionLogic()->set_isRoundFailed(false);
     scoreLogic()->reset();
     emit restartTimerNeeded();

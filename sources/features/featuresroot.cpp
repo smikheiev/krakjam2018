@@ -27,4 +27,5 @@ void FeaturesRoot::connectFeatures()
     connect(gameplay()->esbekLogic(), SIGNAL(esbekCatchAntenaBoy()), gameplay()->scoreLogic(), SLOT(onEsbekCatchAntenaBoy()));
 
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), gameplay()->scoreLogic(), SLOT(onMissionCompleted()));
+    connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), gameplay()->esbekLogic(), SLOT(onObjectiveCompleted()));
 }

@@ -22,6 +22,11 @@ public:
 
     Q_INVOKABLE void moveEsbek();
 
+    void resetEsbeks();
+
+public slots:
+    void onObjectiveCompleted();
+
 signals:
     void esbekCatchAntenaBoy();
 
@@ -30,6 +35,12 @@ private:
     CharactersLogic* mCharactersLogic;
 
     QList<EsbekModel*> mEsbekModelsList;
+
+    int objectiveCompletedCnt = 0;
+
+    void createEsbeks();
+    void addEsbek(QPoint startPoint);
+    void updateVariantList();
 
     void tryToCatchAntenaBoyToJail();
     void setEsbekToStartPosition(EsbekModel *esbek, int startX, int startY);

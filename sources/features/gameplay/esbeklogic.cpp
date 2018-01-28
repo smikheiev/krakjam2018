@@ -7,20 +7,35 @@ EsbekLogic::EsbekLogic(MapModel* mapModel, CharactersLogic* charactersLogic, QOb
     , mMapModel(mapModel)
     , mCharactersLogic(charactersLogic)
 {
+    createEsbeks();
+}
+
+void EsbekLogic::resetEsbeks()
+{
+    mEsbekModelsList.clear();
+    createEsbeks();
+}
+
+void EsbekLogic::createEsbeks() {
     QVector<QPoint> startPositions
     {
         QPoint(1, 3),
         QPoint(11, 2)
     };
-    for (int i = 0; i < 2; ++i)
-    {
-        EsbekModel* esbek = new EsbekModel(i, this);
-        QPoint startPosition = startPositions.at(i);
-        setEsbekToStartPosition(esbek, startPosition.x(), startPosition.y());
-        esbek->set_moveX(1);
-        mEsbekModelsList.append(esbek);
-    }
 
+    addEsbek(startPositions.at(0));
+    addEsbek(startPositions.at(1));
+    updateVariantList();
+}
+
+void EsbekLogic::addEsbek(QPoint startPoint) {
+    EsbekModel* esbek = new EsbekModel(mEsbekModelsList.size(), this);
+    setEsbekToStartPosition(esbek, startPoint.x(), startPoint.y());
+    esbek->set_moveX(1);
+    mEsbekModelsList.append(esbek);
+}
+
+void EsbekLogic::updateVariantList() {
     QVariantList vl;
     for (int i = 0; i < mEsbekModelsList.count(); ++i)
     {
@@ -62,6 +77,15 @@ void EsbekLogic::moveEsbek()
 {
     for (EsbekModel* esbek : mEsbekModelsList) {
         moveEsbek(esbek);
+    }
+}
+
+void EsbekLogic::onObjectiveCompleted()
+{
+    objectiveCompletedCnt++;
+    if (objectiveCompletedCnt % 4 == 3) {
+        addEsbek(QPoint(1, 3));
+        updateVariantList();
     }
 }
 
