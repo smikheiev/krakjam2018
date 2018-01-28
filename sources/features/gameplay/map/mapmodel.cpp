@@ -10,7 +10,7 @@ MapModel::MapModel(QObject *parent)
     , m_height(10)
     , m_count(m_width * m_height)
 {
-    initTiles(2);
+    initTiles(3);
 
     set_height(mTiles.count());
     set_width(mTiles.at(0)->count());
@@ -169,15 +169,15 @@ QVector<QVector<int> > MapModel::getTilesForMap2()
 QVector<QVector<int> > MapModel::getTilesForMap3()
 {
     QVector<QVector<int>> tileTypes;
+    tileTypes.append(QVector<int>{90, 90, 11, 31, 11, 11, 11, 11, 11, 11, 11, 41, 11, 90, 90});
+    tileTypes.append(QVector<int>{90, 15, 42, 31, 42, 11, 11, 11, 11, 11, 42, 41, 42, 15, 90});
+    tileTypes.append(QVector<int>{11, 11, 42, 11, 42, 11, 42, 42, 42, 11, 42, 11, 42, 11, 11});
+    tileTypes.append(QVector<int>{11, 11, 42, 11, 42, 11, 42, 11, 42, 11, 42, 11, 42, 11, 11});
+    tileTypes.append(QVector<int>{11, 11, 42, 11, 42, 11, 42, 10, 42, 11, 42, 11, 42, 11, 11});
+    tileTypes.append(QVector<int>{11, 11, 42, 11, 42, 11, 42, 42, 42, 11, 42, 11, 42, 11, 11});
+    tileTypes.append(QVector<int>{11, 11, 42, 11, 42, 11, 11, 41, 11, 11, 42, 11, 42, 11, 11});
+    tileTypes.append(QVector<int>{11, 11, 42, 31, 42, 42, 42, 42, 42, 42, 42, 31, 42, 11, 11});
+    tileTypes.append(QVector<int>{90, 15, 11, 11, 11, 41, 11, 11, 11, 41, 11, 11, 11, 15, 90});
     tileTypes.append(QVector<int>{90, 90, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 90, 90});
-    tileTypes.append(QVector<int>{90, 11, 11, 11, 11, 11, 11, 32, 42, 42, 42, 34, 11, 11, 90});
-    tileTypes.append(QVector<int>{11, 11, 11, 11, 32, 42, 42, 24, 15, 11, 15, 41, 11, 11, 11});
-    tileTypes.append(QVector<int>{11, 32, 42, 42, 24, 11, 11, 31, 42, 22, 11, 41, 11, 11, 11});
-    tileTypes.append(QVector<int>{11, 41, 15, 11, 41, 11, 11, 11, 11, 41, 11, 41, 15, 11, 11});
-    tileTypes.append(QVector<int>{11, 41, 11, 32, 21, 42, 11, 10, 11, 21, 42, 21, 42, 34, 11});
-    tileTypes.append(QVector<int>{11, 31, 42, 24, 11, 11, 11, 41, 11, 11, 11, 11, 11, 41, 11});
-    tileTypes.append(QVector<int>{11, 11, 11, 31, 42, 34, 11, 41, 11, 11, 11, 11, 11, 41, 11});
-    tileTypes.append(QVector<int>{90, 11, 11, 11, 11, 31, 42, 21, 42, 42, 42, 42, 42, 33, 11});
-    tileTypes.append(QVector<int>{90, 90, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 90});
     return tileTypes;
 }

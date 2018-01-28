@@ -1,4 +1,5 @@
 #include "esbekmodel.h"
+#include "constants.h"
 
 EsbekModel::EsbekModel(int id, QObject* parent)
     : QObject(parent)
@@ -7,7 +8,7 @@ EsbekModel::EsbekModel(int id, QObject* parent)
     , m_posY(0)
     , m_moveX(0)
     , m_moveY(0)
-    , m_killRadius(60)
-    , m_seenRadius(100)
+    , m_killRadius(ESBEK_KILL_RADIUS)
+    , m_seenRadius(140)
 {
 }
