@@ -5,7 +5,7 @@ import Enums 1.0
 BaseScene {
     id: loadingScene
 
-    property int loadingTimeMs: 0//5000
+    property int loadingTimeMs: 1500
     property int maxLoadingPoints: 3
 
     sceneAppState: AppState.Loading
@@ -26,6 +26,12 @@ BaseScene {
         property string loadingPoints: ""
     }
 
+    NumberAnimation on scale {
+        from: 1.5;
+        to: 1;
+        duration: 500
+    }
+
     Image {
         id: splashBg
 
@@ -41,26 +47,36 @@ BaseScene {
         height: parent.height
 
         source: "qrc:/images/Splash_2.png"
+    }
 
-        NumberAnimation on y {
-            from: 100;
+    Image {
+        id: image11
+
+        height: parent.height
+        fillMode: Image.PreserveAspectFit
+
+        x: 0 - 150
+
+        source: "qrc:/images/Splash_1_1.png"
+
+        NumberAnimation on x {
             to: 0;
-            duration: 1000
+            duration: 500;
         }
     }
 
     Image {
-        width: parent.width
+        id: image12
+
         height: parent.height
+        fillMode: Image.PreserveAspectFit
 
-        x: -parent.width
-
-        source: "qrc:/images/Splash_1.png"
+        x: parent.width - image12.width + 200
+        source: "qrc:/images/Splash_1_2.png"
 
         NumberAnimation on x {
-            to: 0;
-            duration: 1000;
-            running: splash1.y === 0
+            to: parent.width - image12.width;
+            duration: 500;
         }
     }
 
@@ -71,7 +87,7 @@ BaseScene {
         running: priv.isLoading
 
         onTriggered: {
-            features.appState.tryChangeStateTo(AppState.Gameplay)
+            features.appState.tryChangeStateTo(AppState.Menu)
         }
     }
 }

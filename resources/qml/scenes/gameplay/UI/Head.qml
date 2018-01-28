@@ -15,6 +15,12 @@ Item {
 
     scale: isSelected ? 0.85 : 0.75
 
+    onIsInactiveChanged: {
+        if (!isInactive) {
+            opacity = 1
+        }
+    }
+
     Image {
         id: headImage
 
