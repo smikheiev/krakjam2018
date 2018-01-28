@@ -113,6 +113,6 @@ Item {
 
     Component.onCompleted: {
         bgSound.play()
-        bgSound.volume = 0.1
+        bgSound.volume = 0.4
     }
 }
