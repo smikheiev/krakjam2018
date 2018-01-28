@@ -30,3 +30,8 @@ void ScoreLogic::onMissionCompleted()
     set_missionsCompleted(missionsCompleted() + 1);
     set_lifeTime(lifeTime() + 10 * 1000); // + 10s
 }
+
+void ScoreLogic::onAllAntenaBoysAreInJail()
+{
+    set_lifeTime(-1);
+}

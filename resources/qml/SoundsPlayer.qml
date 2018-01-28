@@ -31,11 +31,11 @@ Item {
     Connections {
         target: features.sounds
         onPlaySound: {
-            console.log("play sound: " + sound + "; " + looped)
+//            console.log("play sound: " + sound + "; " + looped)
             tryPlaySound(sound, looped)
         }
         onStopSound: {
-            console.log("stop sound: " + sound)
+//            console.log("stop sound: " + sound)
             tryStopSound(sound)
         }
     }

@@ -29,6 +29,7 @@ public slots:
 
 signals:
     void esbekCatchAntenaBoy();
+    void allAntenaBoysAreInJail();
 
 private:
     MapModel* mMapModel;

@@ -35,4 +35,6 @@ void FeaturesRoot::connectFeatures()
 
     connect(gameplay()->hqRange(), SIGNAL(isTransmittingChanged(bool)), sounds(), SLOT(onIsSignalTransmittingChanged(bool)));
     connect(gameplay()->esbekLogic(), SIGNAL(esbekCatchAntenaBoy()), sounds(), SLOT(onAntennaBoyCatched()));
+
+    connect(gameplay()->esbekLogic(), SIGNAL(allAntenaBoysAreInJail()), gameplay()->scoreLogic(), SLOT(onAllAntenaBoysAreInJail()));
 }

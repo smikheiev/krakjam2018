@@ -61,6 +61,17 @@ void EsbekLogic::tryToCatchAntenaBoyToJail()
             }
         }
     }
+
+    // sprawdzenie czy przypadkiem wszystkie ziomki nie siedza w wiezieniu
+    for (int i = 0; i < mCharactersLogic->mAntenaBoyList.count(); ++i)
+    {
+        AntenaBoyModel* boy = mCharactersLogic->mAntenaBoyList.at(i);
+        if (!boy->isInactive()) {
+            return;
+        }
+    }
+
+    emit allAntenaBoysAreInJail();
 }
 
 void EsbekLogic::setEsbekToStartPosition(EsbekModel *esbek, int startX, int startY)
