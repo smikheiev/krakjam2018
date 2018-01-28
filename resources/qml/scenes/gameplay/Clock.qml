@@ -19,6 +19,8 @@ Image {
 
         anchors {
             horizontalCenter: clock.horizontalCenter
+            top: parent.top
+            topMargin: 15
         }
 
         source: "qrc:/images/ui/clock_line.png"

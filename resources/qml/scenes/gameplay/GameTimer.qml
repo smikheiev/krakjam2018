@@ -79,8 +79,8 @@ Item {
 
     Clock {
         anchors {
-            left: parent.right
-            leftMargin: -50
+            right: parent.left
+            rightMargin: -50
         }
     }
 }
