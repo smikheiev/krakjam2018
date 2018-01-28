@@ -38,6 +38,8 @@ public:
     Q_INVOKABLE void restartRoundNeeded();
     Q_INVOKABLE void roundFailed();
 
+    RangeModel* hqRange();
+
 public slots:
     void onAppStateChanged(const AppState appState);
 

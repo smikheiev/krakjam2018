@@ -71,6 +71,11 @@ void GameplayFeature::roundFailed()
     transmissionLogic()->set_isRoundFailed(true);
 }
 
+RangeModel *GameplayFeature::hqRange()
+{
+    return mHQRange;
+}
+
 void GameplayFeature::onAppStateChanged(const AppState appState)
 {
     if (appState == AppState::Gameplay)

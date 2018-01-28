@@ -12,6 +12,7 @@ void FeaturesRoot::createFeatures()
     m_appState = new AppStateFeature(this);
     m_exitApp = new ExitAppFeature(this);
     m_gameplay = new GameplayFeature(this);
+    m_sounds = new SoundsFeature(this);
 }
 
 void FeaturesRoot::connectFeatures()
@@ -31,4 +32,7 @@ void FeaturesRoot::connectFeatures()
     connect(gameplay()->objectiveLogic(), SIGNAL(objectiveCompleted()), gameplay()->esbekLogic(), SLOT(onObjectiveCompleted()));
 
     connect(gameplay()->objectiveLogic(), SIGNAL(jailOpend()), gameplay()->charactersLogic(), SLOT(onJailOpend()));
+
+    connect(gameplay()->hqRange(), SIGNAL(isTransmittingChanged(bool)), sounds(), SLOT(onIsSignalTransmittingChanged(bool)));
+    connect(gameplay()->esbekLogic(), SIGNAL(esbekCatchAntenaBoy()), sounds(), SLOT(onAntennaBoyCatched()));
 }
