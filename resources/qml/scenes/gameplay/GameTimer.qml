@@ -1,6 +1,6 @@
 import QtQuick 2.10
 
-Rectangle {
+Item {
     id: gameTimer
 
     property QtObject scoreLogic: features.gameplay.scoreLogic
@@ -13,46 +13,52 @@ Rectangle {
 
     signal roundFailed()
 
-    color: "black"
-
-    border.color: "white"
-    border.width: borderSize
+    width: progressBarFrame.width
+    height: progressBarFrame.height
 
     Rectangle {
-        id: progressBar
+        color: "#FF1C1E15"
 
-        x: borderSize
-        y: borderSize
-        width: parent.width * (scoreLogic.lifeTime / scoreLogic.MAX_LIFE_TIME)
-        height: parent.height
-
-        color: "#26FF00"
-    }
-
-    Text {
-        id: scoreText
+        width: progressBar.width - 60
+        height: progressBar.height
+        x: 30
 
         anchors {
-            left: parent.left
-            leftMargin: 30
-            top: parent.top
-            topMargin: 20
+            verticalCenter: parent.verticalCenter
         }
-
-        text: "Score: " + scoreLogic.score
-        color: "red"
     }
 
-    Text {
+    Rectangle {
+        width : progressBar.width * (scoreLogic.lifeTime / scoreLogic.MAX_LIFE_TIME) - 60
+        height: progressBar.height
+        x: 30
 
         anchors {
-            left: parent.left
-            leftMargin: 30
-            top: scoreText.bottom
+            verticalCenter: parent.verticalCenter
         }
 
-        text: "Misions Completed: " + scoreLogic.missionsCompleted
-        color: "red"
+        color: "black"
+
+        clip: true
+
+        Image {
+            id: progressBar
+
+            width: sourceSize.width
+            height: sourceSize.height
+
+            source: "qrc:/images/ui/time.png"
+            fillMode: Image.PreserveAspectCrop
+        }
+    }
+
+
+    Image {
+        id: progressBarFrame
+        width: sourceSize.width
+        height: sourceSize.height
+
+        source: "qrc:/images/ui/time_frame.png"
     }
 
     Timer {
