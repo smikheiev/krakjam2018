@@ -5,7 +5,7 @@ import Enums 1.0
 BaseScene {
     id: loadingScene
 
-    property int loadingTimeMs: 0//5000
+    property int loadingTimeMs: 5000
     property int maxLoadingPoints: 3
 
     sceneAppState: AppState.Loading
@@ -71,7 +71,7 @@ BaseScene {
         running: priv.isLoading
 
         onTriggered: {
-            features.appState.tryChangeStateTo(AppState.Gameplay)
+            features.appState.tryChangeStateTo(AppState.Menu)
         }
     }
 }

@@ -56,5 +56,6 @@
         <file>images/Splash_3.png</file>
         <file>images/map/wiezienie.png</file>
         <file>images/kozy-w-pizamach_24131765.png</file>
+        <file>images/menu.png</file>
     </qresource>
 </RCC>

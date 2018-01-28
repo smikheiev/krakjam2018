@@ -10,40 +10,38 @@ BaseScene {
 
     sceneAppState: AppState.Menu
 
-    Rectangle {
-        anchors {
-            fill: parent
-        }
-        color: "red"
+    Image {
+        id: bg
+        anchors.fill: parent
+
+        source: "qrc:/images/menu.png"
     }
 
-    Column {
-        id: buttondColumn
+    Button {
+        id: button
 
         anchors {
-            centerIn: parent
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
+            bottomMargin: 50
         }
 
-        spacing: 20
+        text: "START"
+        font.pixelSize: 80
+        font.bold: true
 
-        ButtonWithText {
-            id: playButton
-
-            textString: "Play"
-
-            onClicked: {
-                features.appState.tryChangeStateTo(AppState.Gameplay)
+        background: Rectangle {
+            anchors {
+                fill: parent
             }
+
+            radius: 6
+
+            color: button.pressed ? "#dd9c33" : "#FBB03B"
         }
 
-        ButtonWithText {
-            id: exitButton
-
-            textString: "Exit"
-
-            onClicked: {
-                features.appState.tryChangeStateTo(AppState.Quit)
-            }
+        onClicked: {
+            features.appState.tryChangeStateTo(AppState.Gameplay)
         }
     }
 }
