@@ -83,9 +83,6 @@ BaseScene {
     Connections {
         target: features.gameplay
 
-        onObjectiveCompleted: {
-        }
-
         onRestartTimerNeeded: {
             gameTimer.isReady = true
         }
