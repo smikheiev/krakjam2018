@@ -15,8 +15,7 @@ Item {
 
     SoundEffect {
         id: jainOpenSound
-        source: "qrc:/sounds/siren.wav"
-//        source: "qrc:/sounds/jail_open.wav"
+        source: "qrc:/sounds/jail_open.wav"
     }
 
     SoundEffect {
@@ -114,6 +113,6 @@ Item {
 
     Component.onCompleted: {
         bgSound.play()
-        bgSound.volume = 0.8
+        bgSound.volume = 0.1
     }
 }
