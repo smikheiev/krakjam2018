@@ -12,6 +12,8 @@ public:
         None = 0,
         AntennaBoyCatched,
         SignalTransmitting,
+        ObjectiveWon,
+        Koza,
     };
     Q_ENUM(Enum)
 };

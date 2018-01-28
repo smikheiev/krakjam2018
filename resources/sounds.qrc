@@ -1,7 +1,9 @@
 <RCC>
     <qresource prefix="/">
+        <file>sounds/bg.wav</file>
+        <file>sounds/goat.wav</file>
         <file>sounds/siren.wav</file>
-        <file>sounds/147938__setuniman__military-background-rhythm-0h-wl2k.wav</file>
-        <file>sounds/390180__debsound__military-communication-loop-37-short.wav</file>
+        <file>sounds/transmitting.wav</file>
+        <file>sounds/won_objective.wav</file>
     </qresource>
 </RCC>

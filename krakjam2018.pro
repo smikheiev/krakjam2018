@@ -24,7 +24,8 @@ SOURCES += \
     sources/features/gameplay/objectives/objectiveslogic.cpp \
     sources/features/gameplay/objectives/objectiveslistmodel.cpp \
     sources/features/appState/scorelogic.cpp \
-    sources/features/sounds/soundsfeature.cpp
+    sources/features/sounds/soundsfeature.cpp \
+    sources/features/koza.cpp
 
 RESOURCES += \
     resources/qml.qrc \
@@ -58,4 +59,5 @@ HEADERS += \
     sources/utils.h \
     sources/features/appState/scorelogic.h \
     sources/features/sounds/soundsfeature.h \
-    sources/features/sounds/soundtype.h
+    sources/features/sounds/soundtype.h \
+    sources/features/koza.h

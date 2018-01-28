@@ -15,6 +15,7 @@ public:
 public slots:
     void onAntennaBoyCatched();
     void onIsSignalTransmittingChanged(bool isTransmitting);
+    void onObjectiveCompleted();
 
 signals:
     void playSound(SoundType sound, bool looped);

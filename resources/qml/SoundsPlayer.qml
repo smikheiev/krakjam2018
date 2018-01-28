@@ -15,13 +15,23 @@ Item {
 
     SoundEffect {
         id: transmittingSound
-        source: "qrc:/sounds/390180__debsound__military-communication-loop-37-short.wav"
+        source: "qrc:/sounds/transmitting.wav"
         volume: 0.6
     }
 
     SoundEffect {
+        id: objectiveWonSound
+        source: "qrc:/sounds/won_objective.wav"
+    }
+
+    SoundEffect {
+        id: kozaSound
+        source: "qrc:/sounds/goat.wav"
+    }
+
+    SoundEffect {
         id: bgSound
-        source: "qrc:/sounds/147938__setuniman__military-background-rhythm-0h-wl2k.wav"
+        source: "qrc:/sounds/bg.wav"
         loops: SoundEffect.Infinite
         volume: 0
 
@@ -65,6 +75,10 @@ Item {
             return antenaBoyCatchedSound
         case SoundType.SignalTransmitting:
             return transmittingSound
+        case SoundType.ObjectiveWon:
+            return objectiveWonSound
+        case SoundType.Koza:
+            return kozaSound
         }
     }
 

@@ -9,7 +9,10 @@ CharactersLogic::CharactersLogic(MapModel* mapModel, QObject* parent)
 {
     for (int i = 0; i < 3; ++i)
     {
-        AntenaBoyModel* boy = new AntenaBoyModel(i, ANTENA_BOY_RANGE_RADIUS, 0, 0, this);
+        int rangeRadius = ANTENA_BOY_RANGE_RADIUSES.at(i);
+        int speed = ANTENA_BOY_SPEEDS.at(i);
+
+        AntenaBoyModel* boy = new AntenaBoyModel(i, rangeRadius, speed, 0, 0, this);
         setBoyToStartPosition(boy);
         mAntenaBoyList.append(boy);
     }
@@ -102,10 +105,10 @@ void CharactersLogic::move() {
 
         if (antenaBoy->moveX() == 0 && antenaBoy->moveY() == 0) continue;
 
-        float newX = antenaBoy->posX() + ANTENA_BOY_SPEED * antenaBoy->moveX();
+        float newX = antenaBoy->posX() + antenaBoy->speed() * antenaBoy->moveX();
         if (newX < 0) newX = 0;
 
-        float newY = antenaBoy->posY() + ANTENA_BOY_SPEED * antenaBoy->moveY();
+        float newY = antenaBoy->posY() + antenaBoy->speed() * antenaBoy->moveY();
         if (newY < 0) newY = 0;
 
         if (!mMapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
@@ -113,7 +116,7 @@ void CharactersLogic::move() {
         }
 
         if (!mMapModel->tryToMove(newX, newY, antenaBoy->boySize())) {
-            newX = antenaBoy->posX() + ANTENA_BOY_SPEED * antenaBoy->moveX();
+            newX = antenaBoy->posX() + antenaBoy->speed() * antenaBoy->moveX();
             if (newX < 0) newX = 0;
             newY = antenaBoy->posY(); // jesli sie nie da sprobuj sie ruszyc tylko w poziomie
         }

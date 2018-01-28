@@ -20,3 +20,8 @@ void SoundsFeature::onIsSignalTransmittingChanged(bool isTransmitting)
         stopSound(SoundType::SignalTransmitting);
     }
 }
+
+void SoundsFeature::onObjectiveCompleted()
+{
+    playSound(SoundType::ObjectiveWon, false);
+}
